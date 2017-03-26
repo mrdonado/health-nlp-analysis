@@ -17,11 +17,15 @@ The first thing you need in your machine to make it work is a beanstalkd service
 
 `sudo apt-get install beanstalkd`.
 
+If you're using MacOSX or another linux distribution, just follow the [instructions on the official documentation](http://kr.github.io/beanstalkd/download.html).
+
 In order to start the beanstalkd service, you need to type this on the terminal:
 
 `beanstalkd -l 127.0.0.1 -p 14711`
 
-By default, we're using port `14711` and IP `127.0.0.1`. You can change this in the configuration.py file.
+Alternatively, `make runqueue` runs exactly that command.
+
+By default, we're using port `14711` and IP `127.0.0.1`. You can change this in the `configuration.py` file.
 
 Once beanstalkd is running on your machine, you can type `make run` to start the job processor and the analyzer.
 
@@ -29,7 +33,9 @@ If you want to insert an example job into the jobs queue and see what happens, y
 
 `python put_message.py 'A message that you want to process.'`
 
-A JSON string with the following format will be sent to the job queue:
+Alternatively, `make putmessage` runs exactly that command.
+
+A JSON string with the following format will be sent to the jobs queue:
 
 ```json
 {
