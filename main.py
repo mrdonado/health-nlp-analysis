@@ -1,33 +1,25 @@
 """
 
-This script starts the jobs processor. The process will
-remain active until the user manually stops it.
+This script starts listening to the beanstalkd jobs queue 
+and whenever it finds any new jobs, it sends them to the jobs 
+processor.
 
-It first sets a connection with beanstalkd and then
-it processes all of its jobs, waiting actively for new
-jobs.
+The process will remain active until the user manually stops it.
 
 """
 import json
 import beanstalkc
 from configuration import CONFIG
+from analyzer.processor import process_job
 
 BEANSTALK = beanstalkc.Connection(host=CONFIG['beanstalk_ip'], port=CONFIG['beanstalk_port'])
-
-def process_job(job_json):
-    """
-    Given a JSON belonging to a job, process_job sends it to the
-    analyzer and then it posts the output to firebase.
-    """
-    print 'Processing message...'
-    print job_json['message']
-    print 'Send results to firebase'
-    return True
 
 def load_jobs():
     """
     Load and process all jobs from beanstalkd
     """
+    print 'Listening on ' + CONFIG['beanstalk_ip'] + ':' + str(CONFIG['beanstalk_port'])
+
     while True:
         # reserve blocks the execution until there's a new job
         current_job = BEANSTALK.reserve()
