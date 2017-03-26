@@ -1,7 +1,7 @@
 """
 
-This script starts listening to the beanstalkd jobs queue 
-and whenever it finds any new jobs, it sends them to the jobs 
+This script starts listening to the beanstalkd jobs queue
+and whenever it finds any new jobs, it sends them to the jobs
 processor.
 
 The process will remain active until the user manually stops it.
@@ -9,7 +9,7 @@ The process will remain active until the user manually stops it.
 """
 import json
 import beanstalkc
-from configuration import CONFIG
+from analyzer.configuration import CONFIG
 from analyzer.processor import process_job
 
 BEANSTALK = beanstalkc.Connection(host=CONFIG['beanstalk_ip'], port=CONFIG['beanstalk_port'])

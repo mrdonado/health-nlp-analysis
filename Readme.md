@@ -28,7 +28,7 @@ In order to start the beanstalkd service, you need to type this on the terminal:
 
 Alternatively, `make runqueue` runs exactly that command.
 
-By default, we're using port `14711` and IP `127.0.0.1`. You can change this in the `configuration.py` file.
+By default, we're using port `14711` and IP `127.0.0.1`. You can change this in the `analyzer/configuration.py` file.
 
 Once beanstalkd is running on your machine, you can type `make run` to start the job processor and the analyzer.
 
