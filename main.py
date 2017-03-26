@@ -1,10 +1,18 @@
 """
-This file starts the jobs processor.
+
+This script starts the jobs processor. The process will
+remain active until the user manually stops it.
+
+It first sets a connection with beanstalkd and then
+it processes all of its jobs, waiting actively for new
+jobs.
+
 """
 import json
 import beanstalkc
+from configuration import CONFIG
 
-BEANSTALK = beanstalkc.Connection(host='localhost', port=14711)
+BEANSTALK = beanstalkc.Connection(host=CONFIG['beanstalk_ip'], port=CONFIG['beanstalk_port'])
 
 def process_job(job_json):
     """
