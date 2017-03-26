@@ -50,3 +50,13 @@ A JSON string with the following format will be sent to the jobs queue:
 In order to install the dependencies, you can simply type `make init`, or alternatively:
 
 `sudo pip install -r requirements.txt`
+
+## Tests
+
+You can run the tests by typing this on the console:
+
+`make test`
+
+And the you can generate the coverage report with:
+
+`make coverage`
