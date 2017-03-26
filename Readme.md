@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/fjrd84/health-nlp-analysis.svg?branch=master)](https://travis-ci.org/fjrd84/health-nlp-analysis)
+[![Coverage Status](https://coveralls.io/repos/github/fjrd84/health-nlp-analysis/badge.svg?branch=master)](https://coveralls.io/github/fjrd84/health-nlp-analysis?branch=master)
+
 # health-nlp-analysis
 This repository contains the jobs processor and the analysis part of the ***health-nlp*** project.
 
