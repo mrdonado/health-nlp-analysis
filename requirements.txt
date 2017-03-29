@@ -1,3 +1,4 @@
 PyYAML
 beanstalkc
 pyrebase
+pytest-mock
