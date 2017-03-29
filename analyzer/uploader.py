@@ -13,17 +13,14 @@ FB_CONFIG = {"apiKey": FIREBASE_CONFIG['api_key'],
              "storageBucket": FIREBASE_CONFIG['storage_bucket']}
 
 # Try to set up the connection to firebase
-try:
-    FIREBASE = pyrebase.initialize_app(FB_CONFIG)
-    # Get a reference to the auth service
-    AUTH = FIREBASE.auth()
-    print 'Logging in into firebase'
-    # Log the user in
-    USER = AUTH.sign_in_with_email_and_password(FIREBASE_CONFIG['email'],
-                                                FIREBASE_CONFIG['password'])
-    print 'Firebase connection ready'
-except:
-    print 'No connection with firebase has been established'
+FIREBASE = pyrebase.initialize_app(FB_CONFIG)
+# Get a reference to the auth service
+AUTH = FIREBASE.auth()
+print 'Logging in into firebase'
+# Log the user in
+USER = AUTH.sign_in_with_email_and_password(FIREBASE_CONFIG['email'],
+                                            FIREBASE_CONFIG['password'])
+print 'Firebase connection ready'
 
 
 def upload_analysis(analysis_json):
