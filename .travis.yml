@@ -3,8 +3,8 @@ sudo: required
 python:
   - 2.7
 install:
-  - sudo pip3 install -r requirements.txt
-  - sudo pip3 install coveralls
+  - sudo pip install -r requirements.txt
+  - sudo pip install coveralls
 script:
   nosetests --with-coverage --cover-erase --cover-html --cover-package=analyzer
 after_success:
