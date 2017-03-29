@@ -1,4 +1,5 @@
 pyyaml
+coverage
 beanstalkc
 pyrebase
 pytest-mock
