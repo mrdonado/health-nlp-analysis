@@ -1,4 +1,4 @@
-PyYAML
+pyyaml
 beanstalkc
 pyrebase
 pytest-mock
