@@ -1,0 +1,12 @@
+version: '2'
+services:
+  health:
+    build: .
+    volumes:
+     - .:/code
+    links:
+     - beanstalkd
+  beanstalkd:
+    image: agaveapi/beanstalkd
+    ports:
+      - "14711:11300"
