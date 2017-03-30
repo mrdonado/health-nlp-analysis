@@ -8,7 +8,7 @@ test:
 	export PYTHONPATH=.;pytest tests
 
 watchtest:
-	export PYTHONPATH=.;pytest tests -f
+	export PYTHONPATH=.;pytest-watch tests 
 
 coverage:
 	nosetests --with-coverage --cover-erase --cover-html --cover-package=analyzer

@@ -1,5 +1,6 @@
 pyyaml
 coverage
-beanstalkc
+pystalkd
 pyrebase
 pytest-mock
+pytest-watch

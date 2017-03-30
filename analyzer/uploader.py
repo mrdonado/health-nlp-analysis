@@ -5,7 +5,7 @@ import datetime
 import pyrebase
 from analyzer.configuration import FIREBASE_CONFIG
 
-print 'Setting up the firebase connection'
+print('Setting up the firebase connection')
 
 FB_CONFIG = {"apiKey": FIREBASE_CONFIG['api_key'],
              "authDomain": FIREBASE_CONFIG['auth_domain'],
@@ -16,11 +16,11 @@ FB_CONFIG = {"apiKey": FIREBASE_CONFIG['api_key'],
 FIREBASE = pyrebase.initialize_app(FB_CONFIG)
 # Get a reference to the auth service
 AUTH = FIREBASE.auth()
-print 'Logging in into firebase'
+print('Logging in into firebase')
 # Log the user in
 USER = AUTH.sign_in_with_email_and_password(FIREBASE_CONFIG['email'],
                                             FIREBASE_CONFIG['password'])
-print 'Firebase connection ready'
+print('Firebase connection ready')
 
 
 def upload_analysis(analysis_json):

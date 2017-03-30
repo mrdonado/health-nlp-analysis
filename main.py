@@ -8,17 +8,17 @@ The process will remain active until the user manually stops it.
 
 """
 import json
-import beanstalkc
+import pystalkd.Beanstalkd
 from analyzer.configuration import CONFIG
 from analyzer.processor import process_job
 
-BEANSTALK = beanstalkc.Connection(host=CONFIG['beanstalk_ip'], port=CONFIG['beanstalk_port'])
+BEANSTALK = pystalkd.Beanstalkd.Connection(host=CONFIG['beanstalk_ip'], port=CONFIG['beanstalk_port'])
 
 def load_jobs():
     """
     Load and process all jobs from beanstalkd
     """
-    print 'Listening on ' + CONFIG['beanstalk_ip'] + ':' + str(CONFIG['beanstalk_port'])
+    print('Listening on ' + CONFIG['beanstalk_ip'] + ':' + str(CONFIG['beanstalk_port']))
 
     while True:
         # reserve blocks the execution until there's a new job
@@ -26,8 +26,8 @@ def load_jobs():
 
         try:
             process_job(json.loads(current_job.body))
-        except ValueError, err:
-            print err
+        except(ValueError, err):
+            print(err)
 
         current_job.delete()
 

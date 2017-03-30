@@ -10,7 +10,7 @@ import beanstalkc
 
 BEANSTALK = beanstalkc.Connection(host='localhost', port=14711)
 
-print 'Inserting message: ' + sys.argv[1]
+print('Inserting message: ' + sys.argv[1])
 
 JSON_STRING = '{"message": "' + sys.argv[1] + '", "author":"jdonado", "source": "web-app"}'
 
