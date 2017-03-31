@@ -1,12 +1,14 @@
 version: '2'
 services:
-  health:
-    build: .
-    volumes:
-     - .:/code
-    links:
-     - beanstalkd
   beanstalkd:
-    image: agaveapi/beanstalkd
+    image: schickling/beanstalkd
+    container_name: health_beanstalkd
     ports:
-      - "14711:11300"
+      - "11300:11300"
+  health-nlp:
+    build: .
+    container_name: health-nlp 
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - beanstalkd

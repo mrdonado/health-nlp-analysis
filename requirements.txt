@@ -1,6 +1,7 @@
 pyyaml
 coverage
 pystalkd
+nose
 pyrebase
 pytest-mock
 pytest-watch
