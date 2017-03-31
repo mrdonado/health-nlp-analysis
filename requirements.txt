@@ -1,7 +1,7 @@
-pyyaml
-coverage
-pystalkd
 nose
-pyrebase
+coverage
 pytest-mock
 pytest-watch
+pyyaml
+pystalkd
+pyrebase
