@@ -10,6 +10,8 @@ before_install:
 install:
   - sudo pip3 install -r requirements.txt
   - sudo pip3 install coveralls
+  - sudo pip install coveralls
+  - sudo pip install pyrebase 
 script:
   python3 -m nose --with-coverage --cover-erase --cover-html --cover-package=analyzer
 after_success:
