@@ -4,4 +4,4 @@ pytest-mock
 pytest-watch
 pyyaml
 pystalkd
-pyrebase
+pyrebase==3.0.10

@@ -1,18 +1,21 @@
-language: python
-dist: trusty
 sudo: required
+dist: trusty
+language: node_js 
 python:
-  - 3.5
+  - "3.4"
+env:
+  - PYTHONPATH=.
 before_install:
+  - sudo apt-get -y update
   - sudo apt-get -y install python3 python3-pip python3-coverage python3-yaml
+  - sudo apt-get -y install libfreetype6-dev libxft-dev libffi-dev locales
+  - pip3 install -U setuptools
+  - pip3 install -U virtualenvwrapper
+  - pip3 install -U coveralls
+  - pip3 install -r requirements.txt
   - python3 -V
   - pip3 -V
 install:
-  - sudo -H pip3 install -r requirements.txt
-  - xargs -a requirements.txt -n 1 sudo -H pip install
-  - sudo -H pip3 install coveralls
-  - sudo -H pip install coveralls
-script:
   python3 -m nose --with-coverage --cover-erase --cover-html --cover-package=analyzer
 after_success:
-  coveralls
+  python3 -m coveralls
