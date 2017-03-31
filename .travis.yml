@@ -8,10 +8,10 @@ before_install:
   - python3 -V
   - pip3 -V
 install:
-  - sudo pip3 install -r requirements.txt
-  - sudo pip install -r requirements.txt
-  - sudo pip3 install coveralls
-  - sudo pip install coveralls
+  - sudo -H pip3 install -r requirements.txt
+  - xargs -a requirements.txt -n 1 sudo -H pip install
+  - sudo -H pip3 install coveralls
+  - sudo -H pip install coveralls
 script:
   python3 -m nose --with-coverage --cover-erase --cover-html --cover-package=analyzer
 after_success:
