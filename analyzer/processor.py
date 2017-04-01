@@ -4,11 +4,10 @@ of a new job, send the message to the analyzer and post the
 results to firebase.
 """
 
-import analyzer.uploader
 import analyzer.engine
 
 
-def process_job(job_json):
+def process_job(job_json, uploader):
     """
     Given a JSON belonging to a job, process_job sends it to the
     analyzer and then it posts the output to firebase.
@@ -17,5 +16,5 @@ def process_job(job_json):
     analysis_result = analyzer.engine.nlp_analysis(job_json['message'])
     print('Send results to firebase')
     job_json['analysis'] = analysis_result
-    analyzer.uploader.upload_analysis(job_json)
+    uploader.upload_analysis(job_json)
     return True
