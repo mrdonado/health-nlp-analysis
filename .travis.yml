@@ -19,4 +19,4 @@ install:
 script:
   python3 -m nose --with-coverage --cover-erase --cover-html --cover-package=analyzer
 after_success:
-  python -m coveralls
+  coveralls
