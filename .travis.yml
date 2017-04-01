@@ -1,6 +1,6 @@
 sudo: required
 dist: trusty
-language: node_js 
+language: python
 python:
   - "3.4"
 env:
@@ -11,11 +11,12 @@ before_install:
   - sudo apt-get -y install libfreetype6-dev libxft-dev libffi-dev locales
   - pip3 install -U setuptools
   - pip3 install -U virtualenvwrapper
-  - pip3 install -U coveralls
-  - pip3 install -r requirements.txt
+  - pip install -U coveralls
   - python3 -V
   - pip3 -V
 install:
+  - pip3 install -r requirements.txt
+script:
   python3 -m nose --with-coverage --cover-erase --cover-html --cover-package=analyzer
 after_success:
-  python3 -m coveralls
+  python -m coveralls
