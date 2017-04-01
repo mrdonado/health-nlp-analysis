@@ -6,9 +6,9 @@ the beanstalkd jobs queue.
 
 """
 import sys
-import beanstalkc
+import pystalkd.Beanstalkd 
 
-BEANSTALK = beanstalkc.Connection(host='localhost', port=14711)
+BEANSTALK = pystalkd.Beanstalkd.Connection(host='localhost', port=11300)
 
 print('Inserting message: ' + sys.argv[1])
 
