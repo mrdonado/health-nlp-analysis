@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 
 This script starts listening to the beanstalkd jobs queue
@@ -9,19 +10,27 @@ The process will remain active until the user manually stops it.
 """
 import json
 import pystalkd.Beanstalkd
-from analyzer.configuration import CONFIG
+import sys
+from analyzer.configuration import CONFIG, FIREBASE_CONFIG
 from analyzer.processor import process_job
 from analyzer.uploader import AnalysisUploader
 
-BEANSTALK = pystalkd.Beanstalkd.Connection(host=CONFIG['beanstalk_ip'], port=CONFIG['beanstalk_port'])
+BEANSTALK = pystalkd.Beanstalkd.Connection(
+    host=CONFIG['beanstalk_ip'], port=CONFIG['beanstalk_port'])
+
 
 def load_jobs():
     """
     Load and process all jobs from beanstalkd
     """
-    print('Listening on ' + CONFIG['beanstalk_ip'] + ':' + str(CONFIG['beanstalk_port']))
+    print('Listening on ' + CONFIG['beanstalk_ip'] +
+          ':' + str(CONFIG['beanstalk_port']))
 
-    uploader = AnalysisUploader()
+    uploader = AnalysisUploader(FIREBASE_CONFIG["api_key"],
+                                FIREBASE_CONFIG["auth_domain"],
+                                FIREBASE_CONFIG["database_url"],
+                                FIREBASE_CONFIG["storage_bucket"],
+                                FIREBASE_CONFIG["email"], FIREBASE_CONFIG["password"])
 
     while True:
         # reserve blocks the execution until there's a new job
@@ -29,10 +38,11 @@ def load_jobs():
 
         try:
             process_job(json.loads(current_job.body), uploader)
-        except(ValueError, err):
-            print(err)
+        except:
+            print("Unexpected error:", sys.exc_info()[0])
 
         current_job.delete()
+
 
 # Start the magic!
 load_jobs()
