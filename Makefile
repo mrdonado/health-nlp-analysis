@@ -2,10 +2,10 @@ init:
 	pip install -r requirements.txt
 
 runqueue:
-	beanstalkd -l 127.0.0.1 -p 14711
+	beanstalkd -l 127.0.0.1 -p 11300 
 
 runqueuedocker:
-	docker run -d -p 14711:11300 schickling/beanstalkd
+	docker run -d -p 11300:11300 schickling/beanstalkd
 
 test:
 	export PYTHONPATH=.;pytest tests
@@ -35,6 +35,6 @@ cleancontainers:
 	sudo docker ps --filter "status=exited" | awk '{print $1}' | xargs sudo docker rm -f
 
 run:
-	python main.py
+	python3 main.py
 
 .PHONY: init test coverage run runqueue putmessage
