@@ -11,20 +11,20 @@ The process will remain active until the user manually stops it.
 import json
 import pystalkd.Beanstalkd
 import sys
-from analyzer.configuration import CONFIG, FIREBASE_CONFIG
+from config_loader import BEANSTALKD_CONFIG, FIREBASE_CONFIG
 from analyzer.processor import process_job
 from analyzer.uploader import AnalysisUploader
 
 BEANSTALK = pystalkd.Beanstalkd.Connection(
-    host=CONFIG['beanstalk_ip'], port=CONFIG['beanstalk_port'])
+    host=BEANSTALKD_CONFIG['beanstalk_ip'], port=BEANSTALKD_CONFIG['beanstalk_port'])
 
 
 def load_jobs():
     """
     Load and process all jobs from beanstalkd
     """
-    print('Listening on ' + CONFIG['beanstalk_ip'] +
-          ':' + str(CONFIG['beanstalk_port']))
+    print('Listening on ' + BEANSTALKD_CONFIG['beanstalk_ip'] +
+          ':' + str(BEANSTALKD_CONFIG['beanstalk_port']))
 
     uploader = AnalysisUploader(FIREBASE_CONFIG["api_key"],
                                 FIREBASE_CONFIG["auth_domain"],

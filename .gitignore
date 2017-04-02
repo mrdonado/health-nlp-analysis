@@ -3,3 +3,4 @@
 .cache
 .coverage
 cover
+config.ini

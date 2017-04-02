@@ -3,5 +3,6 @@ coverage
 pytest-mock
 pytest-watch
 pyyaml
+configparser
 pystalkd
 pyrebase==3.0.10
