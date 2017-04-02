@@ -42,13 +42,33 @@ A JSON string with the following format will be sent to the jobs queue:
 
 ```json
 {
-    "message": "A message that you want to process",
-    "author": "jdonado",
-    "source": "web-app"
+    "user_name": "jdonado",
+    "user_description": "Some random radiologist.",
+    "created_at": "2017-03-26 22:18:32.749317",
+    "message": "Aspirin for diabetes",
+    "source": "twitter",
+    "query": "diabetes"
 }
 ```
 
-This JSON will be sent as it is directly to the analyzer. Once the analysis is ready, it will be uploaded to firebase.
+This JSON will be sent as it is directly to the analyzer. Once the analysis is ready, the original JSON will be extended with the analysis information and sent to firebase.
+
+```json
+{
+    "user_name": "jdonado",
+    "user_description": "Some random radiologist.",
+    "created_at": "2017-03-26 22:18:32.749317",
+    "message": "Aspirin for diabetes",
+    "source": "twitter",
+    "query": "diabetes",
+    "analysis":  {
+        "created_at": "2017-03-26 22:19:52.133117",
+        "profile": "radiologist",
+        "problem": "diabetes",
+        "solution": "aspirin"
+    }
+}
+```
 
 ### Configuration
 
@@ -72,4 +92,4 @@ And the you can generate the coverage report with:
 
 ## Docker
 
-If you want to deploy this service whithin Docker containers, you will find the configuration ready into the `docker-compose.yml` file. Some helper scripts can be found into the `Makefile` in order to perform the usual tasks.
+If you want to deploy this service inside Docker containers, you will find the configuration ready into the `docker-compose.yml` file. Some helper scripts can be found into the `Makefile` in order to perform the usual tasks.
