@@ -24,11 +24,11 @@ If you're using MacOSX or another linux distribution, just follow the [instructi
 
 In order to start the beanstalkd service, you need to type this on the terminal:
 
-`beanstalkd -l 127.0.0.1 -p 14711`
+`beanstalkd -l 127.0.0.1 -p 11300`
 
 Alternatively, `make runqueue` runs exactly that command.
 
-By default, we're using port `14711` and IP `127.0.0.1`. You can change this in the `analyzer/configuration.py` file.
+By default, we're using port `11300` and IP `127.0.0.1`. You can change this in the `analyzer/configuration.py` file.
 
 Once beanstalkd is running on your machine, you can type `make run` to start the job processor and the analyzer.
 
@@ -48,6 +48,12 @@ A JSON string with the following format will be sent to the jobs queue:
 }
 ```
 
+This JSON will be sent as it is directly to the analyzer. Once the analysis is ready, it will be uploaded to firebase.
+
+### Configuration
+
+There's a `config.ini.example` file in the root directory of this repository. You need to rename it as `config.ini` and specify your own configuration parameters before running the service.
+
 ### Python Dependencies
 
 In order to install the dependencies, you can simply type `make init`, or alternatively:
@@ -63,3 +69,7 @@ You can run the tests by typing this on the console:
 And the you can generate the coverage report with:
 
 `make coverage`
+
+## Docker
+
+If you want to deploy this service whithin Docker containers, you will find the configuration ready into the `docker-compose.yml` file. Some helper scripts can be found into the `Makefile` in order to perform the usual tasks.
