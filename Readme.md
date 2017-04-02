@@ -14,23 +14,45 @@ This project is still on an early stage of development. As soon as there's an on
 
 ## Get this thing running
 
-This project takes jobs from a beanstalkd service, sends them to the analyzer and posts the results to firebase.
+This project contains a Python program that takes jobs from a beanstalkd service, sends them to the analyzer and posts the results to firebase. Follow these steps in order to run it on your machine.
 
-The first thing you need in your machine to make it work is a beanstalkd service. If you are running a debian based linux distribution, you can install beanstalkd by typing this on the console:
+### Beanstalkd
+
+The first thing you need is a beanstalkd service.
+
+If you have docker on your system just type `make runqueuedocker` in order to start a dockerized beanstalkd queue.
+
+If you want to install it locally on your system, and you are running a debian based linux distribution, you can install beanstalkd by typing this on the console:
 
 `sudo apt-get install beanstalkd`.
 
 If you're using MacOSX or another linux distribution, just follow the [instructions on the official documentation](http://kr.github.io/beanstalkd/download.html).
 
-In order to start the beanstalkd service, you need to type this on the terminal:
+In order to start the beanstalkd service, you can type this on the shell:
 
 `beanstalkd -l 127.0.0.1 -p 11300`
 
 Alternatively, `make runqueue` runs exactly that command.
 
-By default, we're using port `11300` and IP `127.0.0.1`. You can change this in the `analyzer/configuration.py` file.
+By default, we're using port `11300` and IP `127.0.0.1`. You can change this in the `config.ini` file.
 
-Once beanstalkd is running on your machine, you can type `make run` to start the job processor and the analyzer.
+### Python Dependencies
+
+In order to install the dependencies, you can simply type `make init`, or alternatively:
+
+`sudo pip install -r requirements.txt`
+
+### Configuration
+
+There's a `config.ini.example` file in the root directory of this repository. You need to rename it as `config.ini` and specify your own configuration parameters before running the service.
+
+In the `config.ini`, you set the details about the connection with firebase and beanstalkd.
+
+### Run it!
+
+Once beanstalkd is running on your machine and the configuration is ready, you can type `make run` to start the job processor and the analyzer.
+
+### Is it working?
 
 If you want to insert an example job into the jobs queue and see what happens, you can use the `put_message.py` utility. Just type the following on the console, from the root directory of this project:
 
@@ -70,17 +92,8 @@ This JSON will be sent as it is directly to the analyzer. Once the analysis is r
 }
 ```
 
-### Configuration
 
-There's a `config.ini.example` file in the root directory of this repository. You need to rename it as `config.ini` and specify your own configuration parameters before running the service.
-
-### Python Dependencies
-
-In order to install the dependencies, you can simply type `make init`, or alternatively:
-
-`sudo pip install -r requirements.txt`
-
-## Tests
+## Unit Tests and Coverage
 
 You can run the tests by typing this on the console:
 
@@ -92,4 +105,6 @@ And the you can generate the coverage report with:
 
 ## Docker
 
-If you want to deploy this service inside Docker containers, you will find the configuration ready into the `docker-compose.yml` file. Some helper scripts can be found into the `Makefile` in order to perform the usual tasks.
+If you want to deploy this service inside Docker containers, you will find the `docker-compose.yml` file on the root directory of this repository.
+
+Some helper scripts can be found into the `Makefile` in order to perform the usual tasks.
