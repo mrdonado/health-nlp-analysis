@@ -84,6 +84,7 @@ This JSON will be sent as it is directly to the analyzer. Once the analysis is r
     "source": "twitter",
     "query": "diabetes",
     "analysis":  {
+        "health_related": "true",
         "created_at": "2017-03-26 22:19:52.133117",
         "profile": "radiologist",
         "problem": "diabetes",
