@@ -19,6 +19,6 @@ def test_process_job(mock_engine):
     """ Testing the base route """
     example_job = {"message": "Example message"}
     mock_uploader = MockAnalysisUploader()
-    mock_engine.nlp_analysis.return_value = True
+    mock_engine.dummy_nlp_analysis.return_value = True
     analyzer.processor.process_job(example_job, mock_uploader)
-    mock_engine.nlp_analysis.assert_called_once_with('Example message')
+    mock_engine.dummy_nlp_analysis.assert_called_once_with('Example message')
