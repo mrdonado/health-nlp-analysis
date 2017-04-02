@@ -15,26 +15,30 @@ from config_loader import BEANSTALKD_CONFIG, FIREBASE_CONFIG
 from analyzer.processor import process_job
 from analyzer.uploader import AnalysisUploader
 
-BEANSTALK = pystalkd.Beanstalkd.Connection(
-    host=BEANSTALKD_CONFIG['beanstalk_ip'], port=BEANSTALKD_CONFIG['beanstalk_port'])
 
-
-def load_jobs():
+def setup_and_run():
     """
-    Load and process all jobs from beanstalkd
+    Setup the beanstalkd connection and the firebase uploader.
+    Then start listening to the jobs queue and send the jobs
+    to the analyzer.
     """
+    # Setup connection to the jobs queue
+    beanstalk = pystalkd.Beanstalkd.Connection(
+        host=BEANSTALKD_CONFIG['beanstalk_ip'], port=BEANSTALKD_CONFIG['beanstalk_port'])
     print('Listening on ' + BEANSTALKD_CONFIG['beanstalk_ip'] +
           ':' + str(BEANSTALKD_CONFIG['beanstalk_port']))
 
+    # Setup the firebase uploader
     uploader = AnalysisUploader(FIREBASE_CONFIG["api_key"],
                                 FIREBASE_CONFIG["auth_domain"],
                                 FIREBASE_CONFIG["database_url"],
                                 FIREBASE_CONFIG["storage_bucket"],
                                 FIREBASE_CONFIG["email"], FIREBASE_CONFIG["password"])
 
+    # Start waiting for jobs from the queue.
     while True:
         # reserve blocks the execution until there's a new job
-        current_job = BEANSTALK.reserve()
+        current_job = beanstalk.reserve()
 
         try:
             process_job(json.loads(current_job.body), uploader)
@@ -43,6 +47,6 @@ def load_jobs():
 
         current_job.delete()
 
-
 # Start the magic!
-load_jobs()
+if __name__ == "__main__":
+    setup_and_run()
