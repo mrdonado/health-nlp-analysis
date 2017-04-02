@@ -6,12 +6,27 @@ the beanstalkd jobs queue.
 
 """
 import sys
-import pystalkd.Beanstalkd 
+import json
+import datetime
+import pystalkd.Beanstalkd
 
 BEANSTALK = pystalkd.Beanstalkd.Connection(host='localhost', port=11300)
 
-print('Inserting message: ' + sys.argv[1])
 
-JSON_STRING = '{"message": "' + sys.argv[1] + '", "author":"jdonado", "source": "web-app"}'
+if len(sys.argv) == 1:
+    print("\nERROR:Please, specify the message to be posted as an argument. E.g.:\n\npython3 put_message.py 'Some example message'.\n")
+    sys.exit()
 
-BEANSTALK.put(JSON_STRING)
+json_job = {
+    "user_name": "jdonado",
+    "user_description": "Some random radiologist.",
+    "created_at": datetime.datetime.now().isoformat(),
+    "message": sys.argv[1],
+    "source": "twitter",
+    "query": "diabetes"
+}
+
+print('Inserting job:')
+print(json.dumps(json_job))
+
+BEANSTALK.put(json.dumps(json_job))
