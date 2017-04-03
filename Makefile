@@ -20,7 +20,7 @@ clean:
 	find . -name "*.pyc" -exec rm -f {} \;
 
 putmessage:
-	python put_message.py 'A message that you want to process.'
+	python3 put_message.py 'A message that you want to process.'
 
 builddocker:
 	docker build -t python-health-nlp .

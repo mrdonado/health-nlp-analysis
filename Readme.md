@@ -40,7 +40,7 @@ By default, we're using port `11300` and IP `127.0.0.1`. You can change this in 
 
 In order to install the dependencies, you can simply type `make init`, or alternatively:
 
-`sudo pip install -r requirements.txt`
+`sudo pip3 install -r requirements.txt`
 
 ### Configuration
 
@@ -56,7 +56,7 @@ Once beanstalkd is running on your machine and the configuration is ready, you c
 
 If you want to insert an example job into the jobs queue and see what happens, you can use the `put_message.py` utility. Just type the following on the console, from the root directory of this project:
 
-`python put_message.py 'A message that you want to process.'`
+`python3 put_message.py 'A message that you want to process.'`
 
 Alternatively, `make putmessage` runs exactly that command.
 
