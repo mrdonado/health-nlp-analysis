@@ -24,7 +24,7 @@ If you have docker on your system just type `make runqueuedocker` in order to st
 
 If you want to install it locally on your system, and you are running a debian based linux distribution, you can install beanstalkd by typing this on the console:
 
-`sudo apt-get install beanstalkd`.
+`sudo apt-get install beanstalkd`
 
 If you're using MacOSX or another linux distribution, just follow the [instructions on the official documentation](http://kr.github.io/beanstalkd/download.html).
 
