@@ -1,8 +1,8 @@
 version: '2'
 services:
-  beanstalkd:
-    image: schickling/beanstalkd
-    container_name: health_beanstalkd
+  beanstalksvc:
+    image: schickling/beanstalkd:latest
+    container_name: health_beanstalksvc
     ports:
       - "11300:11300"
   health-nlp:
@@ -11,4 +11,4 @@ services:
     volumes:
       - .:/usr/src/app
     depends_on:
-      - beanstalkd
+      - beanstalksvc
