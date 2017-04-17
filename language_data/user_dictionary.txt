@@ -1,0 +1,144 @@
+<MEDICAL_ATTRIBUTE>	<MEDICAL_FIELD>
+<MEDICAL_JOB>	physicist
+<DISEASE>	liver cancer
+<MEDICAL_FIELD>	family medicine
+<MEDICAL_FIELD>	epidemiology
+<MEDICAL_FIELD>	physiology
+<MEDICAL_FIELD>	radiolog(í|i)a
+<MEDICAL_JOB>	dermatopathologist
+<INSTITUTION>	unit
+<MEDICAL_JOB>	nutritionist
+<ADMINISTRATIVE_JOB>	head
+<INSTITUTION>	sociedad
+<INSTITUTION>	college
+<INSTITUTION>	academy
+<INSTITUTION>	institute
+<INSTITUTION>	department
+<INSTITUTION>	center
+<INSTITUTION>	centre
+<INSTITUTION>	school
+<INSTITUTION>	organization
+<INSTITUTION>	organisation
+<MEDICAL_JOB>	dermat(ó|o)log(o|a)
+<MEDICAL_FIELD>	\w+pathology
+<MEDICAL_FIELD>	biotech
+<MEDICAL_FIELD>	gynecology
+<MEDICAL_JOB>	biostatistician
+<MEDICAL_JOB>	anesthesiologist
+<DISEASE>	\S+disease
+<DISEASE>	psoriasis
+<MEDICAL_FIELD>	echocardiography
+<MEDICAL_ATTRIBUTE>	medical
+<MEDICAL_ATTRIBUTE>	interventional
+<MEDICAL_ATTRIBUTE>	therapy
+<MEDICAL_ATTRIBUTE>	care
+<MEDICAL_ATTRIBUTE>	health
+<MEDICAL_ATTRIBUTE>	healthcare
+<MEDICAL_ATTRIBUTE>	therapy
+<MEDICAL_ATTRIBUTE>	clinical
+<MEDICAL_JOB>	social worker
+<MEDICAL_FIELD>	\w+ intervention
+<MEDICAL_JOB>	electrophysiologist
+<MEDICAL_FIELD>	surgery
+<DISEASE>	autoimmune \w+
+<DISEASE>	disease
+<DISEASE>	thromboembolism
+<DISEASE>	disease
+<DISEASE>	multiple sclerosis
+<MEDICAL_FIELD>	cardiology
+<DISEASE>	alopecia
+<ADMINISTRATIVE_JOB>	director
+<ADMINISTRATIVE_JOB>	ceo
+<MEDICAL_JOB>	neuroradiologist
+<MEDICAL_FIELD>	plastics
+<MEDICAL_FIELD>	oncology
+<MEDICAL_FIELD>	cancer
+<MEDICAL_FIELD>	radiology
+<MEDICAL_FIELD>	immunology
+<MEDICAL_FIELD>	healthcare
+<MEDICAL_FIELD>	dermatology
+<MEDICAL_FIELD>	dermatolog(í|i)a
+<MEDICAL_JOB>	cardiologist
+<MEDICAL_FIELD>	pathology
+<MEDICAL_FIELD>	medicine
+<MEDICAL_FIELD>	health
+<DISEASE>	psoriasis
+<MEDICAL_JOB>	doctor
+<MEDICAL_JOB>	physician
+<MEDICAL_JOB>	practitioner
+<MEDICAL_JOB>	family doctor
+<MEDICAL_JOB>	family physician
+<MEDICAL_JOB>	family practitioner
+<MEDICAL_JOB>	general practitioner
+<MEDICAL_JOB>	anesthesiologist
+<MEDICAL_JOB>	dermatologist
+<MEDICAL_JOB>	gynecologist
+<MEDICAL_JOB>	internist
+<DISEASE>	hair loss
+<MEDICAL_JOB>	neurologist
+<MEDICAL_JOB>	ob-gyn
+<MEDICAL_JOB>	obstetrician
+<MEDICAL_JOB>	ophthalmologist
+<MEDICAL_JOB>	orthopedist
+<MEDICAL_JOB>	pathologist
+<MEDICAL_JOB>	pediatrician
+<MEDICAL_JOB>	pediatrist
+<MEDICAL_JOB>	physiatrist
+<MEDICAL_JOB>	podiatrist
+<MEDICAL_JOB>	radiologist
+<MEDICAL_JOB>	urologist
+<MEDICAL_JOB>	clinician
+<MEDICAL_JOB>	fellow
+<MEDICAL_JOB>	hospitalist
+<MEDICAL_JOB>	plastic surgeon
+<MEDICAL_JOB>	surgeon
+<MEDICAL_JOB>	intern
+<MEDICAL_JOB>	interne
+<MEDICAL_JOB>	resident
+<MEDICAL_JOB>	aidman
+<MEDICAL_FIELD>	aesthetic medicine
+<ADMINISTRATIVE_JOB>	\w*director
+<MEDICAL_JOB>	nurse
+<MEDICAL_JOB>	nurse-practitioner
+<MEDICAL_JOB>	EMT
+<MEDICAL_JOB>	paramedic
+<MEDICAL_JOB>	paramedical
+<MEDICAL_JOB>	therapist
+<MEDICAL_JOB>	physiotherapist
+<MEDICAL_JOB>	anaesthetist
+<MEDICAL_JOB>	analyst
+<MEDICAL_JOB>	chiropodist
+<MEDICAL_JOB>	chiropractor
+<MEDICAL_JOB>	consultant
+<MEDICAL_JOB>	coroner
+<MEDICAL_JOB>	doc
+<MEDICAL_JOB>	flying doctor
+<MEDICAL_JOB>	gp
+<MEDICAL_JOB>	 med 
+<MEDICAL_JOB>	gynaecologist
+<MEDICAL_JOB>	health professional
+<MEDICAL_JOB>	medical practitioner
+<MEDICAL_JOB>	md
+<MEDICAL_JOB>	occupational therapist
+<MEDICAL_JOB>	orthopaedist
+<MEDICAL_JOB>	osteopath
+<MEDICAL_JOB>	paediatrician
+<MEDICAL_JOB>	physio
+<MEDICAL_JOB>	sangoma
+<MEDICAL_JOB>	acupuncturist
+<MEDICAL_JOB>	epidemiologist
+<MEDICAL_JOB>	oncologist
+<MEDICAL_JOB>	pharmacologist
+<MEDICAL_FIELD>	pharma
+<MEDICAL_FIELD>	pharmacology
+<DISEASE>	fibroids
+<MEDICAL_FIELD>	imaging
+<MEDICAL_JOB>	hematologist
+<ADMINISTRATIVE_JOB>	coordinator
+<DISEASE>	syndrome
+<DISEASE>	complications
+<DISEASE>	condition*
+<DISEASE>	cancer
+<PATIENT>	patient*
+<PATIENT>	suffering
+<MEDICAL_JOB>	allergist

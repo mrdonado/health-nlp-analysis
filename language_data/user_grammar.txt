@@ -1,0 +1,99 @@
+¡working for <MEDICAL_ATTRIBUTE>¡
+¡<MEDICAL_ATTRIBUTE> <MEDICAL_FIELD>¡
+¡<MEDICAL_ATTRIBUTE> (web|portal|site)¡
+¡treatment of( \S+){0,3} <DISEASE>¡
+¡( \S+){0,5} physicist at mcw¡
+¡<MEDICAL_JOB> at <\S+>¡
+providing.*information.*¡<DISEASE>¡
+(;|,) ¡<MEDICAL_JOB>¡(;|,)
+¡(<DISEASE>|<MEDICAL_ATTRIBUTE>|<MEDICAL_FIELD>)( \S+){0,3} (hospital|clinic)¡
+¡(<DISEASE>|<MEDICAL_FIELD) awareness¡
+¡(<DISEASE>|<MEDICAL_FIELD>)( \S+){0,2} association¡
+¡(<MEDICAL_FIELD>|<MEDICAL_ATTRIBUTE>|<DISEASE>) (news|information)¡
+¡(<MEDICAL_FIELD>|<MEDICAL_ATTRIBUTE>|<DISEASE>)( \S+){0,4} researcher¡
+¡<MEDICAL_JOB>¡ (and|&) \w+
+\w+ (and|&) ¡<MEDICAL_JOB>¡
+¡(distributor|manufacturers)( \S+){0,3} for( \S+){0,3} <MEDICAL_ATTRIBUTE>¡
+¡(innovation|solutions|knowledge)( \w+){1,6} <MEDICAL_ATTRIBUTE>¡
+¡(interest\w*|passion\w*) (in|for|about)( \S+){0,7} (#?<MEDICAL_FIELD>|<DISEASE>)¡
+¡(medical|clinical) (<MEDICAL_JOB>|<MEDICAL_FIELD>)¡
+¡(patient|health)( \S+){0,7} solution¡
+¡(professor|teacher) of( \S+){0,4} <MEDICAL_FIELD>¡
+¡(web|site|portal) (about|on)( \S+){0,5} (<DISEASE>|<MEDICAL_FIELD>)¡
+¡\. <MEDICAL_JOB>¡
+¡\/<MEDICAL_JOB>¡
+¡#(med\w+|\w+med )¡
+¡#\w*<MEDICAL_FIELD>¡
+¡#\w*<MEDICAL_JOB>¡
+¡^(\S+ ){0,3}medical \w+¡
+¡^(\S+ ){0,5}<MEDICAL_FIELD>¡
+¡^(\S+ ){0,5}<MEDICAL_JOB>¡
+¡^(\w+ ){0,1}official( \S+){1,10} (<MEDICAL_FIELD>|<DISEASE>)¡
+¡^\w+ <MEDICAL_FIELD>¡
+¡^<MEDICAL_ATTRIBUTE> \w+¡
+¡^<MEDICAL_FIELD>¡
+¡^dr(a)*( |\.)¡
+¡^medical \w+¡
+¡^provid.*<MEDICAL_ATTRIBUTE>¡
+¡^researcher¡
+¡<ADMINISTRATIVE_JOB> of( \S+){0,3} <MEDICAL_FIELD>¡
+¡<ADMINISTRATIVE_JOB>.*<MEDICAL_FIELD>¡
+¡<ADMINISTRATIVE_JOB>( \S+){0,7} (clinic|hospital)¡
+¡<DISEASE> blogger¡
+¡<DISEASE>( \w+){0,3} solutions¡
+¡<DISEASE>( \w+){0,5} foundation¡
+¡<INSTITUTION>( \S+){0,6} (of|for)( \S+){0,6} <MEDICAL_ATTRIBUTE>¡
+¡<INSTITUTION>( \S+){1,7} <DISEASE>¡
+¡<INSTITUTION>( \S+){1,8} <MEDICAL_FIELD>¡
+<MEDICAL_ATTRIBUTE> ¡advice¡
+¡<MEDICAL_ATTRIBUTE>( \S+){0,3} device¡
+¡<MEDICAL_ATTRIBUTE>( \S+){0,3} platform¡
+¡<MEDICAL_ATTRIBUTE>( \S+){0,3} provider¡
+¡<MEDICAL_ATTRIBUTE>( \S+){0,5} <INSTITUTION>¡
+¡<MEDICAL_ATTRIBUTE>( \S+){1,4} fellow¡
+¡<MEDICAL_ATTRIBUTE>( \S+){1,4} trainee¡
+¡<MEDICAL_FIELD> consultant¡
+¡<MEDICAL_FIELD> solutions¡
+¡<MEDICAL_FIELD>( \S+ ){0,2} resident¡
+¡<MEDICAL_FIELD>( \S+){0,2} investor¡
+¡<MEDICAL_FIELD>( \S+){0,3} <INSTITUTION>¡
+¡<MEDICAL_FIELD>( \S+){0,3} industry¡
+¡<MEDICAL_FIELD>( \w+){0,4} expert¡
+¡<MEDICAL_FIELD>( \w+){0,4} specialist¡
+¡<MEDICAL_FIELD>( \w+){0,5} news¡
+¡<MEDICAL_JOB> (&|\+)¡
+¡<MEDICAL_JOB>( \S+){0,2} (at|in)( \S+){0,6} (hospital|clinic|<INSTITUTION>)¡
+¡<MEDICAL_JOB>( \S+){0,3} speciali(z|s)\w+¡
+¡<MEDICAL_JOB>\/¡
+¡<PATIENT> (care|health)¡
+¡<PATIENT>( \S+){0,5} <DISEASE>¡
+¡about <MEDICAL_FIELD>¡
+¡at( \w+){1,3} (clinic|hospital)¡
+¡benefit( \S+){0,3} <PATIENT>¡
+¡board certified.*(<MEDICAL_FIELD>|<MEDICAL_JOB>)¡
+¡board of( \S+){0,5} (<MEDICAL_FIELD>|<MEDICAL_JOB>)¡
+¡college of( \S+){0,7} (<MEDICAL_JOB>|<MEDICAL_FIELD>)¡
+¡fellow in( \S+){0,5} <MEDICAL_FIELD>¡
+¡for <MEDICAL_FIELD> professionals¡
+¡for( \S+){0,2} <PATIENT>¡
+¡healthcare needs¡
+¡help\w* (<MEDICAL_JOB>s*|<MEDICAL_ATTRIBUTE>)¡
+¡helping( \S+){1,10} <DISEASE>¡
+¡(boost|improv)( \S+){0,10} <MEDICAL_ATTRIBUTE>¡
+¡in( \S+){0,2} <MEDICAL_ATTRIBUTE>¡
+¡journal of.*(<MEDICAL_FIELD>|<DISEASE>)¡
+¡leader in( \S+){0,3} <MEDICAL_FIELD>¡
+¡people( \S+){1,3} <DISEASE>¡
+¡phd\.?( \S+){0,4} <MEDICAL_FIELD>¡
+¡platform for( \S+){0,10} <DISEASE>¡
+¡promot.*<DISEASE>¡
+¡provid.*(for|to).*(clinic|hospital)¡
+¡provid\w+( \S+){0,10} <MEDICAL_ATTRIBUTE>¡
+¡provid\w+( \w+){1,5} for( \S+){0,5} <MEDICAL_FIELD>¡
+¡publish.*(<DISEASE>|<MEDICAL_FIELD>)¡
+¡society( \S+){0,3} <MEDICAL_FIELD>¡
+¡solution( \S+){1,5} <DISEASE>¡
+¡speaker on.*<MEDICAL_FIELD>¡
+¡therap\w+( \S+){0,3} (for|to)( \S+){0,5} (<DISEASE>|<MEDICAL_ATTRIBUTE>|<MEDICAL_FIELD>)¡
+¡treatment of( \S+){1,4} disease\w*¡
+¡unit( \S+){0,2} of( \S+){0,5} <MEDICAL_FIELD>¡
