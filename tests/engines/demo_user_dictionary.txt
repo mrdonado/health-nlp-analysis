@@ -1,0 +1,6 @@
+<MEDICAL_ATTRIBUTE>	<MEDICAL_FIELD>
+<MEDICAL_JOB>	physicist
+<DISEASE>	liver cancer
+<MEDICAL_FIELD>	family medicine
+<MEDICAL_JOB>	dermat(ó|o)log(o|a)
+<MEDICAL_FIELD>	biotech
