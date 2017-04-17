@@ -12,7 +12,7 @@ def process_job(job_json, uploader):
     analyzer and then it posts the output to firebase.
     """
     print('Processing message: ' + job_json['message'])
-    analysis_result = analyzer.engine.dummy_nlp_analysis(job_json)
+    analysis_result = analyzer.engine.nlp_analysis(job_json)
     print('Send results to firebase')
     job_json['analysis'] = analysis_result
     uploader.upload_analysis(job_json)
