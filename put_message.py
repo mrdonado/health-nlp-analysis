@@ -10,8 +10,9 @@ import json
 import datetime
 import pystalkd.Beanstalkd
 
-BEANSTALK = pystalkd.Beanstalkd.Connection(host='localhost', port=11300)
+BEANSTALK = pystalkd.Beanstalkd.Connection(host='0.0.0.0', port=11300)
 
+BEANSTALK.use('default')
 
 if len(sys.argv) == 1:
     print("\nERROR:Please, specify the message to be posted as an argument. E.g.:\n\npython3 put_message.py 'Some example message'.\n")
