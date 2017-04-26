@@ -1,5 +1,5 @@
 init:
-	pip3 install -r requirements.txt
+	pip3 install -r requirements.txt; python3 -m spacy.en.download all
 
 runqueue:
 	beanstalkd -l 127.0.0.1 -p 11300 
