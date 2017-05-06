@@ -3,6 +3,8 @@ services:
   beanstalksvc:
     image: schickling/beanstalkd:latest
     container_name: health_beanstalksvc
+    networks:
+      - health-nlp-network   
     ports:
       - "11300:11300"
   health-nlp:
@@ -10,5 +12,12 @@ services:
     container_name: health-nlp 
     volumes:
       - .:/usr/src/app
+    networks:
+      - health-nlp-network
     depends_on:
       - beanstalksvc
+
+networks:
+  health-nlp-network:
+    external:
+      name: health-nlp-network 

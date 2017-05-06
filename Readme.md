@@ -109,4 +109,10 @@ And the you can generate the coverage report with:
 
 If you want to deploy this service inside Docker containers, you will find the `docker-compose.yml` file on the root directory of this repository.
 
+The only requirement is to first define a docker network. You can do it by running the following command on the shell:
+
+`docker network create health-nlp-network`
+
+Then, you can run `docker-compose up` as usual.
+
 Some helper scripts can be found into the `Makefile` in order to perform the usual tasks.
