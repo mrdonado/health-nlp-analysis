@@ -27,6 +27,7 @@ from spacy.en import English
 # Function for text processing with Spacy
 NLP = English()
 
+
 def file_parser(path, to_lower):
     """
     Helper function to parse text files.
@@ -91,7 +92,7 @@ def analyzer(message, start_words, stop_words, grammar):
     """
     # Find the start word in message:
     start_word = start_word_match(message, start_words) or ''
-    twitter_start_word = '(' + '#\w*' + start_word + '|' + start_word + ')'
+    twitter_start_word = '(' + r'\w*' + start_word + '|' + start_word + ')'
     # Necessary variables:
     longest_match = ''
     matching_pattern = ''
@@ -103,7 +104,7 @@ def analyzer(message, start_words, stop_words, grammar):
         # start word (e.g. '[s] for [p]' -> '[s] for anorexia')
         for pattern in grammar:
             instance = pattern.replace('[p]', twitter_start_word)
-            instance = re.sub('[s]', '', instance)
+            instance = re.sub(r'\[s\]', '', instance)
             # Test every rule against the message:
             if re.search(instance, message):
                 found_instance = instance
