@@ -3,6 +3,7 @@ Upload an analysis to firebase
 """
 import pyrebase
 
+
 class AnalysisUploader(object):
     """
     Class for setting up the connection with firebase and providing
@@ -28,8 +29,16 @@ class AnalysisUploader(object):
         """
         Upload the results of an analysis to firebase.
         """
+
+        # If the analysis is not relevant, it won't be uploaded
+        if analysis_json['analysis']['problem'] == '' \
+                and analysis_json['analysis']['solution'] == '<nothing_found>' \
+                and analysis_json['source'] != 'web':
+            return False
+
         # Refresh Token
         fb_user = self.auth.refresh(self.user['refreshToken'])
+
         # Get a reference to the analysis database
         analysis_db = self.firebase.database().child('analysis')
         # Pass the user's idToken to the push method

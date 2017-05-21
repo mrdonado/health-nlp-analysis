@@ -21,7 +21,7 @@ class DummyAuth(object):
 class DummyChild(object):
 
     def push(self, analysis, token):
-        assert analysis == {}
+        assert analysis["source"] == "twitter"
         assert token == "someIdToken"
         return
 
@@ -67,6 +67,24 @@ def test_uploader():
         "email5",
         "password6"
     )
+
+    example_analysis = {
+        "source": "twitter",
+        "analysis": {
+            "problem": "some problem",
+            "solution": "some solution"
+        }
+    }
+
+    example_analysis_2 = {
+        "source": "twitter",
+        "analysis": {
+            "problem": "",
+            "solution": "<nothing_found>"
+        }
+    }
+
     # All assertions are into the mocked classes
-    uploader.upload_analysis({})
+    assert uploader.upload_analysis(example_analysis)
+    assert not uploader.upload_analysis(example_analysis_2)
     return
