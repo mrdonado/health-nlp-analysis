@@ -1,60 +1,34 @@
-negativity
 oncogenic
-ptsd
 plantar fasciitis
 tumours*
-trauma
-lungs
 hypercholesterolemia
 proinflammatory
 kidneytransplant
-digestion
 serotypes\S*
 myeloma
 infection
 vasculopathy
-acs
 cv-events*
 myocardialinfarction
 cardiogenic shock
 cardiomyopath\w+
 pathogenic \w+
-pci
-vte
-the poor
 healthcare
-cvd
-patients
-clots*
-hcm
-(\w+){1,2} dysfunction
-acute \w+
-\w+failure
-ablations*
 thromboembolism
-\w+ events*
 carcinoma
 pancreatitis
 delayed graft function
 pemphigus
-opioidinduced
 metastatic
-pd
 dyskinesia
 dystrophy
-disorder
-pain
 ebola
 renalcancer
-resistant \w+
 parkinson's
 parkinsons
 parkinson
-resistance
-ldl
 lymphoma
 leuka?emia
-ca surveil
 diabetes
 lupus
 migraine
@@ -71,6 +45,7 @@ allergies
 allergy
 alzheimer
 alzheimer\'s
+alzheimers
 anaphylaxis
 alopecia
 anemia
@@ -102,8 +77,6 @@ botulism
 breast cancer
 breastfeeding
 bulimia nervosa
-bruises
-burns
 cancer
 cataracts
 cellulite
@@ -183,7 +156,6 @@ insomnia
 interstitial cystitis
 intestinal gas
 irritable bowel syndrome
-itch
 jaundice
 jet lag
 keloid
@@ -204,7 +176,6 @@ melanoma
 meningitis
 menopause
 miscarriage
-mrsa
 mumps
 nail fungus
 narcolepsy
@@ -217,7 +188,6 @@ ovarian cancer
 ovarian cysts
 overactive bladder
 pancreatic cancer
-panic attacks
 panic disorder
 pink eye
 pneumonia
@@ -232,15 +202,12 @@ psoriasis
 psoriatic arthritis
 pulmonary hypertension
 rabies
-rash
 reactive arthritis
 retinal detachment
 rheumatoid arthritis
 rosacea
-sars
 scleroderma
 seasonal affective disorder
-separation anxiety
 severe acute respiratory syndrome
 sexually transmitted diseases
 shingles
@@ -249,7 +216,6 @@ sjogren\'s syndrome
 skin cancer
 sleep apnea
 sleep disturbance
-snoring
 somnoplasty
 sore throat
 staph infection

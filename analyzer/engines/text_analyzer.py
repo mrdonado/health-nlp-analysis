@@ -91,7 +91,7 @@ def analyzer(message, start_words, stop_words, grammar):
     """
     # Find the start word in message:
     start_word = start_word_match(message, start_words) or ''
-    twitter_start_word = '(' + '#' + start_word + '|' + start_word + ')'
+    twitter_start_word = '(' + '#\w*' + start_word + '|' + start_word + ')'
     # Necessary variables:
     longest_match = ''
     matching_pattern = ''
@@ -103,12 +103,12 @@ def analyzer(message, start_words, stop_words, grammar):
         # start word (e.g. '[s] for [p]' -> '[s] for anorexia')
         for pattern in grammar:
             instance = pattern.replace('[p]', twitter_start_word)
-            instance = re.sub(r'\s*\[s\]\s*', '', instance)
+            instance = re.sub('[s]', '', instance)
             # Test every rule against the message:
             if re.search(instance, message):
                 found_instance = instance
                 match = message[re.search(found_instance, message).start(
-                ):re.search(found_instance, message).end() + 1]
+                ):re.search(found_instance, message).end()]
                 # Find the rule with the longest match in the string:
                 if len(match) > len(longest_match):
                     longest_match = match
