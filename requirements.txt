@@ -7,3 +7,4 @@ pyyaml
 configparser
 pystalkd
 pyrebase==3.0.10
+elasticsearch
