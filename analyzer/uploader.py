@@ -31,8 +31,8 @@ class AnalysisUploader(object):
         """
 
         # If the analysis is not relevant, it won't be uploaded
-        if analysis_json['analysis']['problem'] == '' \
-                and analysis_json['analysis']['solution'] == '<nothing_found>' \
+        if (analysis_json['analysis']['problem'] == ''
+                or analysis_json['analysis']['solution'] == '<nothing_found>') \
                 and analysis_json['source'] != 'web':
             return False
 
