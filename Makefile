@@ -4,6 +4,9 @@ init:
 runqueue:
 	beanstalkd -l 127.0.0.1 -p 11300 
 
+runesdocker:
+	docker run -p 9200:9200 -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" docker.elastic.co/elasticsearch/elasticsearch:5.4.3
+
 runqueuedocker:
 	docker run -d -p 11300:11300 schickling/beanstalkd
 
