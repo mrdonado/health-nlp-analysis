@@ -57,7 +57,7 @@ class ElasticsearchAnalysisUploader(object):
     """
 
     def __init__(self, url, user, password):
-        self.url = url + '/analysis'
+        self.url = url + '/analysis/health'
         self.user = user
         self.password = password
 
@@ -70,6 +70,9 @@ class ElasticsearchAnalysisUploader(object):
         if irrelevant_analysis(analysis_json):
             return False
 
-        requests.post(self.url, analysis_json, auth=(self.user, self.password))
+        post = requests.post(self.url, json=analysis_json,
+                             auth=(self.user, self.password))
+
+        print(post)
 
         return True
