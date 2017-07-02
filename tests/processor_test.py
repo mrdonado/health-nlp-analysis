@@ -31,7 +31,8 @@ def test_process_job(mock_engine):
         "source": "twitter",
         "query": "diabetes"
     }
-    mock_uploader = MockAnalysisUploader()
+    mock_fb_uploader = MockAnalysisUploader()
+    mock_es_uploader = MockAnalysisUploader()
     mock_engine.nlp_analysis.return_value = {
         "health_related": "true",
         "created_at": "2017-04-02T22:35:04.868Z",
@@ -39,5 +40,5 @@ def test_process_job(mock_engine):
         "problem": "diabetes",
         "solution": "aspirin"
     }
-    analyzer.processor.process_job(example_job, mock_uploader)
+    analyzer.processor.process_job(example_job, mock_fb_uploader, mock_es_uploader)
     mock_engine.nlp_analysis.assert_called_once_with(example_job)

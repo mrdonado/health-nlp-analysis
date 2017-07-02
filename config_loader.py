@@ -11,6 +11,7 @@ config.read('config.ini')
 try:
     beanstalkd_section = config['beanstalkd']
     firebase_section = config['firebase']
+    elasticsearch_section = config['elasticsearch']
 except:
     print("ERROR: config.ini is not present or its format is wrong. \n\nPlease create a new config.ini file and set your configuration parameters. \n\nYou can find an example file in this directory, as config.example.ini. Just rename it as config.ini and set your local configuration parameters.")
     sys.exit()
@@ -29,4 +30,10 @@ FIREBASE_CONFIG = dict(
     storage_bucket=firebase_section.get('StorageBucket'),
     email=firebase_section.get('Email'),
     password=firebase_section.get('Password')
+)
+
+ELASTICSEARCH_CONFIG = dict(
+    url=elasticsearch_section.get('ElasticsearchUrl', 'http://localhost:9200'),
+    user=elasticsearch_section.get('ElasticsearchUser', 'elastic'),
+    password=elasticsearch_section.get('ElsaticsearchPassword', 'changeme'),
 )
