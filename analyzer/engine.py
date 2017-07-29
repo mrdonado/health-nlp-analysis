@@ -37,8 +37,8 @@ def nlp_analysis(job_json):
     # when available
     text_analysis = text_analyzer.analyzer(job_json['message'],
                                            LANGUAGE_DATA['start_words'],
-                                           LANGUAGE_DATA['stop_words'],
-                                           LANGUAGE_DATA['grammar'])
+                                           LANGUAGE_DATA['grammar'],
+                                           LANGUAGE_DATA['stop_words'])
 
     analysis['solution'] = text_analysis[0]
     analysis['problem'] = text_analysis[1]

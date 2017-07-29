@@ -63,18 +63,19 @@ def test_analyzer():
         GRAMMAR_PATH,
         START_WORDS_PATH,
         STOP_WORDS_PATH)
-    message = "#exercise helps regulate mood, can improve depression " \
-        "and helps fight against diabetes, cancer + heart disease. " \
-        "https://t.co/sw6mvsslg"
+    message = "This is a new medicine for hyperthyroidism"
+    #  \
+    #     "and helps fight against diabetes, cancer + heart disease. " \
+    #     "https://t.co/sw6mvsslg"
     analysis = text_analyzer.analyzer(message,
                                       language_data['start_words'],
-                                      language_data['stop_words'],
-                                      language_data['grammar'])
-    assert analysis[1] == 'heart disease'
-    assert analysis[0] == 'mood'
+                                      language_data['grammar'],
+                                      language_data['stop_words'])
+    assert analysis[1] == 'hyperthyroidism'
+    assert analysis[0] == 'a new medicine'
     message = "some unrelated message that only talks about watching tv"
     analysis = text_analyzer.analyzer(message,
                                       language_data['start_words'],
-                                      language_data['stop_words'],
-                                      language_data['grammar'])
+                                      language_data['grammar'],
+                                      language_data['stop_words'])
     assert analysis[0] == '<nothing_found>'

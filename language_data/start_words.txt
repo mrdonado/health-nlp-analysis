@@ -1,245 +1,77 @@
-oncogenic
-plantar fasciitis
-tumours*
-hypercholesterolemia
-proinflammatory
-kidneytransplant
-serotypes\S*
-myeloma
-infection
-vasculopathy
-cv-events*
-myocardialinfarction
-cardiogenic shock
-cardiomyopath\w+
-pathogenic \w+
-healthcare
-thromboembolism
-carcinoma
-pancreatitis
-delayed graft function
-pemphigus
-metastatic
-dyskinesia
-dystrophy
-ebola
-renalcancer
-parkinson's
-parkinsons
-parkinson
-lymphoma
-leuka?emia
-diabetes
-lupus
-migraine
-conference app
+liver function
 abdominal pain
-aches
-acid reflux
-acne
-actinic keratosis
 adenoiditis
-aids
-air filtration
-allergies
-allergy
-alzheimer
-alzheimer\'s
-alzheimers
-anaphylaxis
-alopecia
-anemia
-angina
 alopecia areata
+alzheimer
 anorexia nervosa
-social anxiety
+sleep apnea
 appendicitis
 arthritis
-asthma
 atherosclerosis
-atopic dermatitis
-eczema
-baldness
-bedwetting
-benign prostatic hyperplasia
 bipolar disorder
-birth control methods
-birth defects
 bladder cancer
-bladder incontinence
-bladder infection
-bladder spasms
-urine blood
-hematuria
-body dysmorphic disorder
-boils
 botulism
-breast cancer
-breastfeeding
-bulimia nervosa
-cancer
-cataracts
-cellulite
+multiple esclerosis
+cardiovascular diseases
 cervical cancer
-chickenpox
-childhood obesity
 cholesterol
-chronic cough
-chronic obstructive pulmonary disease
-chronic pain
-chronic rhinitis
-cirrhosis
-cluster headaches
-colic
-colon polyps
-common cold
-heart disease
-conjunctivitis
-constipation
-copd
-crohn\'s disease
-cystinuria
-dandruff
-degenerative disc
-dementia
-dengue fever
-depression
+colitis
+cystitis
 dermatitis
-diabetes insipidus
-diabetes mellitus
-diaper rash
-diarrhea
+diabetes
 dyspepsia
-dysthymia
+dysthymias
 emphysema
 encephalitis
-erectile dysfunction
-essential mixed cryoglobulinemia
 eustachian tube problems
-eye allergy
-fever
-fiber
 fibromyalgia
-flu
-flu vaccination
 food allergy
 glaucoma
-gout
-h1n1 virus
 hair loss
-hashimoto\'s thyroiditis
-headache
-hearing loss
-heart attack
-heart murmurs
-heart palpitations
-heartburn
-hemorrhoids
+heart disease
+heart diseases
 hepatitis b
 hepatitis c
 high blood pressure
-high cholesterol
-hiv
-hives
-hormone therapy
-hyperactivity disorder
+hypercholesterolemia
 hypertension
 hyperthyroidism
 hypothyroidism
-hysterectomy
-autoimmune
-impotence
-indigestion
-inflammatory bowel disease
 influenza
-insomnia
-interstitial cystitis
-intestinal gas
-irritable bowel syndrome
-jaundice
-jet lag
-keloid
 kidney stones
 lactose intolerance
-lasik eye surgery
-latex allergy
 lichen planus
 liver cancer
 low back pain
 lung cancer
 lupus
-macular degeneration
-mad cow disease
+lymphoma
 malaria
-measles
 melanoma
 meningitis
 menopause
-miscarriage
-mumps
-nail fungus
-narcolepsy
-nerve disease
-nosebleeds
-obesity
 osteoarthritis
 osteoporosis
 ovarian cancer
-ovarian cysts
-overactive bladder
 pancreatic cancer
+pancreatitis
 panic disorder
-pink eye
+parkinson
 pneumonia
-pneumonia vaccination
-poison ivy
-post traumatic stress disorder
-postpartum depression
-premenstrual syndrome
 prostate cancer
 prostatitis
 psoriasis
-psoriatic arthritis
-pulmonary hypertension
-rabies
-reactive arthritis
-retinal detachment
+pulmonary diseases
+respiratory syndrome
 rheumatoid arthritis
 rosacea
 scleroderma
 seasonal affective disorder
-severe acute respiratory syndrome
 sexually transmitted diseases
-shingles
 sinusitis
-sjogren\'s syndrome
 skin cancer
-sleep apnea
-sleep disturbance
-somnoplasty
-sore throat
-staph infection
-stds
-strep throat
-stress
-stroke
-swine flu
-tension headache
+stress disorders
 testicular cancer
-thrush
 thyroid cancer
-thyroid nodules
-tonsillitis
-ulcerative colitis
-urethral stricture
-urinalysis
-urinary incontinence
 urinary retention
-urinary tract infections
 uterine cancer
-varicose veins
-vasectomy
-warts
-west nile virus
-wrinkles
-yeast infections
