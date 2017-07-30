@@ -15,10 +15,13 @@ class DummyUploader(object):
         assert email == 'email'
         assert password == 'password'
 
+
 class DummyJob(object):
     body = "Job body"
+
     def delete(self):
         pass
+
 
 class DummyBeanstalkd(object):
     def __init__(self, host, port):
@@ -28,11 +31,16 @@ class DummyBeanstalkd(object):
     def reserve(self):
         return DummyJob()
 
-analyzer.runner.AnalysisUploader = DummyUploader
+
+analyzer.runner.FirebaseAnalysisUploader = DummyUploader
 analyzer.runner.pystalkd.Beanstalkd.Connection = DummyBeanstalkd
+
 
 def test_runner():
     beanstalkd_config = dict(beanstalk_ip='localhost', beanstalk_port=11300)
-    firebase_config = dict(api_key="someKey", auth_domain="authDomain", database_url="databaseUrl", storage_bucket="storageBucket", email="email", password="password")
-    analyzer.runner.setup_and_run(beanstalkd_config, firebase_config, False)
-
+    es_config = dict(url='http://localhost:9200',
+                     user='elastic', password='changeme')
+    firebase_config = dict(api_key="someKey", auth_domain="authDomain", database_url="databaseUrl",
+                           storage_bucket="storageBucket", email="email", password="password")
+    analyzer.runner.setup_and_run(
+        beanstalkd_config, firebase_config, es_config, False)

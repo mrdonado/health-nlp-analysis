@@ -59,7 +59,7 @@ analyzer.uploader.pyrebase.initialize_app = dummy_initialize_app
 
 
 def test_uploader():
-    uploader = analyzer.uploader.AnalysisUploader(
+    uploader = analyzer.uploader.FirebaseAnalysisUploader(
         "apiKey1",
         "authDomain2",
         "databaseUrl3",

@@ -223,7 +223,6 @@ def analyzer(message, start_words, grammar, stop_words):
     output[2]
         is the rule pattern matched, an string or '<no pattern found>'
     """
-
     # Necessary variables:
     longest_match = ''
     matching_pattern = ''

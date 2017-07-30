@@ -15,3 +15,8 @@ DatabaseUrl = https://your-project.firebaseio.com
 StorageBucket = your-project.appspot.com
 Email = youremail@domain.com
 Password = yourPassword
+
+[elasticsearch]
+ElasticsearchUrl=http://localhost:9200
+ElasticsearchUser=elastic
+ElasticsearchPassword=changeme
