@@ -1,5 +1,5 @@
 init:
-	pip3 install -r requirements.txt; python3 -m spacy.en.download all
+	pip3 install -U -r requirements.txt; python3 -m spacy download en
 
 runqueue:
 	beanstalkd -l 127.0.0.1 -p 11300 
@@ -14,7 +14,7 @@ watchtest:
 	export PYTHONPATH=.;pytest-watch tests 
 
 coverage:
-	nosetests --with-coverage --cover-erase --cover-html --cover-package=analyzer
+	python3 -m "nose" --with-coverage --cover-erase --cover-html --cover-package=analyzer
 
 clean:
 	find . -name "*.pyc" -exec rm -f {} \;
