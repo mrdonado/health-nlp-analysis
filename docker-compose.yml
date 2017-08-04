@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   beanstalksvc:
     image: schickling/beanstalkd:latest
@@ -7,6 +7,23 @@ services:
       - health-nlp-network   
     ports:
       - "11300:11300"
+  elasticsvc:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.4.3
+    container_name: health_elasticsvc
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - health-nlp-network   
+    volumes:
+      - ./esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
   health-nlp:
     build: .
     container_name: health-nlp 
@@ -16,6 +33,7 @@ services:
       - health-nlp-network
     depends_on:
       - beanstalksvc
+
 
 networks:
   health-nlp-network:

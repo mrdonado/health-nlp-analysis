@@ -1,8 +1,11 @@
 init:
-	pip3 install -r requirements.txt; python3 -m spacy.en.download all
+	pip3 install -U -r requirements.txt; python3 -m spacy download en
 
 runqueue:
 	beanstalkd -l 127.0.0.1 -p 11300 
+
+runesdocker:
+	docker run -p 9200:9200 -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" docker.elastic.co/elasticsearch/elasticsearch:5.4.3
 
 runqueuedocker:
 	docker run -d -p 11300:11300 schickling/beanstalkd
@@ -14,7 +17,7 @@ watchtest:
 	export PYTHONPATH=.;pytest-watch tests 
 
 coverage:
-	nosetests --with-coverage --cover-erase --cover-html --cover-package=analyzer
+	python3 -m "nose" --with-coverage --cover-erase --cover-html --cover-package=analyzer
 
 clean:
 	find . -name "*.pyc" -exec rm -f {} \;

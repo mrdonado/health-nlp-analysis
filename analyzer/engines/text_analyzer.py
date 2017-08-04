@@ -38,9 +38,12 @@ It consists of the following functions:
 """
 import re
 # Text codification must be UTF-8 for SpaCy (NLP library)
-import sys  
-reload(sys)  
-sys.setdefaultencoding('utf8')
+
+# There's no sys.sederaultencoding in Python3
+# import sys
+# reload(sys)
+# sys.setdefaultencoding('utf8')
+
 # Load SpaCy and English module
 from spacy.en import English
 NLP = English()
@@ -50,7 +53,7 @@ def file_parser(path, to_lower):
     """
     Helper function to parse text files.
     """
-    input_file = open(path, 'r')
+    input_file = open(path, 'r', encoding='utf-8')
     results = []
     for line in input_file:
         line = line.strip()
@@ -138,7 +141,7 @@ def get_noun_phrase(message, longest_match, position, stop_words):
     disease problem. The arguments this function gets are defined in 
     analyzer(), the next function
     """
-    
+
     longest_match_start = re.search(re.escape(longest_match), message).start()
     longest_match_end = re.search(re.escape(longest_match), message).end()
     noun_phrases = []
@@ -150,19 +153,18 @@ def get_noun_phrase(message, longest_match, position, stop_words):
     if len(noun_phrases) == 0:
         return None
     else:
-        
+
         # This variable stores the chosen noun phrase:
         target_noun_phrase = None
-        
+
         # 1) Search for noun phrases in solution-problem position: 'sp'
         # In this position, the solution is mentioned before the problem
         if position == "sp":
             candidate_nps = []
             for np in noun_phrases:
-                np = unicode(np)
-                np_end = re.search(re.escape(np), message).end()
+                np_end = re.search(re.escape(np.text), message).end()
                 if np_end <= longest_match_start:
-                    candidate_nps.append(np)
+                    candidate_nps.append(np.text)
             # Exclude noun phrase if it is stop word:
             for candidate_np in candidate_nps[::-1]:
                 stop_word_found = False
@@ -175,16 +177,15 @@ def get_noun_phrase(message, longest_match, position, stop_words):
                     break
                 else:
                     continue
-                
+
         # 2) Search for noun phrase in problem-solution position: 'ps'
         # In this position, the solution is mentioned after the problem
         elif position == "ps":
             candidate_nps = []
             for np in noun_phrases:
-                np = unicode(np)
-                np_start = re.search(re.escape(np), message).start()
+                np_start = re.search(re.escape(np.text), message).start()
                 if np_start >= longest_match_end:
-                    candidate_nps.append(np)
+                    candidate_nps.append(np.text)
             # Exclude noun phrase if it is stop word:
             for candidate_np in candidate_nps:
                 stop_word_found = False
@@ -211,7 +212,7 @@ def analyzer(message, start_words, grammar, stop_words):
     It gets as input:
     (a) The incoming message
     (b) Language data (start_words, grammar, stop_words)
-    
+
     It returns as output:
     output = []
     A list with 3 elements, where:
@@ -222,7 +223,6 @@ def analyzer(message, start_words, grammar, stop_words):
     output[2]
         is the rule pattern matched, an string or '<no pattern found>'
     """
-    
     # Necessary variables:
     longest_match = ''
     matching_pattern = ''
@@ -239,11 +239,11 @@ def analyzer(message, start_words, grammar, stop_words):
         twitter_start_word = '(' + '#\w*' + start_word + '|' + start_word + ')'
     else:
         start_word = '<no start_word>'
-    
+
     # Before the analysis, check if start word (twitter_start_word)
     # is in message:
     if start_word_And_message is not None:
-        
+
         # 2) Analysis process
 
         # For every stored grammar rule, generate its counterpart including the
@@ -268,7 +268,8 @@ def analyzer(message, start_words, grammar, stop_words):
                 target_match = message[:message.find(longest_match)]
                 # target_match = unicode(target_match, "utf-8" )
                 if len(target_match) >= 3:
-                    target_noun_phrase = get_noun_phrase(message, longest_match, 'sp', stop_words)
+                    target_noun_phrase = get_noun_phrase(
+                        message, longest_match, 'sp', stop_words)
                     if target_noun_phrase is not None:
                         output.append(target_noun_phrase)
                         output.append(start_word)
@@ -276,16 +277,19 @@ def analyzer(message, start_words, grammar, stop_words):
                         return output
             # Second possible structure: SOLUTION after PROBLEM:
             elif matching_pattern.find('[s]') > matching_pattern.find('[p]'):
-                target_match = message[message.find(longest_match) + len(longest_match):]
+                target_match = message[message.find(
+                    longest_match) + len(longest_match):]
                 if len(target_match) >= 3:
-                    target_noun_phrase = get_noun_phrase(message, longest_match, 'ps', stop_words)
+                    target_noun_phrase = get_noun_phrase(
+                        message, longest_match, 'ps', stop_words)
                     if target_noun_phrase is not None:
                         output.append(target_noun_phrase)
                         output.append(start_word)
                         output.append(matching_pattern)
                         return output
 
-    # Get no results if no solution or start word is found, or if solution = start_word
+    # Get no results if no solution or start word is found, or if solution =
+    # start_word
     if len(output) == 0 or output[0] in output[1]:
         output.append('<nothing_found>')
         output.append(start_word)
@@ -293,22 +297,23 @@ def analyzer(message, start_words, grammar, stop_words):
         return output
 
 
-
 # ## Test message! #####
 # def test_message():
 #     message = raw_input('\n' + 'New message? ')
 #     message = unicode(message)
-    
+
 #     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/git/health-nlp-analysis/language_data/grammar.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/stop_words.txt')
 #     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['stop_words'])
-#     print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'      '+'<'+result[2]+'>'+'\n'
-    
+# print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'
+# '+'<'+result[2]+'>'+'\n'
+
 #     control = raw_input('(t)ry again ?')
 #     while control == "t":
 #         LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/git/health-nlp-analysis/language_data/grammar.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/stop_words.txt')
 #         result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['stop_words'])
 #         print '<m>'+message+'</m>'
-#         print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'      '+'<'+result[2]+'>'+'\n'
+# print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'
+# '+'<'+result[2]+'>'+'\n'
 
 #         control = raw_input('(t)ry again ?')
 #     else:

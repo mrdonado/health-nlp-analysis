@@ -2,9 +2,16 @@
 Upload an analysis to firebase
 """
 import pyrebase
+import requests
 
 
-class AnalysisUploader(object):
+def irrelevant_analysis(analysis_json):
+    return (analysis_json['analysis']['problem'] == ''
+            or analysis_json['analysis']['solution'] == '<nothing_found>') \
+        and analysis_json['source'] != 'web'
+
+
+class FirebaseAnalysisUploader(object):
     """
     Class for setting up the connection with firebase and providing
     JSON upload helpers.
@@ -31,9 +38,7 @@ class AnalysisUploader(object):
         """
 
         # If the analysis is not relevant, it won't be uploaded
-        if analysis_json['analysis']['problem'] == '' \
-                and analysis_json['analysis']['solution'] == '<nothing_found>' \
-                and analysis_json['source'] != 'web':
+        if irrelevant_analysis(analysis_json):
             return False
 
         # Refresh Token
@@ -43,4 +48,31 @@ class AnalysisUploader(object):
         analysis_db = self.firebase.database().child('analysis')
         # Pass the user's idToken to the push method
         analysis_db.push(analysis_json, fb_user['idToken'])
+        return True
+
+
+class ElasticsearchAnalysisUploader(object):
+    """
+    Class for wrapping up the uploading function to firebase.
+    """
+
+    def __init__(self, url, user, password):
+        self.url = url + '/analysis/health'
+        self.user = user
+        self.password = password
+
+    def upload_analysis(self, analysis_json):
+        """
+        Upload the results of an analysis to firebase.
+        """
+
+        # If the analysis is not relevant, it won't be uploaded
+        if irrelevant_analysis(analysis_json):
+            return False
+
+        post = requests.post(self.url, json=analysis_json,
+                             auth=(self.user, self.password))
+
+        print(post)
+
         return True

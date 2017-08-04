@@ -15,7 +15,7 @@ This project is still on an early stage of development. As soon as there's an on
 
 ## Get this thing running
 
-This project contains a Python program that takes jobs from a beanstalkd service, sends them to the analyzer and posts the results to firebase. Follow these steps in order to run it on your machine.
+This project contains a Python program that takes jobs from a beanstalkd service, sends them to the analyzer and posts the results to firebase and to an elasticsearch. Follow these steps in order to run it on your machine.
 
 ### Beanstalkd
 
@@ -36,6 +36,20 @@ In order to start the beanstalkd service, you can type this on the shell:
 Alternatively, `make runqueue` runs exactly that command.
 
 By default, we're using port `11300` and IP `127.0.0.1`. You can change this in the `config.ini` file.
+
+### Elasticsearch
+
+In order to quickly run an elasticsearch container, you can use the following command:
+
+`docker run -p 9200:9200 -e "http.host=0.0.0.0" -e "transport.host=127.0.0.1" docker.elastic.co/elasticsearch/elasticsearch:5.4.3`
+
+The default user for this instance will be `elastic` and its default password is `changeme`.
+
+Before starting `docker-compose up -d`, make sure to run the following on the shell in order to provide the container with enough memory:
+
+`sudo sysctl -w vm.max_map_count=262144`
+
+For this configuration to be permanent, copy the `60-elasticsearch.conf` file to `/etc/sysctl.d/`.
 
 ### Python Dependencies
 
