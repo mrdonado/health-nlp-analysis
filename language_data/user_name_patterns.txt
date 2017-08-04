@@ -1,0 +1,15 @@
+, MD$	Doctor
+(?i)news	News source
+, GP$	Doctor
+^Dr	Doctor
+(?i)physicist	Doctor
+(?i)nutritionist	Doctor
+(?i)dermat(ó|o)log(o|a)	Doctor
+(?i)anesthesiologist	Doctor
+(?i)electrophysiologist	Doctor
+(?i)neuroradiologist	Doctor
+(?i)cardiologist	Doctor
+(?i)doctor	Doctor
+(?i)anesthesiologist	Doctor
+(?i)dermatologist	Doctor
+(?i)gynecologist	Doctor

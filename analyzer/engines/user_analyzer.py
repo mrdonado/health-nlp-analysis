@@ -6,20 +6,16 @@
 ## User Analyzer ##
 ###################
 
-This program receives a user description input, and extracts key information
-from it to categorize the profile of the user (e.g. 'Proud husband. Radiologist
-at Mayo clinic and Runner' --> 'Radiologist at Mayo Clinic')
-user_analyzer consists of 2 functions: (1) lexicon_generator loads
-linguistic knowledge to feed the analyzer (a simple NLP engine), (2)
-user_analyzer uses information from the previous input to annotate the
-key words or expression which best categorizes the profile of the user.
+This program receives 2 text inputs (user name and user description infor-
+mation), and extracts key information from it to categorize the user profile,
+according to a set of semantic tags.
 
 """
 
-
-# Pending screen user name analysis (e.g. @user, MD)
 import re
 
+# Auxiliar functions for User's description analysis:
+# is_tag, dictionary_parser, lexicon_generator
 
 def is_tag(value):
     """
@@ -37,8 +33,9 @@ def is_tag(value):
 
 def dictionary_parser(dictionary_file_path):
     """
-    1) Create a dictionary of words (hospital, clinic) linked to nodes, e.g. <MEDICAL_PLACE>
-    The input file 'user_dictionary.txt' should be as follows:
+    Create a dictionary of words (hospital, clinic) linked to nodes,
+    e.g. <MEDICAL_PLACE>
+    The input file 'user_dictionary.txt' should is as follows:
     (1 entry per line), e.g.
     <MEDICAL_PLACE> \t hospital
     <MEDICAL_PROFESSION> \t anesthesiologist
@@ -55,7 +52,6 @@ def dictionary_parser(dictionary_file_path):
             dictionary[entry].append(definition)
 
     dictionary_file.close()
-
     # The following loop reads dictionary's entries which have nodes inside,
     # e.g. <MEDICAL_JOB> \t <ADMINISTRATIVE_JOB>. It replaces the node for all
     # its words
@@ -70,77 +66,210 @@ def dictionary_parser(dictionary_file_path):
                 dictionary[entry].remove('|'.join(node_variations))
     return dictionary
 
-
 def lexicon_generator(grammar_file_path, dictionary):
     """
-    2) Generate a lexicon from a set of simple grammar patterns and a dictionary:
-    The file user_grammar.txt should be as follows:
-    (1 entry per line), e.g.
-    ¡<MEDICAL_PROFESSION> in <MEDICAL_PLACE>¡
-    The symnol '¡' sets the text span to display as annotation
+    This function creates a set of lexical instances derived from the dictionary
+    returned by dictionary_parser(), plus the set of pattern rules defined in 
+    user_grammar.txt
+    E.g.
+        <MEDICAL_JOB> at <MEDICAL_PLACE>
+        can generate:
+        Anesthesiologist at Mayo Clinic
+        Phisician at Hospital Gregorio Marañón
+        etc.
     """
     generated_lexicon = dict()
-    user_grammar_f = open(grammar_file_path, 'r')
-    pattern_list = user_grammar_f.readlines()
-    for full_pattern in pattern_list:
-        full_pattern = full_pattern.rstrip()
-        displaying_pattern = full_pattern.split('¡')[1]
-        pattern = full_pattern.replace('¡', '')
+    user_grammar_file = open(grammar_file_path, 'r')
+    patterns = []
+    for line in user_grammar_file:
+        line = line.rstrip()
+        patterns.append(line)
+    user_grammar_file.close()
+    for pattern_data in patterns:
+        (pattern, semantic_tag) = pattern_data.split('\t')
         instance = pattern
-        displaying_instance = displaying_pattern
-        # generated_lexicon is as follows: {'full_pattern'}: [instance,
-        # displaying_instance]
-        generated_lexicon[full_pattern] = []
-        # (a) 'instance' matches the whole pattern
+        # (a) Pattern can have a node inside:
         if re.search(r'<\S+?>', pattern):
             node_list = re.findall(r'<\S+?>', pattern)
             for node in node_list:
                 if node in dictionary.keys():
                     instance = re.sub(
                         node, '(' + '|'.join(dictionary[node]) + ')', instance)
-            generated_lexicon[full_pattern].append(instance)
+            generated_lexicon[(pattern, semantic_tag)] = instance
+        # (b) Pattern without node:
         else:
-            generated_lexicon[full_pattern].append(instance)
-        # (b) 'displaying_instance' matches key words inside the pattern to better
-        # categorize the user's description
-        if re.search(r'<\S+?>', displaying_pattern):
-            node_list = re.findall(r'<\S+?>', displaying_pattern)
-            for node in node_list:
-                if node in dictionary.keys():
-                    displaying_instance = re.sub(
-                        node, '(' + '|'.join(dictionary[node]) + ')', displaying_instance)
-            generated_lexicon[full_pattern].append(displaying_instance)
-        else:
-            generated_lexicon[full_pattern].append(displaying_instance)
-    user_grammar_f.close()
+            generated_lexicon[(pattern, semantic_tag)] = instance
     return generated_lexicon
 
-# (2) Analyzer:
+# Auxiliar functions for User's name analysis:
+# user_name_parser, user_name_analysis, 
 
+def user_name_parser(user_name_patterns_path):
+    '''
+    Create a list of pattern expressions for user name's text. Each pattern
+    has a corresponding semantic tag for user categorization. E.g.:
+    , MD$  DOCTOR
+    '''
+    user_name_patterns = []
+    user_name_file = open(user_name_patterns_path, 'r')
+    for line in user_name_file:
+        line = line.rstrip()
+        (pattern, semantic_tag) = line.split('\t')
+        user_name_patterns.append( (pattern, semantic_tag) )
+    user_name_file.close()
+    return user_name_patterns
 
-def user_analyzer(user_description, lexicon):
-    """
-    Given a user description and a lexicon, it inferes if the user is health
-    related or not.
-    """
-    longest_match = ''
-    # 'matching_pattern' and 'result' are only for annotation purposes (in userannotator)
-    matching_pattern = ''
+def user_name_analysis(user_name, user_name_patterns):
+    '''
+    Analysis of user name's text. Given the text, this function maps user name pattern
+    expressions into it. If found, it returns the list 'result', where:
+    result[0] is the pattern found
+    result[1] is the semantic tag linked to pattern
+    '''
     result = []
-    for full_pattern, instance_pair in lexicon.items():
-        if re.search(instance_pair[0], user_description):
-            possible_match = user_description[re.search(instance_pair[0], user_description).start(
-            ):re.search(instance_pair[0], user_description).end()]
+    longest_match = ''
+    matching_pattern_tuple = None
+    for pattern_tuple in user_name_patterns:
+        if re.search(pattern_tuple[0], user_name):
+            possible_match = user_name[re.search(pattern_tuple[0], user_name).start()
+            :re.search(pattern_tuple[0], user_name).end()]
             if len(possible_match) > len(longest_match):
                 longest_match = possible_match
-                matching_pattern = full_pattern
+                matching_pattern_tuple = pattern_tuple
     if len(longest_match) > 0:
-        displaying_instance = lexicon[matching_pattern][1]
-        displaying_match = user_description[re.search(displaying_instance, user_description).start(
-        ):re.search(displaying_instance, user_description).end()]
-        result.append(matching_pattern)
-        result.append(displaying_match)
+        result.append(matching_pattern_tuple[0])
+        result.append(matching_pattern_tuple[1])
+        return result
     else:
-        result.append('<no pattern>')
-        result.append('<unknown source>')
-    return result
+        return None
+
+
+
+# Analyzer:
+
+def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
+    """
+    This function performs a two-steps analysis to get a user profile categorization.
+    The first step is to analyze the user name's text. If patterns are found, it returns
+    the result and does not go further. If not, it proceeds with a second analysis on
+    the user description's text, and try to give results on the same format.
+    
+    This function's outcome is the list 'user_analyzer_result', where:
+    user_analyzer_result[0] is the pattern found
+    user_analyzer_result[1] is the semantic tag linked to pattern
+    """
+    
+    user_analyzer_result = []
+    
+    # Analysis on the user name's text: 
+    user_name_analysis_result = user_name_analysis(user_name, user_name_patterns)
+    if user_name_analysis_result is not None:
+        user_analyzer_result.append(user_name_analysis_result[0])
+        user_analyzer_result.append(user_name_analysis_result[1])
+        user_analyzer_result.append('<from Name>')
+    
+    # Analysis on the user description's text:
+    if len(user_analyzer_result) == 0:
+        longest_match = ''
+        matching_pattern_tuple = None
+        matching_instance = None
+        all_pattern_tuples = dict()
+        for pattern_tuple, instance in lexicon.items():
+            if re.search(instance, user_description):
+                if pattern_tuple[1] not in all_pattern_tuples.keys():
+                    all_pattern_tuples[pattern_tuple[1]] = pattern_tuple[0]
+                possible_match = user_description[re.search(instance, user_description).start(
+                ):re.search(instance, user_description).end()]
+                if len(possible_match) > len(longest_match):
+                    longest_match = possible_match
+                    matching_pattern_tuple = pattern_tuple
+                    matching_instance = instance
+        if len(longest_match) > 0:
+            # We give preference to the following semantic tags, following this order:
+            if 'Doctor' in all_pattern_tuples.keys():
+                user_analyzer_result.append(all_pattern_tuples['Doctor'])
+                user_analyzer_result.append('Doctor')
+                user_analyzer_result.append('<from Description>')
+            elif 'Academia' in all_pattern_tuples.keys():
+                user_analyzer_result.append(all_pattern_tuples['Academia'])
+                user_analyzer_result.append('Academia')
+                user_analyzer_result.append('<from Description>')
+            elif 'Patient' in all_pattern_tuples.keys():
+                user_analyzer_result.append(all_pattern_tuples['Patient'])
+                user_analyzer_result.append('Patient')
+                user_analyzer_result.append('<from Description>')
+            elif 'Institution' in all_pattern_tuples.keys():
+                user_analyzer_result.append(all_pattern_tuples['Institution'])
+                user_analyzer_result.append('Institution')
+                user_analyzer_result.append('<from Description>')
+            elif 'Journal' in all_pattern_tuples.keys():
+                user_analyzer_result.append(all_pattern_tuples['Journal'])
+                user_analyzer_result.append('Journal')
+                user_analyzer_result.append('<from Description>')
+            elif 'News source' in all_pattern_tuples.keys():
+                user_analyzer_result.append(all_pattern_tuples['News source'])
+                user_analyzer_result.append('News source')
+                user_analyzer_result.append('<from Description>')
+            else:
+                user_analyzer_result.append(matching_pattern_tuple[0])
+                user_analyzer_result.append(matching_pattern_tuple[1])
+                user_analyzer_result.append('<from Description>')
+        else:
+            user_analyzer_result.append('<no pattern>')
+            user_analyzer_result.append('<no tag>')
+            user_analyzer_result.append('<no name/description>')
+    
+    return user_analyzer_result
+
+## Test corpus! ####
+# DICTIONARY = dictionary_parser(
+#     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_dictionary.txt')
+# LEXICON = lexicon_generator(
+#     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
+# USER_NAME_PATTERNS = user_name_parser(
+#     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_name_patterns.txt')       
+# count = 0
+# corpusf = open('sida.txt', 'r')
+# for line in corpusf:
+#     line = line.rstrip()
+#     user_name = line.split('\t')[0]
+#     user_description = line.split('\t')[1]
+#     result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
+#     if result[1] != '<no tag>':
+#         count = count +1
+#         print count, '\t', result[1], '\t', result[0], '\t', user_name, '\t', user_description
+
+
+
+## Test message! #####
+# def test_message():
+#     input_text = raw_input('\n' + 'New user? ')
+#     input_text = input_text.split('\t')
+#     user_name = input_text[0]
+#     user_description = input_text[1]
+#     DICTIONARY = dictionary_parser(
+#     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_dictionary.txt')
+#     LEXICON = lexicon_generator(
+#     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
+#     USER_NAME_PATTERNS = user_name_parser(
+#     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_name_patterns.txt')       
+#     result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
+#     print '\n'+'<'+result[1]+'>'+'\t'+'['+result[0]+']' + '\t' + result[2]
+    
+#     control = raw_input('(t)ry again ?')
+#     while control == "t":
+#         DICTIONARY = dictionary_parser(
+#         '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_dictionary.txt')
+#         LEXICON = lexicon_generator(
+#         '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
+#         USER_NAME_PATTERNS = user_name_parser(
+#         '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_name_patterns.txt')       
+#         result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
+#         print '<m>'+user_name+'\t'+user_description+'</m>'
+#         print '\n'+'<'+result[1]+'>'+'\t'+'['+result[0]+']' + '\t' + result[2]
+
+#         control = raw_input('(t)ry again ?')
+#     else:
+#         test_message()
+
+# test_message()

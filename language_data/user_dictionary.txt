@@ -1,144 +1,434 @@
-<MEDICAL_ATTRIBUTE>	<MEDICAL_FIELD>
-<MEDICAL_JOB>	physicist
-<DISEASE>	liver cancer
-<MEDICAL_FIELD>	family medicine
-<MEDICAL_FIELD>	epidemiology
-<MEDICAL_FIELD>	physiology
-<MEDICAL_FIELD>	radiolog(í|i)a
-<MEDICAL_JOB>	dermatopathologist
-<INSTITUTION>	unit
-<MEDICAL_JOB>	nutritionist
+<ADMINISTRATIVE_JOB>	ceo
+<ADMINISTRATIVE_JOB>	coordinator
+<ADMINISTRATIVE_JOB>	director
 <ADMINISTRATIVE_JOB>	head
-<INSTITUTION>	sociedad
-<INSTITUTION>	college
+<ADMINISTRATIVE_JOB>	\w*director
+<DOCTOR>	allergist
+<DOCTOR>	anaesthetist
+<DOCTOR>	anesthesiologist
+<DOCTOR>	anesthesiologist
+<DOCTOR>	cardiologist
+<DOCTOR>	clinician
+<DOCTOR>	dermat(ó|o)log(o|a)
+<DOCTOR>	dermatologist
+<DOCTOR>	dermatopathologist
+<DOCTOR>	doc
+<DOCTOR>	doctor
+<DOCTOR>	electrophysiologist
+<DOCTOR>	epidemiologist
+<DOCTOR>	family doctor
+<DOCTOR>	family physician
+<DOCTOR>	family practitioner
+<DOCTOR>	flying doctor
+<DOCTOR>	general practitioner
+<DOCTOR>	gp
+<DOCTOR>	gynaecologist
+<DOCTOR>	gynecologist
+<DOCTOR>	hematologist
+<DOCTOR>	internist
+<DOCTOR>	md
+<DOCTOR>	medical practitioner
+<DOCTOR>	neurologist
+<DOCTOR>	neuroradiologist
+<MEDICAL_JOB>	nutritionist
+<DOCTOR>	ob-gyn
+<DOCTOR>	obstetrician
+<DOCTOR>	oncologist
+<DOCTOR>	ophthalmologist
+<DOCTOR>	orthopaedist
+<DOCTOR>	orthopedist
+<DOCTOR>	osteopath
+<DOCTOR>	paediatrician
+<DOCTOR>	pathologist
+<DOCTOR>	pediatrician
+<DOCTOR>	pediatrist
+<DOCTOR>	pharmacologist
+<DOCTOR>	physiatrist
+<DOCTOR>	physician
+<DOCTOR>	physicist
+<DOCTOR>	physio
+<DOCTOR>	plastic surgeon
+<DOCTOR>	podiatrist
+<DOCTOR>	radiologist
+<DOCTOR>	surgeon
+<DOCTOR>	urologist
+<DOCTOR>	forensic
+<MEDICAL_JOB>	health worker
+<MEDICAL_JOB>	health professional
 <INSTITUTION>	academy
-<INSTITUTION>	institute
-<INSTITUTION>	department
 <INSTITUTION>	center
 <INSTITUTION>	centre
-<INSTITUTION>	school
-<INSTITUTION>	organization
+<INSTITUTION>	college
+<INSTITUTION>	department
+<INSTITUTION>	institute
 <INSTITUTION>	organisation
-<MEDICAL_JOB>	dermat(ó|o)log(o|a)
-<MEDICAL_FIELD>	\w+pathology
-<MEDICAL_FIELD>	biotech
-<MEDICAL_FIELD>	gynecology
-<MEDICAL_JOB>	biostatistician
-<MEDICAL_JOB>	anesthesiologist
-<DISEASE>	\S+disease
-<DISEASE>	psoriasis
-<MEDICAL_FIELD>	echocardiography
-<MEDICAL_ATTRIBUTE>	medical
-<MEDICAL_ATTRIBUTE>	interventional
-<MEDICAL_ATTRIBUTE>	therapy
+<INSTITUTION>	organization
+<INSTITUTION>	school
+<INSTITUTION>	sociedad
+<INSTITUTION>	unit
 <MEDICAL_ATTRIBUTE>	care
+<MEDICAL_ATTRIBUTE>	clinical
 <MEDICAL_ATTRIBUTE>	health
 <MEDICAL_ATTRIBUTE>	healthcare
+<MEDICAL_ATTRIBUTE>	interventional
+<MEDICAL_ATTRIBUTE>	medical
 <MEDICAL_ATTRIBUTE>	therapy
-<MEDICAL_ATTRIBUTE>	clinical
-<MEDICAL_JOB>	social worker
-<MEDICAL_FIELD>	\w+ intervention
-<MEDICAL_JOB>	electrophysiologist
-<MEDICAL_FIELD>	surgery
-<DISEASE>	autoimmune \w+
-<DISEASE>	disease
-<DISEASE>	thromboembolism
-<DISEASE>	disease
-<DISEASE>	multiple sclerosis
-<MEDICAL_FIELD>	cardiology
-<DISEASE>	alopecia
-<ADMINISTRATIVE_JOB>	director
-<ADMINISTRATIVE_JOB>	ceo
-<MEDICAL_JOB>	neuroradiologist
-<MEDICAL_FIELD>	plastics
-<MEDICAL_FIELD>	oncology
-<MEDICAL_FIELD>	cancer
-<MEDICAL_FIELD>	radiology
-<MEDICAL_FIELD>	immunology
-<MEDICAL_FIELD>	healthcare
-<MEDICAL_FIELD>	dermatology
-<MEDICAL_FIELD>	dermatolog(í|i)a
-<MEDICAL_JOB>	cardiologist
-<MEDICAL_FIELD>	pathology
-<MEDICAL_FIELD>	medicine
-<MEDICAL_FIELD>	health
-<DISEASE>	psoriasis
-<MEDICAL_JOB>	doctor
-<MEDICAL_JOB>	physician
-<MEDICAL_JOB>	practitioner
-<MEDICAL_JOB>	family doctor
-<MEDICAL_JOB>	family physician
-<MEDICAL_JOB>	family practitioner
-<MEDICAL_JOB>	general practitioner
-<MEDICAL_JOB>	anesthesiologist
-<MEDICAL_JOB>	dermatologist
-<MEDICAL_JOB>	gynecologist
-<MEDICAL_JOB>	internist
-<DISEASE>	hair loss
-<MEDICAL_JOB>	neurologist
-<MEDICAL_JOB>	ob-gyn
-<MEDICAL_JOB>	obstetrician
-<MEDICAL_JOB>	ophthalmologist
-<MEDICAL_JOB>	orthopedist
-<MEDICAL_JOB>	pathologist
-<MEDICAL_JOB>	pediatrician
-<MEDICAL_JOB>	pediatrist
-<MEDICAL_JOB>	physiatrist
-<MEDICAL_JOB>	podiatrist
-<MEDICAL_JOB>	radiologist
-<MEDICAL_JOB>	urologist
-<MEDICAL_JOB>	clinician
-<MEDICAL_JOB>	fellow
-<MEDICAL_JOB>	hospitalist
-<MEDICAL_JOB>	plastic surgeon
-<MEDICAL_JOB>	surgeon
-<MEDICAL_JOB>	intern
-<MEDICAL_JOB>	interne
-<MEDICAL_JOB>	resident
-<MEDICAL_JOB>	aidman
+<MEDICAL_ATTRIBUTE>	therapy
 <MEDICAL_FIELD>	aesthetic medicine
-<ADMINISTRATIVE_JOB>	\w*director
-<MEDICAL_JOB>	nurse
-<MEDICAL_JOB>	nurse-practitioner
-<MEDICAL_JOB>	EMT
-<MEDICAL_JOB>	paramedic
-<MEDICAL_JOB>	paramedical
-<MEDICAL_JOB>	therapist
-<MEDICAL_JOB>	physiotherapist
-<MEDICAL_JOB>	anaesthetist
-<MEDICAL_JOB>	analyst
-<MEDICAL_JOB>	chiropodist
-<MEDICAL_JOB>	chiropractor
-<MEDICAL_JOB>	consultant
-<MEDICAL_JOB>	coroner
-<MEDICAL_JOB>	doc
-<MEDICAL_JOB>	flying doctor
-<MEDICAL_JOB>	gp
-<MEDICAL_JOB>	 med 
-<MEDICAL_JOB>	gynaecologist
-<MEDICAL_JOB>	health professional
-<MEDICAL_JOB>	medical practitioner
-<MEDICAL_JOB>	md
-<MEDICAL_JOB>	occupational therapist
-<MEDICAL_JOB>	orthopaedist
-<MEDICAL_JOB>	osteopath
-<MEDICAL_JOB>	paediatrician
-<MEDICAL_JOB>	physio
-<MEDICAL_JOB>	sangoma
-<MEDICAL_JOB>	acupuncturist
-<MEDICAL_JOB>	epidemiologist
-<MEDICAL_JOB>	oncologist
-<MEDICAL_JOB>	pharmacologist
+<MEDICAL_FIELD>	biotech
+<MEDICAL_FIELD>	cancer
+<MEDICAL_FIELD>	cardiology
+<MEDICAL_FIELD>	dermatolog(í|i)a
+<MEDICAL_FIELD>	dermatology
+<MEDICAL_FIELD>	echocardiography
+<MEDICAL_FIELD>	endocrinology
+<MEDICAL_FIELD>	epidemiology
+<MEDICAL_FIELD>	family medicine
+<MEDICAL_FIELD>	gynecology
+<MEDICAL_FIELD>	health
+<MEDICAL_FIELD>	healthcare
+<MEDICAL_FIELD>	imaging
+<MEDICAL_FIELD>	immunology
+<MEDICAL_FIELD>	medicine
+<MEDICAL_FIELD>	oncology
+<MEDICAL_FIELD>	pathology
 <MEDICAL_FIELD>	pharma
 <MEDICAL_FIELD>	pharmacology
-<DISEASE>	fibroids
-<MEDICAL_FIELD>	imaging
-<MEDICAL_JOB>	hematologist
-<ADMINISTRATIVE_JOB>	coordinator
-<DISEASE>	syndrome
-<DISEASE>	complications
-<DISEASE>	condition*
-<DISEASE>	cancer
+<MEDICAL_FIELD>	physiology
+<MEDICAL_FIELD>	plastics
+<MEDICAL_FIELD>	radiolog(í|i)a
+<MEDICAL_FIELD>	radiology
+<MEDICAL_FIELD>	surgery
+<MEDICAL_FIELD>	\w+ intervention
+<MEDICAL_FIELD>	\w+pathology
+<MEDICAL_JOB>	acupuncturist
+<MEDICAL_JOB>	aidman
+<MEDICAL_JOB>	analyst
+<MEDICAL_JOB>	biostatistician
+<MEDICAL_JOB>	chiropodist
+<MEDICAL_JOB>	chiropractor
+<MEDICAL_JOB>	chiropractic
+<MEDICAL_JOB>	consultant
+<MEDICAL_JOB>	coroner
+<MEDICAL_JOB>	EMT
+<MEDICAL_JOB>	health professional
+<MEDICAL_JOB>	hospitalist
+<MEDICAL_JOB>	intern
+<MEDICAL_JOB>	interne
+<MEDICAL_JOB>	med
+<MEDICAL_JOB>	nurse
+<MEDICAL_JOB>	nurse-practitioner
+<MEDICAL_JOB>	occupational therapist
+<MEDICAL_JOB>	paramedic
+<MEDICAL_JOB>	paramedical
+<MEDICAL_JOB>	physiotherapist
+<MEDICAL_JOB>	\bresident
+<MEDICAL_JOB>	sangoma
+<MEDICAL_JOB>	social worker
+<MEDICAL_JOB>	therapist
 <PATIENT>	patient*
 <PATIENT>	suffering
-<MEDICAL_JOB>	allergist
+<DISEASE>	liver function
+<DISEASE>	abdominal pain
+<DISEASE>	adenoiditis
+<DISEASE>	alopecia areata
+<DISEASE>	alzheimer
+<DISEASE>	anorexia nervosa
+<DISEASE>	sleep apnea
+<DISEASE>	appendicitis
+<DISEASE>	arthritis
+<DISEASE>	atherosclerosis
+<DISEASE>	bipolar disorder
+<DISEASE>	bladder cancer
+<DISEASE>	botulism
+<DISEASE>	multiple esclerosis
+<DISEASE>	cardiovascular diseases
+<DISEASE>	cervical cancer
+<DISEASE>	cholesterol
+<DISEASE>	colitis
+<DISEASE>	cystitis
+<DISEASE>	dermatitis
+<DISEASE>	diabetes
+<DISEASE>	dyspepsia
+<DISEASE>	dysthymias
+<DISEASE>	emphysema
+<DISEASE>	encephalitis
+<DISEASE>	eustachian tube problems
+<DISEASE>	fibromyalgia
+<DISEASE>	food allergy
+<DISEASE>	glaucoma
+<DISEASE>	hair loss
+<DISEASE>	heart disease
+<DISEASE>	heart diseases
+<DISEASE>	hepatitis b
+<DISEASE>	hepatitis c
+<DISEASE>	high blood pressure
+<DISEASE>	hypercholesterolemia
+<DISEASE>	hypertension
+<DISEASE>	hyperthyroidism
+<DISEASE>	hypothyroidism
+<DISEASE>	influenza
+<DISEASE>	kidney stones
+<DISEASE>	lactose intolerance
+<DISEASE>	lichen planus
+<DISEASE>	liver cancer
+<DISEASE>	low back pain
+<DISEASE>	lung cancer
+<DISEASE>	lupus
+<DISEASE>	lymphoma
+<DISEASE>	malaria
+<DISEASE>	melanoma
+<DISEASE>	meningitis
+<DISEASE>	menopause
+<DISEASE>	osteoarthritis
+<DISEASE>	osteoporosis
+<DISEASE>	ovarian cancer
+<DISEASE>	pancreatic cancer
+<DISEASE>	pancreatitis
+<DISEASE>	panic disorder
+<DISEASE>	parkinson
+<DISEASE>	pneumonia
+<DISEASE>	prostate cancer
+<DISEASE>	prostatitis
+<DISEASE>	psoriasis
+<DISEASE>	pulmonary diseases
+<DISEASE>	respiratory syndrome
+<DISEASE>	rheumatoid arthritis
+<DISEASE>	rosacea
+<DISEASE>	scleroderma
+<DISEASE>	seasonal affective disorder
+<DISEASE>	sexually transmitted diseases
+<DISEASE>	sinusitis
+<DISEASE>	skin cancer
+<DISEASE>	stress disorders
+<DISEASE>	testicular cancer
+<DISEASE>	thyroid cancer
+<DISEASE>	urinary retention
+<DISEASE>	uterine cancer
+<DISEASE>	Abscess
+<DISEASE>	Alzheimer's disease
+<DISEASE>	Anotia
+<DISEASE>	alien hand syndrome
+<DISEASE>	Apraxia
+<DISEASE>	Argyria
+<DISEASE>	Aseptic meningitis
+<DISEASE>	Asthenia
+<DISEASE>	Asthma
+<DISEASE>	Astigmatism
+<DISEASE>	Athetosis
+<DISEASE>	Atrophy
+<DISEASE>	Bacterial meningitis
+<DISEASE>	Beriberi
+<DISEASE>	Black Death
+<DISEASE>	Breast cancer
+<DISEASE>	Bronchitis
+<DISEASE>	Brucellosis
+<DISEASE>	Bubonic plague
+<DISEASE>	Bunion
+<DISEASE>	Calculi
+<DISEASE>	Campylobacter infection
+<DISEASE>	Cancer
+<DISEASE>	Candidiasis
+<DISEASE>	Carbon monoxide poisoning
+<DISEASE>	Celiacs disease
+<DISEASE>	Cerebral palsy
+<DISEASE>	Chagas disease
+<DISEASE>	Chalazion
+<DISEASE>	Chancroid
+<DISEASE>	Chavia
+<DISEASE>	Congenital insensitivity to pain with anhidrosis
+<DISEASE>	Cherubism
+<DISEASE>	Chickenpox
+<DISEASE>	Chlamydia
+<DISEASE>	Chlamydia trachomatis
+<DISEASE>	Cholera
+<DISEASE>	Chordoma
+<DISEASE>	Chorea
+<DISEASE>	Chronic fatigue syndrome
+<DISEASE>	Circadian rhythm sleep disorder
+<DISEASE>	Coccidioidomycosis
+<DISEASE>	Common cold
+<DISEASE>	Condyloma
+<DISEASE>	Congestive heart disease
+<DISEASE>	Coronary heart disease
+<DISEASE>	Cowpox
+<DISEASE>	Cretinism
+<DISEASE>	Crohn's Disease
+<DISEASE>	Dengue
+<DISEASE>	Diabetes mellitus
+<DISEASE>	Diphtheria
+<DISEASE>	Dehydration
+<DISEASE>	Dysentery
+<DISEASE>	Ear infection
+<DISEASE>	Ebola
+<DISEASE>	Epilepsy
+<DISEASE>	Erectile dysfunctions
+<DISEASE>	flu
+<DISEASE>	Gangrene
+<DISEASE>	Gastroenteritis
+<DISEASE>	Genital herpes
+<DISEASE>	GERD
+<DISEASE>	Goitre
+<DISEASE>	Gonorrhea
+<DISEASE>	Hepatitis A
+<DISEASE>	Hepatitis D
+<DISEASE>	Hepatitis E
+<DISEASE>	Histiocytosis (Childhood Cancer)
+<DISEASE>	HIV
+<DISEASE>	Human papillomavirus
+<DISEASE>	Huntington's disease
+<DISEASE>	Hypermetropia
+<DISEASE>	Hyperopia
+<DISEASE>	Hypothyroid
+<DISEASE>	Hypotonia
+<DISEASE>	Impetigo
+<DISEASE>	Infertility
+<DISEASE>	Interstitial cystitis
+<DISEASE>	Iritis
+<DISEASE>	Iron-deficiency anemia
+<DISEASE>	Irritable bowel syndrome
+<DISEASE>	Ignious Syndrome
+<DISEASE>	Jaundice
+<DISEASE>	Keloids
+<DISEASE>	Kuru
+<DISEASE>	Kwashiorkor
+<DISEASE>	Kidney stone disease
+<DISEASE>	Laryngitis
+<DISEASE>	Lead poisoning
+<DISEASE>	Legionellosis
+<DISEASE>	Leishmaniasis
+<DISEASE>	Leprosy
+<DISEASE>	Leptospirosis
+<DISEASE>	Listeriosis
+<DISEASE>	Leukemia
+<DISEASE>	Lice
+<DISEASE>	Loiasis
+<DISEASE>	Lupus erythematosus
+<DISEASE>	Lyme disease
+<DISEASE>	Lymphogranuloma venereum
+<DISEASE>	Mad cow disease
+<DISEASE>	Marburg fever
+<DISEASE>	Measles
+<DISEASE>	Metastatic cancer
+<DISEASE>	Ménière's disease
+<DISEASE>	Migraine
+<DISEASE>	Mononucleosis
+<DISEASE>	Multiple myeloma
+<DISEASE>	Multiple sclerosis
+<DISEASE>	Mumps
+<DISEASE>	Muscular dystrophy
+<DISEASE>	Myasthenia gravis
+<DISEASE>	Myelitis
+<DISEASE>	Myoclonus
+<DISEASE>	Myopia
+<DISEASE>	Myxedema
+<DISEASE>	Morquio Syndrome
+<DISEASE>	Mattticular syndrome
+<DISEASE>	Neoplasm
+<DISEASE>	Non-gonococcal urethritis
+<DISEASE>	Necrotizing Fasciitis
+<DISEASE>	Night blindness
+<DISEASE>	Obesity
+<DISEASE>	Otitis
+<DISEASE>	Palindromic rheumatism
+<DISEASE>	Paratyphoid fever
+<DISEASE>	Parkinson's disease
+<DISEASE>	Pelvic inflammatory disease
+<DISEASE>	Peritonitis
+<DISEASE>	Periodontal disease
+<DISEASE>	Pertussis
+<DISEASE>	Phenylketonuria
+<DISEASE>	Plague
+<DISEASE>	Poliomyelitis
+<DISEASE>	Porphyria
+<DISEASE>	Progeria
+<DISEASE>	Psittacosis
+<DISEASE>	Pubic lice
+<DISEASE>	Pulmonary embolism
+<DISEASE>	Pilia
+<DISEASE>	Q fever
+<DISEASE>	Ques fever
+<DISEASE>	Rabies
+<DISEASE>	Repetitive strain injury
+<DISEASE>	Rheumatic fever
+<DISEASE>	Rheumatic heart
+<DISEASE>	Rheumatism
+<DISEASE>	Rickets
+<DISEASE>	Rift Valley fever
+<DISEASE>	Rocky Mountain spotted fever
+<DISEASE>	Rubella
+<DISEASE>	Salmonellosis
+<DISEASE>	Scabies
+<DISEASE>	Scarlet fever
+<DISEASE>	Sciatica
+<DISEASE>	Scrapie
+<DISEASE>	Scurvy
+<DISEASE>	Sepsis
+<DISEASE>	Septicemia
+<DISEASE>	SARS
+<DISEASE>	Shigellosis
+<DISEASE>	Shin splints
+<DISEASE>	Shingles
+<DISEASE>	Sickle-cell anemia
+<DISEASE>	Siderosis
+<DISEASE>	SIDS
+<DISEASE>	Silicosis
+<DISEASE>	Smallpox
+<DISEASE>	Stevens-Johnson syndrome
+<DISEASE>	Stomach flu
+<DISEASE>	Stomach ulcers
+<DISEASE>	Strabismus
+<DISEASE>	Strep throat
+<DISEASE>	Streptococcal infection
+<DISEASE>	Synovitis
+<DISEASE>	Syphilis
+<DISEASE>	Swine influenza
+<DISEASE>	Schizophrenia
+<DISEASE>	Taeniasis
+<DISEASE>	Tay-Sachs disease
+<DISEASE>	Tennis elbow
+<DISEASE>	Teratoma
+<DISEASE>	Tetanus
+<DISEASE>	Thalassaemia
+<DISEASE>	Thrush
+<DISEASE>	Thymoma
+<DISEASE>	Tinnitus
+<DISEASE>	Tonsillitis
+<DISEASE>	Tooth decay
+<DISEASE>	Toxic shock syndrome
+<DISEASE>	Trichinosis
+<DISEASE>	Trichomoniasis
+<DISEASE>	Trisomy
+<DISEASE>	Tuberculosis
+<DISEASE>	Tularemia
+<DISEASE>	Tungiasis
+<DISEASE>	Typhoid fever
+<DISEASE>	Typhus
+<DISEASE>	Tumor
+<DISEASE>	Ulcerative colitis
+<DISEASE>	Ulcers
+<DISEASE>	Uremia
+<DISEASE>	Urticaria
+<DISEASE>	Uveitis
+<DISEASE>	Varicella
+<DISEASE>	Varicose veins
+<DISEASE>	Vasovagal syncope
+<DISEASE>	Vitiligo
+<DISEASE>	Von Hippel-Lindau disease
+<DISEASE>	Viral fever
+<DISEASE>	Viral meningitis
+<DISEASE>	Valley fever
+<DISEASE>	Warkany syndrome
+<DISEASE>	Warts
+<DISEASE>	Watkins
+<DISEASE>	Yellow fever
+<DISEASE>	Yersiniosis
+<DISEASE>	alopecia
+<DISEASE>	autoimmune \w+
+<DISEASE>	complications
+<DISEASE>	condition*
+<DISEASE>	disease
+<DISEASE>	fibroids
+<DISEASE>	syndrome
+<DISEASE>	thromboembolism
+<DISEASE>	\S+disease

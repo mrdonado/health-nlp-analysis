@@ -11,6 +11,8 @@ DICTIONARY = user_analyzer.dictionary_parser(
     './language_data/user_dictionary.txt')
 LEXICON = user_analyzer.lexicon_generator(
     './language_data/user_grammar.txt', DICTIONARY)
+USER_NAME_PATTERNS = user_analyzer.user_name_parser(
+    './language_data/user_name_patterns.txt')
 
 
 # Text analysis
@@ -27,11 +29,13 @@ def nlp_analysis(job_json):
     """
     analysis = dict()
     # Get 'profile' and 'health_related'
-    analysis['profile'] = user_analyzer.user_analyzer(job_json['user_description'],
-                                                      LEXICON)[1]
+    analysis['profile'] = user_analyzer.user_analyzer(job_json['user_name'],
+                                                    job_json['user_description'],
+                                                    USER_NAME_PATTERNS,
+                                                    LEXICON)[1]
 
     # Identified medical sources will be tagged as health related
-    analysis['health_related'] = analysis['profile'] != '<unknown source>'
+    analysis['health_related'] = analysis['profile'] != '<no tag>'
 
     # The text analyzer inferes a health related problem and its solution,
     # when available
@@ -68,7 +72,7 @@ def dummy_nlp_analysis(input_job):
     a model for future analysis engines.
     """
     result = {
-        "health_related": "true",
+        "health_related": "Doctor",
         "created_at": datetime.now().isoformat(),
         "profile": "radiologist",
         "problem": "diabetes",
