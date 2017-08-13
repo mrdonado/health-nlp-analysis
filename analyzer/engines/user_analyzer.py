@@ -17,6 +17,7 @@ import re
 # Auxiliar functions for User's description analysis:
 # is_tag, dictionary_parser, lexicon_generator
 
+
 def is_tag(value):
     """
     It identifies a value as tag
@@ -56,7 +57,8 @@ def dictionary_parser(dictionary_file_path):
     # e.g. <MEDICAL_JOB> \t <ADMINISTRATIVE_JOB>. It replaces the node for all
     # its words
     for (entry, values) in dictionary.items():
-        nodes_with_variations = [value.split('|') for value in values if is_tag(value)]
+        nodes_with_variations = [value.split(
+            '|') for value in values if is_tag(value)]
         for node_variations in nodes_with_variations:
             for insidenode in node_variations:
                 if insidenode in dictionary.keys():
@@ -65,6 +67,7 @@ def dictionary_parser(dictionary_file_path):
                             dictionary[entry].append(definition)
                 dictionary[entry].remove('|'.join(node_variations))
     return dictionary
+
 
 def lexicon_generator(grammar_file_path, dictionary):
     """
@@ -102,7 +105,8 @@ def lexicon_generator(grammar_file_path, dictionary):
     return generated_lexicon
 
 # Auxiliar functions for User's name analysis:
-# user_name_parser, user_name_analysis, 
+# user_name_parser, user_name_analysis,
+
 
 def user_name_parser(user_name_patterns_path):
     '''
@@ -115,9 +119,10 @@ def user_name_parser(user_name_patterns_path):
     for line in user_name_file:
         line = line.rstrip()
         (pattern, semantic_tag) = line.split('\t')
-        user_name_patterns.append( (pattern, semantic_tag) )
+        user_name_patterns.append((pattern, semantic_tag))
     user_name_file.close()
     return user_name_patterns
+
 
 def user_name_analysis(user_name, user_name_patterns):
     '''
@@ -131,8 +136,8 @@ def user_name_analysis(user_name, user_name_patterns):
     matching_pattern_tuple = None
     for pattern_tuple in user_name_patterns:
         if re.search(pattern_tuple[0], user_name):
-            possible_match = user_name[re.search(pattern_tuple[0], user_name).start()
-            :re.search(pattern_tuple[0], user_name).end()]
+            possible_match = user_name[re.search(pattern_tuple[0], user_name).start(
+            ):re.search(pattern_tuple[0], user_name).end()]
             if len(possible_match) > len(longest_match):
                 longest_match = possible_match
                 matching_pattern_tuple = pattern_tuple
@@ -144,7 +149,6 @@ def user_name_analysis(user_name, user_name_patterns):
         return None
 
 
-
 # Analyzer:
 
 def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
@@ -153,21 +157,22 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
     The first step is to analyze the user name's text. If patterns are found, it returns
     the result and does not go further. If not, it proceeds with a second analysis on
     the user description's text, and try to give results on the same format.
-    
+
     This function's outcome is the list 'user_analyzer_result', where:
     user_analyzer_result[0] is the pattern found
     user_analyzer_result[1] is the semantic tag linked to pattern
     """
-    
+
     user_analyzer_result = []
-    
-    # Analysis on the user name's text: 
-    user_name_analysis_result = user_name_analysis(user_name, user_name_patterns)
+
+    # Analysis on the user name's text:
+    user_name_analysis_result = user_name_analysis(
+        user_name, user_name_patterns)
     if user_name_analysis_result is not None:
         user_analyzer_result.append(user_name_analysis_result[0])
         user_analyzer_result.append(user_name_analysis_result[1])
         user_analyzer_result.append('<from Name>')
-    
+
     # Analysis on the user description's text:
     if len(user_analyzer_result) == 0:
         longest_match = ''
@@ -185,7 +190,8 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
                     matching_pattern_tuple = pattern_tuple
                     matching_instance = instance
         if len(longest_match) > 0:
-            # We give preference to the following semantic tags, following this order:
+            # We give preference to the following semantic tags, following this
+            # order:
             if 'Doctor' in all_pattern_tuples.keys():
                 user_analyzer_result.append(all_pattern_tuples['Doctor'])
                 user_analyzer_result.append('Doctor')
@@ -218,7 +224,7 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
             user_analyzer_result.append('<no pattern>')
             user_analyzer_result.append('<no tag>')
             user_analyzer_result.append('<no name/description>')
-    
+
     return user_analyzer_result
 
 ## Test corpus! ####
@@ -227,7 +233,7 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
 # LEXICON = lexicon_generator(
 #     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
 # USER_NAME_PATTERNS = user_name_parser(
-#     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_name_patterns.txt')       
+#     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_name_patterns.txt')
 # count = 0
 # corpusf = open('sida.txt', 'r')
 # for line in corpusf:
@@ -237,8 +243,8 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
 #     result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
 #     if result[1] != '<no tag>':
 #         count = count +1
-#         print count, '\t', result[1], '\t', result[0], '\t', user_name, '\t', user_description
-
+# print count, '\t', result[1], '\t', result[0], '\t', user_name, '\t',
+# user_description
 
 
 ## Test message! #####
@@ -252,10 +258,10 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
 #     LEXICON = lexicon_generator(
 #     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
 #     USER_NAME_PATTERNS = user_name_parser(
-#     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_name_patterns.txt')       
+#     '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_name_patterns.txt')
 #     result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
 #     print '\n'+'<'+result[1]+'>'+'\t'+'['+result[0]+']' + '\t' + result[2]
-    
+
 #     control = raw_input('(t)ry again ?')
 #     while control == "t":
 #         DICTIONARY = dictionary_parser(
@@ -263,10 +269,10 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
 #         LEXICON = lexicon_generator(
 #         '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
 #         USER_NAME_PATTERNS = user_name_parser(
-#         '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_name_patterns.txt')       
+#         '/Users/DoraDorita/git/health-nlp-analysis/language_data/user_name_patterns.txt')
 #         result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
 #         print '<m>'+user_name+'\t'+user_description+'</m>'
-#         print '\n'+'<'+result[1]+'>'+'\t'+'['+result[0]+']' + '\t' + result[2]
+# print '\n'+'<'+result[1]+'>'+'\t'+'['+result[0]+']' + '\t' + result[2]
 
 #         control = raw_input('(t)ry again ?')
 #     else:

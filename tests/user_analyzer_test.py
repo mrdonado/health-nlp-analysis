@@ -6,6 +6,7 @@ from analyzer.engines import user_analyzer
 
 USER_DICTIONARY = './tests/engines/demo_user_dictionary.txt'
 USER_GRAMMAR = './tests/engines/demo_user_grammar.txt'
+USER_NAME_PATTERNS_PATH = './tests/engines/demo_user_name_patterns.txt'
 
 
 def test_is_tag():
@@ -52,13 +53,22 @@ def test_user_analyzer():
     """
     dictionary = user_analyzer.dictionary_parser(USER_DICTIONARY)
     lexicon = user_analyzer.lexicon_generator(USER_GRAMMAR, dictionary)
+    user_name_patterns = user_analyzer.user_name_parser(
+        USER_NAME_PATTERNS_PATH)
 
-    assert user_analyzer.user_analyzer('Some random person',
-                                       lexicon) == ['<no pattern>',
-                                                    '<unknown source>']
+    assert user_analyzer.user_analyzer('Mr. Proper',
+                                       'Some random person',
+                                       user_name_patterns,
+                                       lexicon) == [
+                                           '<no pattern>',
+        '<no tag>',
+        '<no name/description>']
+
+    """
     assert user_analyzer.user_analyzer('Some physicist and father',
                                        lexicon) == ['¡<MEDICAL_JOB>¡ (and|&) \\w+',
                                                     'physicist']
     assert user_analyzer.user_analyzer('family medicine website',
                                        lexicon) == ['¡<MEDICAL_ATTRIBUTE> (web|portal|site)¡',
                                                     'family medicine web']
+    """
