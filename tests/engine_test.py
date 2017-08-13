@@ -14,7 +14,7 @@ def test_dummy_nlp_analysis():
         "query": "diabetes"
     }
     example_analysis = dummy_nlp_analysis(input_job)
-    assert example_analysis["health_related"] == "true"
+    assert example_analysis["health_related"] == "Doctor"
     assert example_analysis["profile"] == "radiologist"
     assert example_analysis["problem"] == "diabetes"
     assert example_analysis["solution"] == "aspirin"
