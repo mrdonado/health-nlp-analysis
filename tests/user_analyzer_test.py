@@ -64,7 +64,14 @@ def test_user_analyzer():
         '<no tag>',
         '<no name/description>']
 
+    assert user_analyzer.user_analyzer('Doctor Proper',
+                                       'Some physicist and father',
+                                       user_name_patterns,
+                                       lexicon) == ['(?i)doctor', 'Doctor', '<from Name>']
+
+
     """
+    # older assertions...
     assert user_analyzer.user_analyzer('Some physicist and father',
                                        lexicon) == ['¡<MEDICAL_JOB>¡ (and|&) \\w+',
                                                     'physicist']
