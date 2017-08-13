@@ -40,24 +40,10 @@ def test_lexicon_generator():
     dictionary = user_analyzer.dictionary_parser(USER_DICTIONARY)
     lexicon = user_analyzer.lexicon_generator(USER_GRAMMAR,
                                               dictionary)
-    assert lexicon == {
-        '¡<MEDICAL_ATTRIBUTE> <MEDICAL_FIELD>¡': [
-            '(family medicine|biotech) (family '
-            'medicine|biotech)',
-            '(family medicine|biotech) (family '
-            'medicine|biotech)'],
-        '¡working for <MEDICAL_ATTRIBUTE>¡': [
-            'working for (family medicine|biotech)',
-            'working for (family medicine|biotech)'],
-        '¡<MEDICAL_ATTRIBUTE> (web|portal|site)¡': [
-            '(family medicine|biotech) '
-            '(web|portal|site)',
-            '(family medicine|biotech) '
-            '(web|portal|site)'],
-        '¡<MEDICAL_JOB>¡ (and|&) \\w+': [
-            '(physicist|dermat(ó|o)log(o|a)) (and|&) '
-            '\\w+',
-            '(physicist|dermat(ó|o)log(o|a))']}
+    assert lexicon == {('(?i)(;|,|\\.) practitioner', 'Doctor'): '(?i)(;|,|\\.) practitioner',
+                       ('(?i)^practitioner', 'Doctor'): '(?i)^practitioner',
+                       ('(?i)nurse clinician', 'Professional'): '(?i)nurse clinician',
+                       ('(?i)peer reviewed', 'Source'): '(?i)peer reviewed'}
 
 
 def test_user_analyzer():
