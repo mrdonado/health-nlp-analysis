@@ -37,6 +37,9 @@ def nlp_analysis(job_json):
     # Identified medical sources will be tagged as health related
     analysis['health_related'] = analysis['profile'] != '<no tag>'
 
+    if not analysis['health_related']:
+        return None
+
     # The text analyzer inferes a health related problem and its solution,
     # when available
     text_analysis = text_analyzer.analyzer(job_json['message'],
