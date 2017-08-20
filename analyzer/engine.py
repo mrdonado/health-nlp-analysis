@@ -29,10 +29,14 @@ def nlp_analysis(job_json):
     """
     analysis = dict()
     # Get 'profile' and 'health_related'
-    analysis['profile'] = user_analyzer.user_analyzer(job_json['user_name'],
-                                                    job_json['user_description'],
-                                                    USER_NAME_PATTERNS,
-                                                    LEXICON)[1]
+    user_analysis = user_analyzer.user_analyzer(job_json['user_name'],
+                                                job_json['user_description'],
+                                                USER_NAME_PATTERNS,
+                                                LEXICON)
+
+    analysis['profile'] = user_analysis[1]
+    analysis['profile_rule'] = user_analysis[0]
+    analysis['profile_origin'] = user_analysis[2]
 
     # Identified medical sources will be tagged as health related
     analysis['health_related'] = analysis['profile'] != '<no tag>'
@@ -53,6 +57,7 @@ def nlp_analysis(job_json):
     # Save the analysis timestamp
     analysis['created_at'] = datetime.now().isoformat()
     return analysis
+
 
 def dummy_nlp_analysis(input_job):
     """
