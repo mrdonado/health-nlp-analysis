@@ -29,7 +29,7 @@ y\'$
 ^us$
 ^what$
 ^who$
-^@
+^\.?@
 ^\\
 ^(RT|MT)  
 ^\d+\w$
@@ -185,3 +185,106 @@ impact
 ^colitis$
 ^urinary retention$
 ^uterine cancer$
+crew
+chances
+(?i)blog
+(?i)health
+disorder
+^#\w+ #\w
+(?i)post
+(?i)^#?cancer$
+(?i)^#?hypercholesterolemia$
+(?i)^#?pancreatitis$
+(?i)^#?parkinson$
+(?i)^#?parkinson's$
+(?i)^#?lymphoma$
+(?i)^#?diabetes$
+(?i)^#?lupus$
+(?i)^#?abdominal pain$
+(?i)^#?adenoiditis$
+(?i)^#?aids$
+(?i)^#?alzheimer$
+(?i)^#?alzheimer's$
+(?i)^#?anorexia nervosa$
+(?i)^#?appendicitis$
+(?i)^#?arthritis$
+(?i)^#?asthma$
+(?i)^#?alopecia areata$
+(?i)^#?atherosclerosis$
+(?i)^#?bipolar disorder$
+(?i)^#?bladder cancer$
+(?i)^#?botulism$
+(?i)^#?breast cancer$
+(?i)^#?cancer$
+(?i)^#?cataracts$
+(?i)^#?cellulite$
+(?i)^#?cervical cancer$
+(?i)^#?cholesterol$
+(?i)^#?pulmonary diseases$
+(?i)^#?chronic pain$
+(?i)^#?cirrhosis$
+(?i)^#?heart diseases$
+(?i)^#?heart disease$
+(?i)^#?dermatitis$
+(?i)^#?diabetes$
+(?i)^#?dyspepsia$
+(?i)^#?dysthymias$
+(?i)^#?emphysema$
+(?i)^#?encephalitis$
+(?i)^#?eustachian tube problems$
+(?i)^#?fibromyalgia$
+(?i)^#?food allergy$
+(?i)^#?glaucoma$
+(?i)^#?hair loss$
+(?i)^#?hemorrhoids$
+(?i)^#?hepatitis b$
+(?i)^#?hepatitis c$
+(?i)^#?high blood pressure$
+(?i)^#?cholesterol$
+(?i)^#?hyperthyroidism$
+(?i)^#?hypothyroidism$
+(?i)^#?influenza$
+(?i)^#?cystitis$
+(?i)^#?kidney stones$
+(?i)^#?lactose intolerance$
+(?i)^#?lichen planus$
+(?i)^#?liver cancer$
+(?i)^#?cardiovascular diseases$
+(?i)^#?low back pain$
+(?i)^#?lung cancer$
+(?i)^#?lupus$
+(?i)^#?malaria$
+(?i)^#?melanoma$
+(?i)^#?meningitis$
+(?i)^#?menopause$
+(?i)^#?obesity$
+(?i)^#?osteoarthritis$
+(?i)^#?osteoporosis$
+(?i)^#?ovarian cancer$
+(?i)^#?pancreatic cancer$
+(?i)^#?pancreatitis$
+(?i)^#?panic disorder$
+(?i)^#?pneumonia$
+(?i)^#?stress disorders$
+(?i)^#?prostate cancer$
+(?i)^#?prostatitis$
+(?i)^#?psoriasis$
+(?i)^#?hypertension$
+(?i)^#?rheumatoid arthritis$
+(?i)^#?rosacea$
+(?i)^#?scleroderma$
+(?i)^#?seasonal affective disorder$
+(?i)^#?respiratory syndrome$
+(?i)^#?sexually transmitted diseases$
+(?i)^#?sinusitis$
+(?i)^#?skin cancer$
+(?i)^#?apnea$
+(?i)^#?testicular cancer$
+(?i)^#?thyroid cancer$
+(?i)^#?colitis$
+(?i)^#?urinary retention$
+(?i)^#?uterine cancer$
+ MD$
+heaven
+job
+target

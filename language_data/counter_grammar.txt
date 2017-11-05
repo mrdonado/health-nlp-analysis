@@ -1,0 +1,7 @@
+risk for( \S+){0,5} [p]
+why \w+ [p]
+chances for ( \S+){0,5} [p]
+screen\w* for( \S+){0,5} [p]
+(are not|aren't|isn't|is not|doesn't|does not|don't|do not)( \S+){3,7} [p]
+get ready (to|for)( \S+){0,5} [p]
+for support\w*( \S+){0,7} [p]

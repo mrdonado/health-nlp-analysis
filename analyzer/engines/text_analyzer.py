@@ -54,6 +54,7 @@ def file_parser(path, to_lower):
     Helper function to parse text files.
     """
     input_file = open(path, 'r', encoding='utf-8')
+    #input_file = open(path, 'r')
     results = []
     for line in input_file:
         line = line.strip()
@@ -64,7 +65,7 @@ def file_parser(path, to_lower):
     return results
 
 
-def language_data_loader(grammar_path, start_words_path, stop_words_path):
+def language_data_loader(grammar_path, counter_grammar_path, start_words_path, stop_words_path):
     """
     It receives three file paths as input:
     - Grammar
@@ -76,6 +77,8 @@ def language_data_loader(grammar_path, start_words_path, stop_words_path):
     language_data = dict()
     # Load grammar
     language_data['grammar'] = file_parser(grammar_path, False)
+    # Load counter_grammar
+    language_data['counter_grammar'] = file_parser(counter_grammar_path, False)
     # Load start words (a term list to recover messages on diseases)
     language_data['start_words'] = file_parser(start_words_path, True)
     # Load stop words (words tagged as noun phrases that cannot be extracted
@@ -202,8 +205,26 @@ def get_noun_phrase(message, longest_match, position, stop_words):
         # Return noun phrase ('None' if not found):
         return target_noun_phrase
 
+def counter_analyzer(message, start_word, counter_grammar):
+    """
 
-def analyzer(message, start_words, grammar, stop_words):
+    """
+    longest_match = ''
+    for pattern in counter_grammar:
+        instance = pattern.replace('[p]', start_word)
+        if re.search(instance, message, flags=re.IGNORECASE):
+            found_instance = instance
+            match = message[re.search(found_instance, message, flags=re.IGNORECASE).start(
+                ):re.search(found_instance, message, flags=re.IGNORECASE).end()]
+            # Find the rule with the longest match in the string:
+            if len(match) > len(longest_match):
+                longest_match = match
+    if len(longest_match) > 0:
+        return True
+    else:
+        return False
+
+def analyzer(message, start_words, grammar, counter_grammar, stop_words):
     """
     Analyzer, a treatment-entity finder.
     The input grammar follows two basic syntactic schemes,
@@ -246,47 +267,51 @@ def analyzer(message, start_words, grammar, stop_words):
 
         # 2) Analysis process
 
-        # For every stored grammar rule, generate its counterpart including the
-        # start word (e.g. '[s] for [p]' -> '[s] for anorexia')
-        for pattern in grammar:
-            instance = pattern.replace('[p]', twitter_start_word)
-            instance = instance.replace('[s]', '')
-            # Test every rule against the message:
-            if re.search(instance, message, flags=re.IGNORECASE):
-                found_instance = instance
-                match = message[re.search(found_instance, message, flags=re.IGNORECASE).start(
-                ):re.search(found_instance, message, flags=re.IGNORECASE).end()]
-                # Find the rule with the longest match in the string:
-                if len(match) > len(longest_match):
-                    longest_match = match
-                    matching_pattern = pattern
-        # Rule matchs if 'longest_match' contains a string,
-        # so the analysis can continue:
-        if len(longest_match) > 0:
-            # First possible structure: SOLUTION before PROBLEM
-            if matching_pattern.find('[s]') < matching_pattern.find('[p]'):
-                target_match = message[:message.find(longest_match)]
-                # target_match = unicode(target_match, "utf-8" )
-                if len(target_match) >= 3:
-                    target_noun_phrase = get_noun_phrase(
-                        message, longest_match, 'sp', stop_words)
-                    if target_noun_phrase is not None:
-                        output.append(target_noun_phrase)
-                        output.append(start_word)
-                        output.append(matching_pattern)
-                        return output
-            # Second possible structure: SOLUTION after PROBLEM:
-            elif matching_pattern.find('[s]') > matching_pattern.find('[p]'):
-                target_match = message[message.find(
-                    longest_match) + len(longest_match):]
-                if len(target_match) >= 3:
-                    target_noun_phrase = get_noun_phrase(
-                        message, longest_match, 'ps', stop_words)
-                    if target_noun_phrase is not None:
-                        output.append(target_noun_phrase)
-                        output.append(start_word)
-                        output.append(matching_pattern)
-                        return output
+        # Counter analysis to avoid false positives:
+        counter_analyzer_result = counter_analyzer(message, twitter_start_word, counter_grammar)
+        
+        if counter_analyzer_result is False:
+            # For every stored grammar rule, generate its counterpart including the
+            # start word (e.g. '[s] for [p]' -> '[s] for anorexia')
+            for pattern in grammar:
+                instance = pattern.replace('[p]', twitter_start_word)
+                instance = instance.replace('[s]', '')
+                # Test every rule against the message:
+                if re.search(instance, message, flags=re.IGNORECASE):
+                    found_instance = instance
+                    match = message[re.search(found_instance, message, flags=re.IGNORECASE).start(
+                    ):re.search(found_instance, message, flags=re.IGNORECASE).end()]
+                    # Find the rule with the longest match in the string:
+                    if len(match) > len(longest_match):
+                        longest_match = match
+                        matching_pattern = pattern
+            # Rule matchs if 'longest_match' contains a string,
+            # so the analysis can continue:
+            if len(longest_match) > 0:
+                # First possible structure: SOLUTION before PROBLEM
+                if matching_pattern.find('[s]') < matching_pattern.find('[p]'):
+                    target_match = message[:message.find(longest_match)]
+                    # target_match = unicode(target_match, "utf-8" )
+                    if len(target_match) >= 3:
+                        target_noun_phrase = get_noun_phrase(
+                            message, longest_match, 'sp', stop_words)
+                        if target_noun_phrase is not None:
+                            output.append(target_noun_phrase)
+                            output.append(start_word)
+                            output.append(matching_pattern)
+                            return output
+                # Second possible structure: SOLUTION after PROBLEM:
+                elif matching_pattern.find('[s]') > matching_pattern.find('[p]'):
+                    target_match = message[message.find(
+                        longest_match) + len(longest_match):]
+                    if len(target_match) >= 3:
+                        target_noun_phrase = get_noun_phrase(
+                            message, longest_match, 'ps', stop_words)
+                        if target_noun_phrase is not None:
+                            output.append(target_noun_phrase)
+                            output.append(start_word)
+                            output.append(matching_pattern)
+                            return output
 
     # Get no results if no solution or start word is found, or if solution =
     # start_word
@@ -297,23 +322,25 @@ def analyzer(message, start_words, grammar, stop_words):
         return output
 
 
-# ## Test message! #####
+## Test message! #####
 # def test_message():
 #     message = raw_input('\n' + 'New message? ')
 #     message = unicode(message)
 
-#     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/git/health-nlp-analysis/language_data/grammar.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/stop_words.txt')
-#     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['stop_words'])
-# print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'
-# '+'<'+result[2]+'>'+'\n'
+#     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/git/health-nlp-analysis/language_data/grammar.txt',
+#      '/Users/DoraDorita/git/health-nlp-analysis/language_data/counter_grammar.txt',
+#      '/Users/DoraDorita/git/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/stop_words.txt')
+#     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
+    
+#     print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
 
 #     control = raw_input('(t)ry again ?')
 #     while control == "t":
-#         LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/git/health-nlp-analysis/language_data/grammar.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/stop_words.txt')
-#         result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['stop_words'])
+#         LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/git/health-nlp-analysis/language_data/grammar.txt',
+#         '/Users/DoraDorita/git/health-nlp-analysis/language_data/counter_grammar.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/stop_words.txt')
+#         result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
 #         print '<m>'+message+'</m>'
-# print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'
-# '+'<'+result[2]+'>'+'\n'
+#         print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
 
 #         control = raw_input('(t)ry again ?')
 #     else:

@@ -8,6 +8,7 @@ from analyzer.engines import text_analyzer
 START_WORDS_PATH = './tests/engines/demo_start_words.txt'
 STOP_WORDS_PATH = './tests/engines/demo_stop_words.txt'
 GRAMMAR_PATH = './tests/engines/demo_grammar.txt'
+COUNTER_GRAMMAR_PATH = './tests/engines/demo_counter_grammar.txt'
 
 
 def test_file_parser():
@@ -31,11 +32,13 @@ def test_language_data_loader():
     """
     language_data = text_analyzer.language_data_loader(
         GRAMMAR_PATH,
+        COUNTER_GRAMMAR_PATH,
         START_WORDS_PATH,
         STOP_WORDS_PATH)
     assert 'eczema' in language_data['start_words']
     assert '^@\\w+$' in language_data['stop_words']
     assert '[s] \\w+ed to (healthier|better)( \\S+){0,7} [p]' in language_data['grammar']
+    assert 'risk for( \S+){0,5} [p]' in language_data['counter_grammar']
     assert r'[s] effective( \w+){0,2} (in|for|to)( \w+){0,5} [p]' in language_data['grammar']
 
 
@@ -61,6 +64,7 @@ def test_analyzer():
     """
     language_data = text_analyzer.language_data_loader(
         GRAMMAR_PATH,
+        COUNTER_GRAMMAR_PATH,
         START_WORDS_PATH,
         STOP_WORDS_PATH)
     message = "This is a new medicine for hyperthyroidism"
@@ -70,6 +74,7 @@ def test_analyzer():
     analysis = text_analyzer.analyzer(message,
                                       language_data['start_words'],
                                       language_data['grammar'],
+                                      language_data['counter_grammar'],
                                       language_data['stop_words'])
     assert analysis[1] == 'hyperthyroidism'
     assert analysis[0] == 'a new medicine'
@@ -77,5 +82,6 @@ def test_analyzer():
     analysis = text_analyzer.analyzer(message,
                                       language_data['start_words'],
                                       language_data['grammar'],
+                                      language_data['counter_grammar'],
                                       language_data['stop_words'])
     assert analysis[0] == '<nothing_found>'
