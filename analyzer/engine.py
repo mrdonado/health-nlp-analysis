@@ -18,6 +18,7 @@ USER_NAME_PATTERNS = user_analyzer.user_name_parser(
 # Text analysis
 LANGUAGE_DATA = text_analyzer.language_data_loader(
     './language_data/grammar.txt',
+    './language_data/counter_grammar.txt',
     './language_data/start_words.txt',
     './language_data/stop_words.txt'
 )
@@ -49,6 +50,7 @@ def nlp_analysis(job_json):
     text_analysis = text_analyzer.analyzer(job_json['message'],
                                            LANGUAGE_DATA['start_words'],
                                            LANGUAGE_DATA['grammar'],
+                                           LANGUAGE_DATA['counter_grammar'],
                                            LANGUAGE_DATA['stop_words'])
 
     analysis['solution'] = text_analysis[0]
