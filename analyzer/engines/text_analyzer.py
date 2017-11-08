@@ -54,7 +54,7 @@ def file_parser(path, to_lower):
     Helper function to parse text files.
     """
     input_file = open(path, 'r', encoding='utf-8')
-    #input_file = open(path, 'r')
+    # input_file = open(path, 'r')
     results = []
     for line in input_file:
         line = line.strip()
@@ -322,22 +322,23 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
         return output
 
 
-## Test message! #####
+# Test message! #####
 # def test_message():
 #     message = raw_input('\n' + 'New message? ')
 #     message = unicode(message)
 
-#     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/git/health-nlp-analysis/language_data/grammar.txt',
-#      '/Users/DoraDorita/git/health-nlp-analysis/language_data/counter_grammar.txt',
-#      '/Users/DoraDorita/git/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/stop_words.txt')
+#     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
+#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
+#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
+#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
 #     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
     
 #     print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
 
 #     control = raw_input('(t)ry again ?')
 #     while control == "t":
-#         LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/git/health-nlp-analysis/language_data/grammar.txt',
-#         '/Users/DoraDorita/git/health-nlp-analysis/language_data/counter_grammar.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/git/health-nlp-analysis/language_data/stop_words.txt')
+#         LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
+#         '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
 #         result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
 #         print '<m>'+message+'</m>'
 #         print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
