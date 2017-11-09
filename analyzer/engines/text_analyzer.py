@@ -54,7 +54,7 @@ def file_parser(path, to_lower):
     Helper function to parse text files.
     """
     input_file = open(path, 'r', encoding='utf-8')
-    # input_file = open(path, 'r')
+    #input_file = open(path, 'r')
     results = []
     for line in input_file:
         line = line.strip()
@@ -322,7 +322,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
         return output
 
 
-# Test message! #####
+### Test message! #####
 # def test_message():
 #     message = raw_input('\n' + 'New message? ')
 #     message = unicode(message)
@@ -348,3 +348,31 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
 #         test_message()
 
 # test_message()
+
+###### Test set of messages ################
+
+# messages = open('falsos_positivos.txt', 'r').readlines()
+# import sys
+# reload(sys)
+# sys.setdefaultencoding('utf8')
+
+
+# results = dict()
+
+# LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
+# '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
+# '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
+# '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
+
+# for message in messages:
+#     message = unicode(message)
+#     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
+#     if result[2] not in results.keys():
+#         results[result[2]] = []
+#         results[result[2]].append(message)
+#     else:
+#         results[result[2]].append(message)
+
+# for x,y in results.items():
+#     for m in y:
+#         print len(y), '\t', x, '\t', m

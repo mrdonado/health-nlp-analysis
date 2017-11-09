@@ -302,3 +302,14 @@ thing
  mom$
 boy
 child
+difference
+friend
+gift
+ground
+path$
+concern
+^[^\s]$
+(?i)eligibility
+(?i)fight
+help
+evidence
