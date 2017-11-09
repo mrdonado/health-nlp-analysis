@@ -188,7 +188,7 @@ impact
 crew
 chances
 (?i)blog
-(?i)health
+(?i)^health$
 disorder
 ^#\w+ #\w
 (?i)post
@@ -288,3 +288,28 @@ disorder
 heaven
 job
 target
+reason
+people
+^ppl$
+minute
+hour
+(^kid| kid)
+day
+ mins?
+(?i)thanks?$
+thing
+^\d+ mg$
+ mom$
+boy
+child
+difference
+friend
+gift
+ground
+path$
+concern
+^[^\s]$
+(?i)eligibility
+(?i)fight
+help
+evidence

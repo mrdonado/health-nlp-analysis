@@ -1,5 +1,5 @@
 nose
-spacy
+spacy==1.8.2
 coverage
 pytest-mock
 pytest-watch
