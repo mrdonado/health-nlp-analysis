@@ -30,9 +30,18 @@ It consists of the following functions:
     Extracts the exact noun phrase corresponding to the solution of the
     disease problem. Before, it parses the whole sentences to look for all
     the noun structures, and then chooses the appropriate one
+(6) counter_analyzer:
+    Maps a set of grammar rules into the message, in order to prevent false
+    positives. These rules have priority over the rules from analyzer()
+    E.g. risk for + problem, is a "counter rule" that prevents a case of false
+    positive in the rule: solution + for + problem
+(7) magic_bullet_analyzer:
+    Maps a set of grammar rules with very high precision as the context is 
+    rich. E.g. prescribe + noun phrase + to stop. For these reason, the problem's
+    position doesn't need to be explicit.
 (6) analyzer:
-    Maps the language data set into the text mensaje, and get the best noun
-    phrase as the solution for the disease problem.
+    Maps the language dataset's rules into the text mensage, and get the best 
+    noun phrase as the solution for the disease problem.
 
 
 """
@@ -53,8 +62,8 @@ def file_parser(path, to_lower):
     """
     Helper function to parse text files.
     """
-    input_file = open(path, 'r', encoding='utf-8')
-    #input_file = open(path, 'r')
+    #input_file = open(path, 'r', encoding='utf-8')
+    input_file = open(path, 'r')
     results = []
     for line in input_file:
         line = line.strip()
@@ -205,9 +214,13 @@ def get_noun_phrase(message, longest_match, position, stop_words):
         # Return noun phrase ('None' if not found):
         return target_noun_phrase
 
+
 def counter_analyzer(message, start_word, counter_grammar):
     """
-
+    Maps a set of grammar rules into the message, in order to prevent false
+    positives. 
+    E.g. risk for + problem, is a "counter rule" that prevents a case of false
+    positive in the rule: solution + for + problem
     """
     longest_match = ''
     for pattern in counter_grammar:
@@ -223,6 +236,101 @@ def counter_analyzer(message, start_word, counter_grammar):
         return True
     else:
         return False
+
+def magic_bullet_analyzer(message, start_word, grammar):
+    """
+    Maps a set of grammar rules with very high precision as the context is 
+    rich. E.g. prescribe + noun phrase + to stop. The problem's
+    position doesn't need to be explicit.
+    """
+    # 1) Find the matching magic bullet rule from the grammar
+    # They have '[np]' (noun phrase) instead of [s] or [p] as variables
+    
+    magic_bullet = [None, None]
+    case_B_C = None
+    longest_match = ''
+    target_noun_phrase = ''
+    pattern_context = None
+    output = []
+
+    for pattern in grammar:
+        possible_magic_bullet = ''
+    
+        # Skip conventional grammar rules
+        if re.search('\[(p|s)\]', pattern):
+            continue
+
+        # Case A: "prescribe + np + to stop" (with left and right contexts)
+        if re.search('\[np\]', pattern):
+            possible_magic_bullet = pattern.replace('[np]', '.+')
+            case_B_C = False
+
+        # Case B: "npl secondary effects" (no left context)
+        # Look for 3 words to the left by defaut
+        elif re.search('\[npl\]', pattern):
+            possible_magic_bullet = pattern.replace('[npl]', '(\S+ ){4}')
+            pattern_context = pattern.replace('[npl]', '')
+            case_B_C = True
+
+        # Case C: "the solution is npr" (no right context)
+        # Look for 3 words to the right by default
+        elif re.search('\[npr\]', pattern):
+            possible_magic_bullet = pattern.replace('[npr]', '( \S+){4}')
+            pattern_context = pattern.replace('[npr]', '')
+            case_B_C = True
+
+        # Look for a possible pattern match into the message:
+        if re.search(possible_magic_bullet, message, flags=re.IGNORECASE):
+            match = message[
+                re.search(possible_magic_bullet, message, flags=re.IGNORECASE).start():
+                re.search(possible_magic_bullet, message, flags=re.IGNORECASE).end()
+            ]
+            if len(match) > len(longest_match):
+                # Store the longest match to avoid the ambiguity of one rule
+                # against another
+                longest_match = match
+                magic_bullet[0] = possible_magic_bullet 
+                magic_bullet[1] = case_B_C
+
+    # 2) If magic bullet is found, get the NP for its match into the message:
+    if magic_bullet[0] is not None:
+        noun_phrases = []
+        for np in NLP(message).noun_chunks:
+            np = np.text
+            noun_phrases.append(np)
+
+        # Get the NP that fits into the pattern match:
+        # In case B and C, we take context out of the longest_match string,
+        # to avoid confussion if more than one NP is present:
+        if magic_bullet[1] == True:
+            target_longest_match = longest_match.replace(pattern_context, '')
+        else:
+            target_longest_match = longest_match
+        print target_longest_match
+        for np in noun_phrases:
+            if np in target_longest_match:
+                output.append(np)
+                output.append(start_word)
+                output.append(magic_bullet[0])
+                break
+
+        # Return output if the right NP is found:
+        if len(output) == 3:
+            return output
+
+        # Else, no NP fit although a magic bullet rule
+        # is matched: 
+        else:
+            output.append('<nothing_found>')
+            output.append(start_word)
+            output.append(magic_bullet[0])
+            return output
+    else:
+        output.append('<nothing_found>')
+        output.append(start_word)
+        output.append('<no pattern found>')
+        return output
+
 
 def analyzer(message, start_words, grammar, counter_grammar, stop_words):
     """
@@ -243,6 +351,14 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
         is the problem found, a unicode string or '<no start_word>'
     output[2]
         is the rule pattern matched, an string or '<no pattern found>'
+
+    Two functions operate before the basic problem-solution pattern
+    matching:
+        counter_analyzer() prevents false positive cases before analyzer()
+        operates,
+        magic_bullet_analyzer() looks for rich-context pattern rules that have
+        priority over the conventional problem-solution rules
+
     """
     # Necessary variables:
     longest_match = ''
@@ -253,6 +369,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
     # then assign "message" a new value with only one sentence.
     start_word_And_message = get_start_word_from_sentence(message, start_words)
     if start_word_And_message is not None:
+        no_splitted_message = message
         start_word = start_word_And_message[0]
         message = start_word_And_message[1]
         # As we are're monitoring Twitter, we turn start_word into
@@ -267,51 +384,76 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
 
         # 2) Analysis process
 
-        # Counter analysis to avoid false positives:
+        # 2.1) Counter analysis to avoid false positives:
         counter_analyzer_result = counter_analyzer(message, twitter_start_word, counter_grammar)
         
         if counter_analyzer_result is False:
-            # For every stored grammar rule, generate its counterpart including the
-            # start word (e.g. '[s] for [p]' -> '[s] for anorexia')
-            for pattern in grammar:
-                instance = pattern.replace('[p]', twitter_start_word)
-                instance = instance.replace('[s]', '')
-                # Test every rule against the message:
-                if re.search(instance, message, flags=re.IGNORECASE):
-                    found_instance = instance
-                    match = message[re.search(found_instance, message, flags=re.IGNORECASE).start(
-                    ):re.search(found_instance, message, flags=re.IGNORECASE).end()]
-                    # Find the rule with the longest match in the string:
-                    if len(match) > len(longest_match):
-                        longest_match = match
-                        matching_pattern = pattern
-            # Rule matchs if 'longest_match' contains a string,
-            # so the analysis can continue:
-            if len(longest_match) > 0:
-                # First possible structure: SOLUTION before PROBLEM
-                if matching_pattern.find('[s]') < matching_pattern.find('[p]'):
-                    target_match = message[:message.find(longest_match)]
-                    # target_match = unicode(target_match, "utf-8" )
-                    if len(target_match) >= 3:
-                        target_noun_phrase = get_noun_phrase(
-                            message, longest_match, 'sp', stop_words)
-                        if target_noun_phrase is not None:
-                            output.append(target_noun_phrase)
-                            output.append(start_word)
-                            output.append(matching_pattern)
-                            return output
-                # Second possible structure: SOLUTION after PROBLEM:
-                elif matching_pattern.find('[s]') > matching_pattern.find('[p]'):
-                    target_match = message[message.find(
-                        longest_match) + len(longest_match):]
-                    if len(target_match) >= 3:
-                        target_noun_phrase = get_noun_phrase(
-                            message, longest_match, 'ps', stop_words)
-                        if target_noun_phrase is not None:
-                            output.append(target_noun_phrase)
-                            output.append(start_word)
-                            output.append(matching_pattern)
-                            return output
+            
+            # 2.2) Look for magic bullet rule matching. If found, return output
+            # and stop analyzer process
+
+            magic_bullet_result = magic_bullet_analyzer(no_splitted_message, start_word, grammar)
+
+            if magic_bullet_result[0] != '<nothing_found>':
+                output.append(magic_bullet_result[0])
+                output.append(magic_bullet_result[1])
+                output.append(magic_bullet_result[2])
+                return output
+
+            else:
+
+            # 2.3) Look for problem-solution rule matching, as follows:
+
+                # For every stored grammar rule, generate its counterpart including the
+                # start word (e.g. '[s] for [p]' -> '[s] for anorexia')
+                for pattern in grammar:
+
+                    # Skip magic bullet rules tested before:
+                    if re.search('(\[np\]|\[npl\]|\[npr\])', pattern):
+                        continue
+
+                    instance = pattern.replace('[p]', twitter_start_word)
+                    instance = instance.replace('[s]', '')
+
+                    # Test every rule against the message:
+                    if re.search(instance, message, flags=re.IGNORECASE):
+                        found_instance = instance
+                        match = message[re.search(found_instance, message, flags=re.IGNORECASE).start(
+                        ):re.search(found_instance, message, flags=re.IGNORECASE).end()]
+                        # Find the rule with the longest match in the string:
+                        if len(match) > len(longest_match):
+                            longest_match = match
+                            matching_pattern = pattern
+
+                # Rule matchs if 'longest_match' contains a string,
+                # so the analysis can continue:
+                if len(longest_match) > 0:
+                    
+                    # First possible structure: SOLUTION before PROBLEM
+                    if matching_pattern.find('[s]') < matching_pattern.find('[p]'):
+                        target_match = message[:message.find(longest_match)]
+                        # target_match = unicode(target_match, "utf-8" )
+                        if len(target_match) >= 3:
+                            target_noun_phrase = get_noun_phrase(
+                                message, longest_match, 'sp', stop_words)
+                            if target_noun_phrase is not None:
+                                output.append(target_noun_phrase)
+                                output.append(start_word)
+                                output.append(matching_pattern)
+                                return output
+                    
+                    # Second possible structure: SOLUTION after PROBLEM:
+                    elif matching_pattern.find('[s]') > matching_pattern.find('[p]'):
+                        target_match = message[message.find(
+                            longest_match) + len(longest_match):]
+                        if len(target_match) >= 3:
+                            target_noun_phrase = get_noun_phrase(
+                                message, longest_match, 'ps', stop_words)
+                            if target_noun_phrase is not None:
+                                output.append(target_noun_phrase)
+                                output.append(start_word)
+                                output.append(matching_pattern)
+                                return output
 
     # Get no results if no solution or start word is found, or if solution =
     # start_word
@@ -322,32 +464,32 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
         return output
 
 
-### Test message! #####
-# def test_message():
-#     message = raw_input('\n' + 'New message? ')
-#     message = unicode(message)
+## Test message! #####
+def test_message():
+    message = raw_input('\n' + 'New message? ')
+    message = unicode(message)
 
-#     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
-#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
-#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
-#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
-#     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
+    LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
+     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
+     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
+     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
+    result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
     
-#     print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
+    print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
 
-#     control = raw_input('(t)ry again ?')
-#     while control == "t":
-#         LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
-#         '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
-#         result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
-#         print '<m>'+message+'</m>'
-#         print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
+    control = raw_input('(t)ry again ?')
+    while control == "t":
+        LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
+        '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
+        result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
+        print '<m>'+message+'</m>'
+        print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
 
-#         control = raw_input('(t)ry again ?')
-#     else:
-#         test_message()
+        control = raw_input('(t)ry again ?')
+    else:
+        test_message()
 
-# test_message()
+test_message()
 
 ###### Test set of messages ################
 

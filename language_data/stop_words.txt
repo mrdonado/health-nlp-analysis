@@ -313,3 +313,7 @@ concern
 (?i)fight
 help
 evidence
+(?i)^(women|men)$
+(?i)^no 
+(?i)^opportunity
+demand

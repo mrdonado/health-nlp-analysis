@@ -177,3 +177,12 @@
 [s] go\w* gold for( \S+){0,6} [p]
 [s] help\w* for( \S+){0,7} [p]
 [s] treatment for( \S+){0,5} [p]
+prescrib\w+ [np] to stop
+[npl](secondary|side) effects
+(side|secondary effects) of[npr]
+[s] provid\w+( \S+){0,6} [p]
+most promising is[npr]
+think more about[npr]
+[s] opportunity (for|in)( \S+){0,7} [p]
+[npl](can|could) help
+a trial of[npr]
