@@ -62,8 +62,8 @@ def file_parser(path, to_lower):
     """
     Helper function to parse text files.
     """
-    #input_file = open(path, 'r', encoding='utf-8')
-    input_file = open(path, 'r')
+    input_file = open(path, 'r', encoding='utf-8')
+    #input_file = open(path, 'r')
     results = []
     for line in input_file:
         line = line.strip()
@@ -105,9 +105,9 @@ def start_word_match(message, start_words):
     """
     start_word = None
     for word in start_words:
-        if re.search(word, message, flags=re.IGNORECASE):
-            current_word = message[re.search(word, message, flags=re.IGNORECASE).start():
-                                   re.search(word, message, flags=re.IGNORECASE).end()]
+        if re.search(re.escape(word), message, flags=re.IGNORECASE):
+            current_word = message[re.search(re.escape(word), message, flags=re.IGNORECASE).start():
+                                   re.search(re.escape(word), message, flags=re.IGNORECASE).end()]
             if start_word is None or len(current_word) > len(start_word):
                 start_word = current_word
     # we search for the longest match ('Mindfulness for anorexia nervosa' gets
@@ -121,26 +121,33 @@ def get_start_word_from_sentence(message, start_words):
     start word in each sentence. When found, it returns the sentence and
     the start word found in it
     """
+
+    start_word = start_word_match(message, start_words)
     result = []
-    bounds = [
-        '(?<=[^A-Z].[.?]) +(?=[A-Z])',
-        '\.\.\.',
-        '\? ',
-        '\! ',
-        ' \- ',
-        '\, ',
-        '\: ',
-        '; ',
-        'http']
-    for bound in bounds:
-        message = re.sub(bound, '<bound>', message)
-    sentences = message.split('<bound>')
-    for sentence in sentences:
-        start_word = start_word_match(sentence, start_words)
-        if start_word is not None:
-            result.append(start_word)
-            result.append(sentence)
-            break
+
+    if start_word is not None:
+        # A start_word has been found, now
+        # specify the sentence:
+        bounds = [
+            '(?<=[^A-Z].[.?]) +(?=[A-Z])',
+            '\.\.\.',
+            '\? ',
+            '\! ',
+            ' \- ',
+            '\, ',
+            '\: ',
+            '; ',
+            'http']
+        for bound in bounds:
+            message = re.sub(bound, '<bound>', message)
+        sentences = message.split('<bound>')
+        for sentence in sentences:
+            if re.search(re.escape(start_word), sentence):
+                result.append(start_word)
+                result.append(sentence)
+                break
+    
+    # Return output:
     if len(result) == 0:
         return None
     else:
@@ -306,7 +313,6 @@ def magic_bullet_analyzer(message, start_word, grammar):
             target_longest_match = longest_match.replace(pattern_context, '')
         else:
             target_longest_match = longest_match
-        print target_longest_match
         for np in noun_phrases:
             if np in target_longest_match:
                 output.append(np)
@@ -464,42 +470,40 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
         return output
 
 
-## Test message! #####
-def test_message():
-    message = raw_input('\n' + 'New message? ')
-    message = unicode(message)
+# # Test message! #####
+# def test_message():
+#     message = raw_input('\n' + 'New message? ')
+#     message = unicode(message)
 
-    LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
-     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
-     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
-     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
-    result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
+#     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
+#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
+#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
+#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
+#     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
     
-    print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
+#     print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
 
-    control = raw_input('(t)ry again ?')
-    while control == "t":
-        LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
-        '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
-        result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
-        print '<m>'+message+'</m>'
-        print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
+#     control = raw_input('(t)ry again ?')
+#     while control == "t":
+#         LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
+#         '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
+#         result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
+#         print '<m>'+message+'</m>'
+#         print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
 
-        control = raw_input('(t)ry again ?')
-    else:
-        test_message()
+#         control = raw_input('(t)ry again ?')
+#     else:
+#         test_message()
 
-test_message()
+# test_message()
 
 ###### Test set of messages ################
 
-# messages = open('falsos_positivos.txt', 'r').readlines()
+# messages = open('mensajes.txt', 'r').readlines()
 # import sys
 # reload(sys)
 # sys.setdefaultencoding('utf8')
 
-
-# results = dict()
 
 # LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
 # '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
@@ -509,12 +513,4 @@ test_message()
 # for message in messages:
 #     message = unicode(message)
 #     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
-#     if result[2] not in results.keys():
-#         results[result[2]] = []
-#         results[result[2]].append(message)
-#     else:
-#         results[result[2]].append(message)
-
-# for x,y in results.items():
-#     for m in y:
-#         print len(y), '\t', x, '\t', m
+#     print result[0], result[1]

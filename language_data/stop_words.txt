@@ -317,3 +317,9 @@ evidence
 (?i)^no 
 (?i)^opportunity
 demand
+^a gift$
+(?i)\ba life
+(?i)\bm(a|e)n\b
+(?i)\bwom(a|e)n\b
+(?i)strength$
+(?i)story

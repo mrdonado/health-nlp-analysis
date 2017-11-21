@@ -1,0 +1,91 @@
+hypercholesterolemia
+pancreatitis
+parkinson
+parkinson's
+lymphoma
+diabetes
+lupus
+abdominal pain
+adenoiditis
+aids
+alzheimer
+alzheimer's
+anorexia nervosa
+appendicitis
+arthritis
+asthma
+alopecia areata
+atherosclerosis
+bipolar disorder
+bladder cancer
+botulism
+breast cancer
+cancer
+cataracts
+cellulite
+cervical cancer
+cholesterol
+pulmonary diseases
+chronic pain
+cirrhosis
+heart diseases
+heart disease
+dermatitis
+diabetes
+dyspepsia
+dysthymias
+emphysema
+encephalitis
+eustachian tube problems
+fibromyalgia
+food allergy
+glaucoma
+hair loss
+hemorrhoids
+hepatitis b
+hepatitis c
+high blood pressure
+cholesterol
+hyperthyroidism
+hypothyroidism
+influenza
+cystitis
+kidney stones
+lactose intolerance
+lichen planus
+liver cancer
+cardiovascular diseases
+low back pain
+lung cancer
+lupus
+malaria
+melanoma
+meningitis
+menopause
+obesity
+osteoarthritis
+osteoporosis
+ovarian cancer
+pancreatic cancer
+pancreatitis
+panic disorder
+pneumonia
+stress disorders
+prostate cancer
+prostatitis
+psoriasis
+hypertension
+rheumatoid arthritis
+rosacea
+scleroderma
+seasonal affective disorder
+respiratory syndrome
+sexually transmitted diseases
+sinusitis
+skin cancer
+apnea
+testicular cancer
+thyroid cancer
+colitis
+urinary retention
+uterine cancer
