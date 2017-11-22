@@ -57,6 +57,60 @@ def test_start_word_match():
         ['one', 'word', 'anorexia', 'unrelated', 'anorexia nervosa'])
     assert result == 'anorexia nervosa'
 
+def test_get_start_word_from_sentence():
+    """
+    Start word from sentence tests
+    """
+    result = text_analyzer.get_start_word_from_sentence("This is one-sentence message without a start word",
+                                                        ['obesity', 'fever'])
+    assert result is None
+    result = text_analyzer.get_start_word_from_sentence("This is the first sentence, and in the second you can find obesity",
+                                                        ['obesity', 'fever'])
+    assert result[0] == 'obesity'
+    assert result[1] == 'and in the second you can find obesity'
+
+
+def test_counter_analyzer():
+    """
+    Counter analyzer tests
+    """
+    language_data = text_analyzer.language_data_loader(
+        GRAMMAR_PATH,
+        COUNTER_GRAMMAR_PATH,
+        START_WORDS_PATH,
+        STOP_WORDS_PATH)
+    message = "If you eat a pig you have chances for dying from obesity"
+    analysis = text_analyzer.counter_analyzer(message,
+                                      language_data['start_words'],
+                                      language_data['counter_grammar'])
+    assert analysis is True
+    message = "A new medicine for obesity"
+    analysis = text_analyzer.counter_analyzer(message,
+                                      language_data['start_words'],
+                                      language_data['counter_grammar'])
+    assert analysis is False
+
+
+def test_magic_bullet_analyzer():
+    """
+    Magic bullet analyzer tests
+    """
+    language_data = text_analyzer.language_data_loader(
+        GRAMMAR_PATH,
+        COUNTER_GRAMMAR_PATH,
+        START_WORDS_PATH,
+        STOP_WORDS_PATH)
+    message = "I am involved in a trial of this new medicine regarding obesity"
+    analysis = text_analyzer.magic_bullet_analyzer(message,
+                                    language_data['start_words'],
+                                    language_data['grammar'])
+    assert analysis[0] == 'this new medicine'
+    message = "This is nonsense obesity"
+    analysis = text_analyzer.magic_bullet_analyzer(message,
+                                    language_data['start_words'],
+                                    language_data['grammar'])
+    assert analysis[0] == '<nothing_found>'
+
 
 def test_analyzer():
     """
