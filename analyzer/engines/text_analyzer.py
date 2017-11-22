@@ -497,7 +497,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
 
 # test_message()
 
-###### Test set of messages ################
+# ###### Test set of messages ################
 
 # messages = open('mensajes.txt', 'r').readlines()
 # import sys
@@ -510,7 +510,12 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
 # '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
 # '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
 
+
+# count = 0
 # for message in messages:
+#     count = count +1
+#     print str(count)+'/'+str(len(messages))
 #     message = unicode(message)
 #     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
-#     print result[0], result[1]
+#     if result[0] != "<nothing_found>":
+#         print result[0], ' --> ', result[1]
