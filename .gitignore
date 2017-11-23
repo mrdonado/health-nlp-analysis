@@ -6,3 +6,5 @@ venv
 cover
 config.ini
 esdata
+.DS_Store
+**/.DS_Store
