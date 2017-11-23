@@ -1,434 +1,768 @@
-<ADMINISTRATIVE_JOB>	ceo
-<ADMINISTRATIVE_JOB>	coordinator
-<ADMINISTRATIVE_JOB>	director
-<ADMINISTRATIVE_JOB>	head
-<ADMINISTRATIVE_JOB>	\w*director
-<DOCTOR>	allergist
-<DOCTOR>	anaesthetist
-<DOCTOR>	anesthesiologist
-<DOCTOR>	anesthesiologist
-<DOCTOR>	cardiologist
-<DOCTOR>	clinician
-<DOCTOR>	dermat(ó|o)log(o|a)
-<DOCTOR>	dermatologist
-<DOCTOR>	dermatopathologist
-<DOCTOR>	doc
-<DOCTOR>	doctor
-<DOCTOR>	electrophysiologist
-<DOCTOR>	epidemiologist
-<DOCTOR>	family doctor
-<DOCTOR>	family physician
-<DOCTOR>	family practitioner
-<DOCTOR>	flying doctor
-<DOCTOR>	general practitioner
-<DOCTOR>	gp
-<DOCTOR>	gynaecologist
-<DOCTOR>	gynecologist
-<DOCTOR>	hematologist
-<DOCTOR>	internist
-<DOCTOR>	md
-<DOCTOR>	medical practitioner
-<DOCTOR>	neurologist
-<DOCTOR>	neuroradiologist
-<MEDICAL_JOB>	nutritionist
-<DOCTOR>	ob-gyn
-<DOCTOR>	obstetrician
-<DOCTOR>	oncologist
-<DOCTOR>	ophthalmologist
-<DOCTOR>	orthopaedist
-<DOCTOR>	orthopedist
-<DOCTOR>	osteopath
-<DOCTOR>	paediatrician
-<DOCTOR>	pathologist
-<DOCTOR>	pediatrician
-<DOCTOR>	pediatrist
-<DOCTOR>	pharmacologist
-<DOCTOR>	physiatrist
-<DOCTOR>	physician
-<DOCTOR>	physicist
-<DOCTOR>	physio
-<DOCTOR>	plastic surgeon
-<DOCTOR>	podiatrist
-<DOCTOR>	radiologist
-<DOCTOR>	surgeon
-<DOCTOR>	urologist
-<DOCTOR>	forensic
-<MEDICAL_JOB>	health worker
-<MEDICAL_JOB>	health professional
-<INSTITUTION>	academy
-<INSTITUTION>	center
-<INSTITUTION>	centre
-<INSTITUTION>	college
-<INSTITUTION>	department
-<INSTITUTION>	institute
-<INSTITUTION>	organisation
-<INSTITUTION>	organization
-<INSTITUTION>	school
-<INSTITUTION>	sociedad
-<INSTITUTION>	unit
-<MEDICAL_ATTRIBUTE>	care
-<MEDICAL_ATTRIBUTE>	clinical
-<MEDICAL_ATTRIBUTE>	health
-<MEDICAL_ATTRIBUTE>	healthcare
-<MEDICAL_ATTRIBUTE>	interventional
-<MEDICAL_ATTRIBUTE>	medical
-<MEDICAL_ATTRIBUTE>	therapy
-<MEDICAL_ATTRIBUTE>	therapy
-<MEDICAL_FIELD>	aesthetic medicine
-<MEDICAL_FIELD>	biotech
-<MEDICAL_FIELD>	cancer
-<MEDICAL_FIELD>	cardiology
-<MEDICAL_FIELD>	dermatolog(í|i)a
-<MEDICAL_FIELD>	dermatology
-<MEDICAL_FIELD>	echocardiography
-<MEDICAL_FIELD>	endocrinology
-<MEDICAL_FIELD>	epidemiology
-<MEDICAL_FIELD>	family medicine
-<MEDICAL_FIELD>	gynecology
-<MEDICAL_FIELD>	health
-<MEDICAL_FIELD>	healthcare
-<MEDICAL_FIELD>	imaging
-<MEDICAL_FIELD>	immunology
-<MEDICAL_FIELD>	medicine
-<MEDICAL_FIELD>	oncology
-<MEDICAL_FIELD>	pathology
-<MEDICAL_FIELD>	pharma
-<MEDICAL_FIELD>	pharmacology
-<MEDICAL_FIELD>	physiology
-<MEDICAL_FIELD>	plastics
-<MEDICAL_FIELD>	radiolog(í|i)a
-<MEDICAL_FIELD>	radiology
-<MEDICAL_FIELD>	surgery
-<MEDICAL_FIELD>	\w+ intervention
-<MEDICAL_FIELD>	\w+pathology
-<MEDICAL_JOB>	acupuncturist
-<MEDICAL_JOB>	aidman
-<MEDICAL_JOB>	analyst
-<MEDICAL_JOB>	biostatistician
-<MEDICAL_JOB>	chiropodist
-<MEDICAL_JOB>	chiropractor
-<MEDICAL_JOB>	chiropractic
-<MEDICAL_JOB>	consultant
-<MEDICAL_JOB>	coroner
-<MEDICAL_JOB>	EMT
-<MEDICAL_JOB>	health professional
-<MEDICAL_JOB>	hospitalist
-<MEDICAL_JOB>	intern
-<MEDICAL_JOB>	interne
-<MEDICAL_JOB>	med
-<MEDICAL_JOB>	nurse
-<MEDICAL_JOB>	nurse-practitioner
-<MEDICAL_JOB>	occupational therapist
-<MEDICAL_JOB>	paramedic
-<MEDICAL_JOB>	paramedical
-<MEDICAL_JOB>	physiotherapist
-<MEDICAL_JOB>	\bresident
-<MEDICAL_JOB>	sangoma
-<MEDICAL_JOB>	social worker
-<MEDICAL_JOB>	therapist
-<PATIENT>	patient*
-<PATIENT>	suffering
-<DISEASE>	liver function
-<DISEASE>	abdominal pain
-<DISEASE>	adenoiditis
-<DISEASE>	alopecia areata
-<DISEASE>	alzheimer
-<DISEASE>	anorexia nervosa
-<DISEASE>	sleep apnea
-<DISEASE>	appendicitis
-<DISEASE>	arthritis
-<DISEASE>	atherosclerosis
-<DISEASE>	bipolar disorder
-<DISEASE>	bladder cancer
-<DISEASE>	botulism
-<DISEASE>	multiple esclerosis
-<DISEASE>	cardiovascular diseases
-<DISEASE>	cervical cancer
-<DISEASE>	cholesterol
-<DISEASE>	colitis
-<DISEASE>	cystitis
-<DISEASE>	dermatitis
-<DISEASE>	diabetes
-<DISEASE>	dyspepsia
-<DISEASE>	dysthymias
-<DISEASE>	emphysema
-<DISEASE>	encephalitis
-<DISEASE>	eustachian tube problems
-<DISEASE>	fibromyalgia
-<DISEASE>	food allergy
-<DISEASE>	glaucoma
-<DISEASE>	hair loss
-<DISEASE>	heart disease
-<DISEASE>	heart diseases
-<DISEASE>	hepatitis b
-<DISEASE>	hepatitis c
-<DISEASE>	high blood pressure
-<DISEASE>	hypercholesterolemia
-<DISEASE>	hypertension
-<DISEASE>	hyperthyroidism
-<DISEASE>	hypothyroidism
-<DISEASE>	influenza
-<DISEASE>	kidney stones
-<DISEASE>	lactose intolerance
-<DISEASE>	lichen planus
-<DISEASE>	liver cancer
-<DISEASE>	low back pain
-<DISEASE>	lung cancer
-<DISEASE>	lupus
-<DISEASE>	lymphoma
-<DISEASE>	malaria
-<DISEASE>	melanoma
-<DISEASE>	meningitis
-<DISEASE>	menopause
-<DISEASE>	osteoarthritis
-<DISEASE>	osteoporosis
-<DISEASE>	ovarian cancer
-<DISEASE>	pancreatic cancer
-<DISEASE>	pancreatitis
-<DISEASE>	panic disorder
-<DISEASE>	parkinson
-<DISEASE>	pneumonia
-<DISEASE>	prostate cancer
-<DISEASE>	prostatitis
-<DISEASE>	psoriasis
-<DISEASE>	pulmonary diseases
-<DISEASE>	respiratory syndrome
-<DISEASE>	rheumatoid arthritis
-<DISEASE>	rosacea
-<DISEASE>	scleroderma
-<DISEASE>	seasonal affective disorder
-<DISEASE>	sexually transmitted diseases
-<DISEASE>	sinusitis
-<DISEASE>	skin cancer
-<DISEASE>	stress disorders
-<DISEASE>	testicular cancer
-<DISEASE>	thyroid cancer
-<DISEASE>	urinary retention
-<DISEASE>	uterine cancer
-<DISEASE>	Abscess
-<DISEASE>	Alzheimer's disease
-<DISEASE>	Anotia
-<DISEASE>	alien hand syndrome
-<DISEASE>	Apraxia
-<DISEASE>	Argyria
-<DISEASE>	Aseptic meningitis
-<DISEASE>	Asthenia
-<DISEASE>	Asthma
-<DISEASE>	Astigmatism
-<DISEASE>	Athetosis
-<DISEASE>	Atrophy
-<DISEASE>	Bacterial meningitis
-<DISEASE>	Beriberi
-<DISEASE>	Black Death
-<DISEASE>	Breast cancer
-<DISEASE>	Bronchitis
-<DISEASE>	Brucellosis
-<DISEASE>	Bubonic plague
-<DISEASE>	Bunion
-<DISEASE>	Calculi
-<DISEASE>	Campylobacter infection
-<DISEASE>	Cancer
-<DISEASE>	Candidiasis
-<DISEASE>	Carbon monoxide poisoning
-<DISEASE>	Celiacs disease
-<DISEASE>	Cerebral palsy
-<DISEASE>	Chagas disease
-<DISEASE>	Chalazion
-<DISEASE>	Chancroid
-<DISEASE>	Chavia
-<DISEASE>	Congenital insensitivity to pain with anhidrosis
-<DISEASE>	Cherubism
-<DISEASE>	Chickenpox
-<DISEASE>	Chlamydia
-<DISEASE>	Chlamydia trachomatis
-<DISEASE>	Cholera
-<DISEASE>	Chordoma
-<DISEASE>	Chorea
-<DISEASE>	Chronic fatigue syndrome
-<DISEASE>	Circadian rhythm sleep disorder
-<DISEASE>	Coccidioidomycosis
-<DISEASE>	Common cold
-<DISEASE>	Condyloma
-<DISEASE>	Congestive heart disease
-<DISEASE>	Coronary heart disease
-<DISEASE>	Cowpox
-<DISEASE>	Cretinism
-<DISEASE>	Crohn's Disease
-<DISEASE>	Dengue
-<DISEASE>	Diabetes mellitus
-<DISEASE>	Diphtheria
-<DISEASE>	Dehydration
-<DISEASE>	Dysentery
-<DISEASE>	Ear infection
-<DISEASE>	Ebola
-<DISEASE>	Epilepsy
-<DISEASE>	Erectile dysfunctions
-<DISEASE>	flu
-<DISEASE>	Gangrene
-<DISEASE>	Gastroenteritis
-<DISEASE>	Genital herpes
-<DISEASE>	GERD
-<DISEASE>	Goitre
-<DISEASE>	Gonorrhea
-<DISEASE>	Hepatitis A
-<DISEASE>	Hepatitis D
-<DISEASE>	Hepatitis E
-<DISEASE>	Histiocytosis (Childhood Cancer)
-<DISEASE>	HIV
-<DISEASE>	Human papillomavirus
-<DISEASE>	Huntington's disease
-<DISEASE>	Hypermetropia
-<DISEASE>	Hyperopia
-<DISEASE>	Hypothyroid
-<DISEASE>	Hypotonia
-<DISEASE>	Impetigo
-<DISEASE>	Infertility
-<DISEASE>	Interstitial cystitis
-<DISEASE>	Iritis
-<DISEASE>	Iron-deficiency anemia
-<DISEASE>	Irritable bowel syndrome
-<DISEASE>	Ignious Syndrome
-<DISEASE>	Jaundice
-<DISEASE>	Keloids
-<DISEASE>	Kuru
-<DISEASE>	Kwashiorkor
-<DISEASE>	Kidney stone disease
-<DISEASE>	Laryngitis
-<DISEASE>	Lead poisoning
-<DISEASE>	Legionellosis
-<DISEASE>	Leishmaniasis
-<DISEASE>	Leprosy
-<DISEASE>	Leptospirosis
-<DISEASE>	Listeriosis
-<DISEASE>	Leukemia
-<DISEASE>	Lice
-<DISEASE>	Loiasis
-<DISEASE>	Lupus erythematosus
-<DISEASE>	Lyme disease
-<DISEASE>	Lymphogranuloma venereum
-<DISEASE>	Mad cow disease
-<DISEASE>	Marburg fever
-<DISEASE>	Measles
-<DISEASE>	Metastatic cancer
-<DISEASE>	Ménière's disease
-<DISEASE>	Migraine
-<DISEASE>	Mononucleosis
-<DISEASE>	Multiple myeloma
-<DISEASE>	Multiple sclerosis
-<DISEASE>	Mumps
-<DISEASE>	Muscular dystrophy
-<DISEASE>	Myasthenia gravis
-<DISEASE>	Myelitis
-<DISEASE>	Myoclonus
-<DISEASE>	Myopia
-<DISEASE>	Myxedema
-<DISEASE>	Morquio Syndrome
-<DISEASE>	Mattticular syndrome
-<DISEASE>	Neoplasm
-<DISEASE>	Non-gonococcal urethritis
-<DISEASE>	Necrotizing Fasciitis
-<DISEASE>	Night blindness
-<DISEASE>	Obesity
-<DISEASE>	Otitis
-<DISEASE>	Palindromic rheumatism
-<DISEASE>	Paratyphoid fever
-<DISEASE>	Parkinson's disease
-<DISEASE>	Pelvic inflammatory disease
-<DISEASE>	Peritonitis
-<DISEASE>	Periodontal disease
-<DISEASE>	Pertussis
-<DISEASE>	Phenylketonuria
-<DISEASE>	Plague
-<DISEASE>	Poliomyelitis
-<DISEASE>	Porphyria
-<DISEASE>	Progeria
-<DISEASE>	Psittacosis
-<DISEASE>	Pubic lice
-<DISEASE>	Pulmonary embolism
-<DISEASE>	Pilia
-<DISEASE>	Q fever
-<DISEASE>	Ques fever
-<DISEASE>	Rabies
-<DISEASE>	Repetitive strain injury
-<DISEASE>	Rheumatic fever
-<DISEASE>	Rheumatic heart
-<DISEASE>	Rheumatism
-<DISEASE>	Rickets
-<DISEASE>	Rift Valley fever
-<DISEASE>	Rocky Mountain spotted fever
-<DISEASE>	Rubella
-<DISEASE>	Salmonellosis
-<DISEASE>	Scabies
-<DISEASE>	Scarlet fever
-<DISEASE>	Sciatica
-<DISEASE>	Scrapie
-<DISEASE>	Scurvy
-<DISEASE>	Sepsis
-<DISEASE>	Septicemia
-<DISEASE>	SARS
-<DISEASE>	Shigellosis
-<DISEASE>	Shin splints
-<DISEASE>	Shingles
-<DISEASE>	Sickle-cell anemia
-<DISEASE>	Siderosis
-<DISEASE>	SIDS
-<DISEASE>	Silicosis
-<DISEASE>	Smallpox
-<DISEASE>	Stevens-Johnson syndrome
-<DISEASE>	Stomach flu
-<DISEASE>	Stomach ulcers
-<DISEASE>	Strabismus
-<DISEASE>	Strep throat
-<DISEASE>	Streptococcal infection
-<DISEASE>	Synovitis
-<DISEASE>	Syphilis
-<DISEASE>	Swine influenza
-<DISEASE>	Schizophrenia
-<DISEASE>	Taeniasis
-<DISEASE>	Tay-Sachs disease
-<DISEASE>	Tennis elbow
-<DISEASE>	Teratoma
-<DISEASE>	Tetanus
-<DISEASE>	Thalassaemia
-<DISEASE>	Thrush
-<DISEASE>	Thymoma
-<DISEASE>	Tinnitus
-<DISEASE>	Tonsillitis
-<DISEASE>	Tooth decay
-<DISEASE>	Toxic shock syndrome
-<DISEASE>	Trichinosis
-<DISEASE>	Trichomoniasis
-<DISEASE>	Trisomy
-<DISEASE>	Tuberculosis
-<DISEASE>	Tularemia
-<DISEASE>	Tungiasis
-<DISEASE>	Typhoid fever
-<DISEASE>	Typhus
-<DISEASE>	Tumor
-<DISEASE>	Ulcerative colitis
-<DISEASE>	Ulcers
-<DISEASE>	Uremia
-<DISEASE>	Urticaria
-<DISEASE>	Uveitis
-<DISEASE>	Varicella
-<DISEASE>	Varicose veins
-<DISEASE>	Vasovagal syncope
-<DISEASE>	Vitiligo
-<DISEASE>	Von Hippel-Lindau disease
-<DISEASE>	Viral fever
-<DISEASE>	Viral meningitis
-<DISEASE>	Valley fever
-<DISEASE>	Warkany syndrome
-<DISEASE>	Warts
-<DISEASE>	Watkins
-<DISEASE>	Yellow fever
-<DISEASE>	Yersiniosis
-<DISEASE>	alopecia
-<DISEASE>	autoimmune \w+
-<DISEASE>	complications
-<DISEASE>	condition*
-<DISEASE>	disease
-<DISEASE>	fibroids
-<DISEASE>	syndrome
-<DISEASE>	thromboembolism
-<DISEASE>	\S+disease
+<MEDICAL_ATTRIBUTE>	\\bacute\\b
+<MEDICAL_ATTRIBUTE>	\\bbiological\\b
+<MEDICAL_ATTRIBUTE>	\\bbiomedical\\b
+<MEDICAL_ATTRIBUTE>	\\bbiotech\\b
+<MEDICAL_ATTRIBUTE>	\\bcardiovascular\\b
+<MEDICAL_ATTRIBUTE>	\\bchronic\\b
+<MEDICAL_ATTRIBUTE>	\\bclinical\\b
+<MEDICAL_ATTRIBUTE>	\\bgastrointestinal\\b
+<MEDICAL_ATTRIBUTE>	\\bhealthier\\b
+<MEDICAL_ATTRIBUTE>	\\bhealthy\\b
+<MEDICAL_ATTRIBUTE>	\\bhematologic\\b
+<MEDICAL_ATTRIBUTE>	\\bhepatic\\b
+<MEDICAL_ATTRIBUTE>	\\bimmune\\b
+<MEDICAL_ATTRIBUTE>	\\binfectious\\b
+<MEDICAL_ATTRIBUTE>	\\binterventional\\b
+<MEDICAL_ATTRIBUTE>	\\bmed\\b
+<MEDICAL_ATTRIBUTE>	\\bmedic\\b
+<MEDICAL_ATTRIBUTE>	\\bmedical\\b
+<MEDICAL_ATTRIBUTE>	\\bmolecular\\b
+<MEDICAL_ATTRIBUTE>	\\bneuromuscular\\b
+<MEDICAL_ATTRIBUTE>	\\bpalliative\\b
+<MEDICAL_ATTRIBUTE>	\\bpediatric\\b
+<MEDICAL_ATTRIBUTE>	\\bpharmaceutical\\b
+<MEDICAL_ATTRIBUTE>	\\bpreventive\\b
+<MEDICAL_ATTRIBUTE>	\\bregenerative\\b
+<MEDICAL_ATTRIBUTE>	\\brestorative\\b
+<MEDICAL_ATTRIBUTE>	\\btherapeutic\\b
+<MEDICAL_ATTRIBUTE>	\\binflammatory\\b
+<MEDICAL_ATTRIBUTE>	\\bparasitic\\b
+<DISEASE>	\\bviral\\b
+<DISEASE>	\\bblood\\b
+<DISEASE>	\\bbones\\b
+<DISEASE>	\\bbrain\\b
+<DISEASE>	\\bcirculation\\b
+<DISEASE>	\\bear\\b
+<DISEASE>	\\bendocrine\\b
+<DISEASE>	\\beye\\b
+<DISEASE>	\\bhair\\b
+<DISEASE>	\\bheart\\b
+<DISEASE>	\\bkidney\\b
+<DISEASE>	\\blung\\b
+<DISEASE>	\\bmuscles\\b
+<DISEASE>	\\bnervous\\b
+<DISEASE>	\\bpulmonary\\b
+<DISEASE>	\\bskin\\b
+<DISEASE>	\\bstomach\\b
+<DISEASE>	\\bthroat\\b
+<DISEASE>	\\brenal\\b
+<DISEASE>	\\bcancer\\b
+<DISEASE>	\\bcomplications\\b
+<DISEASE>	\\bcondition\\b
+<DISEASE>	\\bconditions\\b
+<DISEASE>	\\bdisease\\b
+<DISEASE>	\\bdiseases\\b
+<DISEASE>	\\bdisorder\\b
+<DISEASE>	\\bdisorders\\b
+<DISEASE>	\\bdysfunction\\b
+<DISEASE>	\\bdysfunctions\\b
+<DISEASE>	\\bHIV\\b
+<DISEASE>	\\binfection\\b
+<DISEASE>	\\binfections\\b
+<DISEASE>	\\binflammation\\b
+<DISEASE>	\\binjuries\\b
+<DISEASE>	\\binjury\\b
+<DISEASE>	\\bpain\\b
+<DISEASE>	\\bproblems\\b
+<DISEASE>	\\bsyndrome\\b
+<DISEASE>	\\bsyndromes\\b
+<DISEASE>	\\btumor\\b
+<DISEASE>	\\btumour\\b
+<DISEASE>	\\baddictions\\b
+<DISEASE>	\\balzheimer\\b
+<DISEASE>	\\basthma\\b
+<DISEASE>	\\bautoimmune\\b
+<DISEASE>	\\bdefects\\b
+<DISEASE>	\\bcomplication\\b
+<DISEASE>	\\bdementia\\b
+<DISEASE>	\\bdepression\\b
+<DISEASE>	\\bdiabetes\\b
+<DISEASE>	\\btraumas\\b
+<DISEASE>	\\bfailure\\b
+<DISEASE>	\\bhypertension\\b
+<DISEASE>	\\binfluenza\\b
+<DISEASE>	\\bleukemia\\b
+<DISEASE>	\\blymphoma\\b
+<DISEASE>	\\bsclerosis\\b
+<DISEASE>	\\bobesity\\b
+<DISEASE>	\\bosteoarthritis\\b
+<DISEASE>	\\bparkinson\\b
+<DISEASE>	\\bpsoriasis\\b
+<DISEASE>	\\barthritis\\b
+<DISEASE>	\\bschizophrenia\\b
+<DISEASE>	\\bstroke\\b
+<DISEASE>	\\btrauma\\b
+<DISEASE>	\\btuberculosis\\b
+<DISEASE>	\\baging\\b
+<DISEASE>	\\ballergy\\b
+<DISEASE>	\\banatomical\\b
+<DISEASE>	\\banatomy\\b
+<MEDICAL_FIELD>	\\bautoimmunity\\b
+<MEDICAL_FIELD>	\\bbio
+<MEDICAL_FIELD>	\\bbiochemistry\\b
+<MEDICAL_FIELD>	\\bbioengineering\\b
+<MEDICAL_FIELD>	\\bbiology\\b
+<MEDICAL_FIELD>	\\bbiopharma\\b
+<MEDICAL_FIELD>	\\bbiosciences\\b
+<MEDICAL_FIELD>	\\bbiostatistics\\b
+<MEDICAL_FIELD>	\\bbiotechnology\\b
+<MEDICAL_FIELD>	\\bcardiology\\b
+<MEDICAL_FIELD>	\\bchesmistry\\b
+<MEDICAL_FIELD>	\\bdermatology\\b
+<MEDICAL_FIELD>	\\bdigitalhealth\\b
+<MEDICAL_FIELD>	\\bechocardiography\\b
+<MEDICAL_FIELD>	\\behealth\\b
+<MEDICAL_FIELD>	\\bendocrinology\\b
+<MEDICAL_FIELD>	\\bepidemiology\\b
+<MEDICAL_FIELD>	\\bexercise medicine\\b
+<MEDICAL_FIELD>	\\bgastroenterology\\b
+<MEDICAL_FIELD>	\\bgene
+<MEDICAL_FIELD>	\\bgenetics\\b
+<MEDICAL_FIELD>	\\bgenomics\\b
+<MEDICAL_FIELD>	\\bgeriatrics\\b
+<MEDICAL_FIELD>	\\bgynecology\\b
+<MEDICAL_FIELD>	\\bhematology\\b
+<MEDICAL_FIELD>	\\bhistology\\b
+<MEDICAL_FIELD>	\\bimmunity\\b
+<MEDICAL_FIELD>	\\bimmunology\\b
+<MEDICAL_FIELD>	\\bimmunometabolism\\b
+<MEDICAL_FIELD>	\\bimmunotherapy\\b
+<MEDICAL_FIELD>	\\blife sciences?\\b
+<MEDICAL_FIELD>	\\bmedtech\\b
+<MEDICAL_FIELD>	\\bmetabolism\\b
+<MEDICAL_FIELD>	\\bmicrobiology\\b
+<MEDICAL_FIELD>	\\bnanotechnology\\b
+<MEDICAL_FIELD>	\\bnephrology\\b
+<MEDICAL_FIELD>	\\bneuro-oncology\\b
+<MEDICAL_FIELD>	\\bneurology\\b
+<MEDICAL_FIELD>	\\bneuroscience\\b
+<MEDICAL_FIELD>	\\bneurosurgery\\b
+<MEDICAL_FIELD>	\\bnursing\\b
+<MEDICAL_FIELD>	\\bnutrition\\b
+<MEDICAL_FIELD>	\\bobstetrics\\b
+<MEDICAL_FIELD>	\\boncology\\b
+<MEDICAL_FIELD>	\\boncopathology\\b
+<MEDICAL_FIELD>	\\bophthalmology\\b
+<MEDICAL_FIELD>	\\bparasitology\\b
+<MEDICAL_FIELD>	\\bpathology\\b
+<MEDICAL_FIELD>	\\bpediatrics\\b
+<MEDICAL_FIELD>	\\bpharma\\b
+<MEDICAL_FIELD>	\\bpharmacology\\b
+<MEDICAL_FIELD>	\\bphysiology\\b
+<MEDICAL_FIELD>	\\bplastics\\b
+<MEDICAL_FIELD>	\\bpregnancy\\b
+<MEDICAL_FIELD>	\\bpsychiatry\\b
+<MEDICAL_FIELD>	\\bradiology\\b
+<MEDICAL_FIELD>	\\brheumatology\\b
+<MEDICAL_FIELD>	\\bscience\\b
+<MEDICAL_FIELD>	\\bsurgery\\b
+<MEDICAL_FIELD>	\\btoxicology\\b
+<MEDICAL_FIELD>	\\bvascular\\b
+<MEDICAL_FIELD>	\\bvirology\\b
+<MEDICAL_FIELD>	\\bwellness\\b
+<MEDICAL_FIELD>	\\bcardiomyopathy\\b
+<MEDICAL_FIELD>	\\blegal\\b
+<MEDICAL_FIELD>	\\bgynecologic\\b
+<MEDICAL_FIELD>	\\blaw\\b
+<MEDICAL_FIELD>	\\bimmunization\\b
+<MEDICAL_FIELD>	\\bneonatology\\b
+<MEDICAL_FIELD>	\\borthopedics\\b
+<MEDICAL_FIELD>	\\botolaryngology\\b
+<MEDICAL_FIELD>	\\breproductive\\b
+<MEDICAL_FIELD>	\\burology\\b
+<MEDICAL_FIELD>	\\bforensic\\b
+<MEDICAL_ATTRIBUTE>	\\b#health\\b
+<MEDICAL_ATTRIBUTE>	\\b#healthcare\\b
+<MEDICAL_ATTRIBUTE>	\\bbreast cancer\\b
+<MEDICAL_ATTRIBUTE>	\\bcare\\b
+<MEDICAL_ATTRIBUTE>	\\bcells\\b
+<MEDICAL_ATTRIBUTE>	\\bcellular\\b
+<MEDICAL_ATTRIBUTE>	\\bchemicals\\b
+<MEDICAL_ATTRIBUTE>	\\bcritical\\b
+<MEDICAL_ATTRIBUTE>	\\bcure\\b
+<MEDICAL_ATTRIBUTE>	\\bdiagnose\\b
+<MEDICAL_ATTRIBUTE>	\\bdiagnosed\\b
+<MEDICAL_ATTRIBUTE>	\\bdiagnoses\\b
+<MEDICAL_ATTRIBUTE>	\\bdiagnosis\\b
+<MEDICAL_ATTRIBUTE>	\\bdiagnostic\\b
+<MEDICAL_ATTRIBUTE>	\\bdrug\\b
+<MEDICAL_ATTRIBUTE>	\\bdrugs\\b
+<MEDICAL_ATTRIBUTE>	\\bhealth\\b
+<MEDICAL_ATTRIBUTE>	\\bhealth care\\b
+<MEDICAL_ATTRIBUTE>	\\bhealthcare\\b
+<MEDICAL_ATTRIBUTE>	\\bimaging\\b
+<MEDICAL_ATTRIBUTE>	\\blife-saving\\b
+<MEDICAL_ATTRIBUTE>	\\blifestyle\\b
+<MEDICAL_ATTRIBUTE>	\\bmedication\\b
+<MEDICAL_ATTRIBUTE>	\\bmedications\\b
+<MEDICAL_ATTRIBUTE>	\\bmedicine\\b
+<MEDICAL_ATTRIBUTE>	\\bpatient\\b
+<MEDICAL_ATTRIBUTE>	\\bpatients\\b
+<MEDICAL_ATTRIBUTE>	\\bprevent\\b
+<MEDICAL_ATTRIBUTE>	\\bprevention\\b
+<MEDICAL_ATTRIBUTE>	\\bprognosis\\b
+<MEDICAL_ATTRIBUTE>	\\brehabilitation\\b
+<MEDICAL_ATTRIBUTE>	\\bresearch\\b
+<MEDICAL_ATTRIBUTE>	\\bsurvivor\\b
+<MEDICAL_ATTRIBUTE>	\\bsymptoms\\b
+<MEDICAL_ATTRIBUTE>	\\btherapeutics\\b
+<MEDICAL_ATTRIBUTE>	\\btherapies\\b
+<MEDICAL_ATTRIBUTE>	\\btherapy\\b
+<MEDICAL_ATTRIBUTE>	\\btransplantations\\b
+<MEDICAL_ATTRIBUTE>	\\btreat\\b
+<MEDICAL_ATTRIBUTE>	\\btreatment\\b
+<MEDICAL_ATTRIBUTE>	\\btreatments\\b
+<MEDICAL_ATTRIBUTE>	\\btrials\\b
+<MEDICAL_ATTRIBUTE>	\\bvaccines\\b
+<MEDICAL_ATTRIBUTE>	\\bvirus\\b
+<MEDICAL_ATTRIBUTE>	\\bwellbeing\\b
+<MEDICAL_ATTRIBUTE>	\\bdiagnostics\\b
+<MEDICAL_ATTRIBUTE>	\\bdiet\\b
+<MEDICAL_ATTRIBUTE>	\\bdevices\\b
+<MEDICAL_ATTRIBUTE>	\\bend-of-life\\b
+<MEDICAL_ATTRIBUTE>	\\binsurance\\b
+<DOCTOR>	\\banaesthetist\\b
+<DOCTOR>	\\bcardiologist\\b
+<DOCTOR>	\\bdermatologist\\b
+<DOCTOR>	\\bmicrobiologist\\b
+<DOCTOR>	\\bnephrologist\\b
+<DOCTOR>	\\bneurologist\\b
+<DOCTOR>	\\bneurosurgeon\\b
+<DOCTOR>	\\bophthalmologist\\b
+<DOCTOR>	\\bpaediatrician\\b
+<DOCTOR>	\\bpathologist\\b
+<DOCTOR>	\\bphysician\\b
+<DOCTOR>	\\bradiologist\\b
+<DOCTOR>	\\bsurgeon\\b
+<DOCTOR>	\\burologist\\b
+<DOCTOR>	\\bacupuncturist\\b
+<DOCTOR>	\\baidman\\b
+<DOCTOR>	\\ballergist\\b
+<DOCTOR>	\\banalyst\\b
+<DOCTOR>	\\banesthesiologist\\b
+<DOCTOR>	\\bapothecary\\b
+<DOCTOR>	\\bbiologist\\b
+<DOCTOR>	\\bbiostatistician\\b
+<DOCTOR>	\\bcaregiver\\b
+<DOCTOR>	\\bcarer\\b
+<DOCTOR>	\\bchemical engineering\\b
+<DOCTOR>	\\bchiropodist\\b
+<DOCTOR>	\\bchiropractic\\b
+<DOCTOR>	\\bchiropractor\\b
+<DOCTOR>	\\bclinician\\b
+<DOCTOR>	\\bconsultant\\b
+<DOCTOR>	\\bcoroner\\b
+<DOCTOR>	\\bcytopathologist\\b
+<DOCTOR>	\\bdentist\\b
+<DOCTOR>	\\bdermatopathologist\\b
+<DOCTOR>	\\bdigestive\\b
+<DOCTOR>	\\bdoc\\b
+<DOCTOR>	\\bdoctor\\b
+<DOCTOR>	\\bDr.\\b
+<DOCTOR>	\\bechocardiographer\\b
+<DOCTOR>	\\belectrophysiologist\\b
+<DOCTOR>	\\bendodontics\\b
+<DOCTOR>	\\bepidemiologist\\b
+<DOCTOR>	\\bG.P.\\b
+<DOCTOR>	\\bGP\\b
+<DOCTOR>	\\bgynaecologist\\b
+<DOCTOR>	\\bgynecologist\\b
+<DOCTOR>	\\bhealth worker\\b
+<DOCTOR>	\\bhematologist\\b
+<DOCTOR>	\\bhematologyst\\b
+<DOCTOR>	\\bhospitalist\\b
+<DOCTOR>	\\bimmunologist\\b
+<DOCTOR>	\\bintensivist\\b
+<DOCTOR>	\\bintern\\b
+<DOCTOR>	\\binterne\\b
+<DOCTOR>	\\binternist\\b
+<DOCTOR>	\\bM.D.\\b
+<DOCTOR>	\\bMD\\b
+<DOCTOR>	\\bmedstudent\\b
+<DOCTOR>	\\bneuropathologist\\b
+<DOCTOR>	\\bneuroradiologist\\b
+<DOCTOR>	\\bnurse\\b
+<DOCTOR>	\\bnurse-practitioner\\b
+<DOCTOR>	\\bnutritionist\\b
+<DOCTOR>	\\bob-gyn\\b
+<DOCTOR>	\\bobstetrician\\b
+<DOCTOR>	\\boccupational therapist\\b
+<DOCTOR>	\\boncologist\\b
+<DOCTOR>	\\borthopaedist\\b
+<DOCTOR>	\\borthopedist\\b
+<DOCTOR>	\\bosteopath\\b
+<DOCTOR>	\\bpediatrician\\b
+<DOCTOR>	\\bpediatrist\\b
+<DOCTOR>	\\bpharmacist\\b
+<DOCTOR>	\\bpharmacologist\\b
+<DOCTOR>	\\bphysiatrist\\b
+<DOCTOR>	\\bphysicians\\b
+<DOCTOR>	\\bphysicist\\b
+<DOCTOR>	\\bphysio\\b
+<DOCTOR>	\\bphysiologist\\b
+<DOCTOR>	\\bphysiotherapist\\b
+<DOCTOR>	\\bpodiatrist\\b
+<DOCTOR>	\\bpractitioner\\b
+<DOCTOR>	\\bpractitioners\\b
+<DOCTOR>	\\bpsychologist\\b
+<DOCTOR>	\\bresident\\b
+<DOCTOR>	\\bscientist\\b
+<DOCTOR>	\\bsocial worker\\b
+<DOCTOR>	\\bsurgical\\b
+<DOCTOR>	\\btherapist\\b
+<DOCTOR>	\\bspecialist\\b
+<DOCTOR>	\\burogynaecologist\\b
+<DOCTOR>	\\bneonatologist\\b
+<DOCTOR>	\\bgeriatrician\\b
+<DOCTOR>	\\bpsychiatrist\\b
+<DOCTOR>	\\botolaryngologist\\b
+<DOCTOR>	\\bexpert\\b
+<DOCTOR>	\\banesthetist\\b
+<DOCTOR>	\\bendocrinologist\\b
+<DOCTOR>	\\bgastroenterologist\\b
+<DOCTOR>	\\bhepatologist\\b
+<DOCTOR>	\\bexaminer\\b
+<DOCTOR>	\\bgeneticist\\b
+<DOCTOR>	\\bperinatologist\\b
+<DOCTOR>	\\brespirologist\\b
+<DOCTOR>	\\brheumatologist\\b
+<INSTITUTION>	\\bpubmed\\b
+<MEDICAL_ATTRIBUTE>	\\bstemcells\\b
+<INSTITUTION>	\\bFDA\\b
+<INSTITUTION>	\\bhospital\\b
+<INSTITUTION>	\\binstitute\\b
+<INSTITUTION>	\\blaboratoy\\b
+<ADMINISTRATIVE_JOB>	\\bceo\\b
+<ADMINISTRATIVE_JOB>	\\bcoordinator\\b
+<ADMINISTRATIVE_JOB>	\\bdirector\\b
+<ADMINISTRATIVE_JOB>	\\bhead\\b
+<ADMINISTRATIVE_JOB>	\\b\w*director\\b
+<DOCTOR>	\\ballergist\\b
+<DOCTOR>	\\banaesthetist\\b
+<DOCTOR>	\\banesthesiologist\\b
+<DOCTOR>	\\banesthesiologist\\b
+<DOCTOR>	\\bcardiologist\\b
+<DOCTOR>	\\bclinician\\b
+<DOCTOR>	\\bdermat(ó|o)log(o|a)\\b
+<DOCTOR>	\\bdermatologist\\b
+<DOCTOR>	\\bdermatopathologist\\b
+<DOCTOR>	\\bdoc\\b
+<DOCTOR>	\\bdoctor\\b
+<DOCTOR>	\\belectrophysiologist\\b
+<DOCTOR>	\\bepidemiologist\\b
+<DOCTOR>	\\bfamily doctor\\b
+<DOCTOR>	\\bfamily physician\\b
+<DOCTOR>	\\bfamily practitioner\\b
+<DOCTOR>	\\bflying doctor\\b
+<DOCTOR>	\\bgeneral practitioner\\b
+<DOCTOR>	\\bgp\\b
+<DOCTOR>	\\bgynaecologist\\b
+<DOCTOR>	\\bgynecologist\\b
+<DOCTOR>	\\bhematologist\\b
+<DOCTOR>	\\binternist\\b
+<DOCTOR>	\\bmd\\b
+<DOCTOR>	\\bmedical practitioner\\b
+<DOCTOR>	\\bneurologist\\b
+<DOCTOR>	\\bneuroradiologist\\b
+<MEDICAL_JOB>	\\bnutritionist\\b
+<DOCTOR>	\\bob-gyn\\b
+<DOCTOR>	\\bobstetrician\\b
+<DOCTOR>	\\boncologist\\b
+<DOCTOR>	\\bophthalmologist\\b
+<DOCTOR>	\\borthopaedist\\b
+<DOCTOR>	\\borthopedist\\b
+<DOCTOR>	\\bosteopath\\b
+<DOCTOR>	\\bpaediatrician\\b
+<DOCTOR>	\\bpathologist\\b
+<DOCTOR>	\\bpediatrician\\b
+<DOCTOR>	\\bpediatrist\\b
+<DOCTOR>	\\bpharmacologist\\b
+<DOCTOR>	\\bphysiatrist\\b
+<DOCTOR>	\\bphysician\\b
+<DOCTOR>	\\bphysicist\\b
+<DOCTOR>	\\bphysio\\b
+<DOCTOR>	\\bplastic surgeon\\b
+<DOCTOR>	\\bpodiatrist\\b
+<DOCTOR>	\\bradiologist\\b
+<DOCTOR>	\\bsurgeon\\b
+<DOCTOR>	\\burologist\\b
+<DOCTOR>	\\bforensic\\b
+<MEDICAL_JOB>	\\bhealth worker\\b
+<MEDICAL_JOB>	\\bhealth professional\\b
+<INSTITUTION>	\\bacademy\\b
+<INSTITUTION>	\\bcenter\\b
+<INSTITUTION>	\\bcentre\\b
+<INSTITUTION>	\\bcollege\\b
+<INSTITUTION>	\\bdepartment\\b
+<INSTITUTION>	\\binstitute\\b
+<INSTITUTION>	\\borganisation\\b
+<INSTITUTION>	\\borganization\\b
+<INSTITUTION>	\\bschool\\b
+<INSTITUTION>	\\bsociedad\\b
+<INSTITUTION>	\\bunit\\b
+<MEDICAL_ATTRIBUTE>	\\bcare\\b
+<MEDICAL_ATTRIBUTE>	\\bclinical\\b
+<MEDICAL_ATTRIBUTE>	\\bhealth\\b
+<MEDICAL_ATTRIBUTE>	\\bhealthcare\\b
+<MEDICAL_ATTRIBUTE>	\\binterventional\\b
+<MEDICAL_ATTRIBUTE>	\\bmedical\\b
+<MEDICAL_ATTRIBUTE>	\\btherapy\\b
+<MEDICAL_ATTRIBUTE>	\\btherapy\\b
+<MEDICAL_FIELD>	\\baesthetic medicine\\b
+<MEDICAL_FIELD>	\\bbiotech\\b
+<MEDICAL_FIELD>	\\bcancer\\b
+<MEDICAL_FIELD>	\\bcardiology\\b
+<MEDICAL_FIELD>	\\bdermatolog(í|i)a\\b
+<MEDICAL_FIELD>	\\bdermatology\\b
+<MEDICAL_FIELD>	\\bechocardiography\\b
+<MEDICAL_FIELD>	\\bendocrinology\\b
+<MEDICAL_FIELD>	\\bepidemiology\\b
+<MEDICAL_FIELD>	\\bfamily medicine\\b
+<MEDICAL_FIELD>	\\bgynecology\\b
+<MEDICAL_FIELD>	\\bhealth\\b
+<MEDICAL_FIELD>	\\bhealthcare\\b
+<MEDICAL_FIELD>	\\bimaging\\b
+<MEDICAL_FIELD>	\\bimmunology\\b
+<MEDICAL_FIELD>	\\bmedicine\\b
+<MEDICAL_FIELD>	\\boncology\\b
+<MEDICAL_FIELD>	\\bpathology\\b
+<MEDICAL_FIELD>	\\bpharma\\b
+<MEDICAL_FIELD>	\\bpharmacology\\b
+<MEDICAL_FIELD>	\\bphysiology\\b
+<MEDICAL_FIELD>	\\bplastics\\b
+<MEDICAL_FIELD>	\\bradiolog(í|i)a\\b
+<MEDICAL_FIELD>	\\bradiology\\b
+<MEDICAL_FIELD>	\\bsurgery\\b
+<MEDICAL_FIELD>	\\b\w+ intervention\\b
+<MEDICAL_FIELD>	\\b\w+pathology\\b
+<MEDICAL_JOB>	\\bacupuncturist\\b
+<MEDICAL_JOB>	\\baidman\\b
+<MEDICAL_JOB>	\\banalyst\\b
+<MEDICAL_JOB>	\\bbiostatistician\\b
+<MEDICAL_JOB>	\\bchiropodist\\b
+<MEDICAL_JOB>	\\bchiropractor\\b
+<MEDICAL_JOB>	\\bchiropractic\\b
+<MEDICAL_JOB>	\\bconsultant\\b
+<MEDICAL_JOB>	\\bcoroner\\b
+<MEDICAL_JOB>	\\bEMT\\b
+<MEDICAL_JOB>	\\bhealth professional\\b
+<MEDICAL_JOB>	\\bhospitalist\\b
+<MEDICAL_JOB>	\\bintern\\b
+<MEDICAL_JOB>	\\binterne\\b
+<MEDICAL_JOB>	\\bmed\\b
+<MEDICAL_JOB>	\\bnurse\\b
+<MEDICAL_JOB>	\\bnurse-practitioner\\b
+<MEDICAL_JOB>	\\boccupational therapist\\b
+<MEDICAL_JOB>	\\bparamedic\\b
+<MEDICAL_JOB>	\\bparamedical\\b
+<MEDICAL_JOB>	\\bphysiotherapist\\b
+<MEDICAL_JOB>	\\bresident\\b
+<MEDICAL_JOB>	\\bsangoma\\b
+<MEDICAL_JOB>	\\bsocial worker\\b
+<MEDICAL_JOB>	\\btherapist\\b
+<PATIENT>	\\bpatient*\\b
+<PATIENT>	\\bsuffering\\b
+<DISEASE>	\\bliver function\\b
+<DISEASE>	\\babdominal pain\\b
+<DISEASE>	\\badenoiditis\\b
+<DISEASE>	\\balopecia areata\\b
+<DISEASE>	\\balzheimer\\b
+<DISEASE>	\\banorexia nervosa\\b
+<DISEASE>	\\bsleep apnea\\b
+<DISEASE>	\\bappendicitis\\b
+<DISEASE>	\\barthritis\\b
+<DISEASE>	\\batherosclerosis\\b
+<DISEASE>	\\bbipolar disorder\\b
+<DISEASE>	\\bbladder cancer\\b
+<DISEASE>	\\bbotulism\\b
+<DISEASE>	\\bmultiple esclerosis\\b
+<DISEASE>	\\bcardiovascular diseases\\b
+<DISEASE>	\\bcervical cancer\\b
+<DISEASE>	\\bcholesterol\\b
+<DISEASE>	\\bcolitis\\b
+<DISEASE>	\\bcystitis\\b
+<DISEASE>	\\bdermatitis\\b
+<DISEASE>	\\bdiabetes\\b
+<DISEASE>	\\bdyspepsia\\b
+<DISEASE>	\\bdysthymias\\b
+<DISEASE>	\\bemphysema\\b
+<DISEASE>	\\bencephalitis\\b
+<DISEASE>	\\beustachian tube problems\\b
+<DISEASE>	\\bfibromyalgia\\b
+<DISEASE>	\\bfood allergy\\b
+<DISEASE>	\\bglaucoma\\b
+<DISEASE>	\\bhair loss\\b
+<DISEASE>	\\bheart disease\\b
+<DISEASE>	\\bheart diseases\\b
+<DISEASE>	\\bhepatitis b\\b
+<DISEASE>	\\bhepatitis c\\b
+<DISEASE>	\\bhigh blood pressure\\b
+<DISEASE>	\\bhypercholesterolemia\\b
+<DISEASE>	\\bhypertension\\b
+<DISEASE>	\\bhyperthyroidism\\b
+<DISEASE>	\\bhypothyroidism\\b
+<DISEASE>	\\binfluenza\\b
+<DISEASE>	\\bkidney stones\\b
+<DISEASE>	\\blactose intolerance\\b
+<DISEASE>	\\blichen planus\\b
+<DISEASE>	\\bliver cancer\\b
+<DISEASE>	\\blow back pain\\b
+<DISEASE>	\\blung cancer\\b
+<DISEASE>	\\blupus\\b
+<DISEASE>	\\blymphoma\\b
+<DISEASE>	\\bmalaria\\b
+<DISEASE>	\\bmelanoma\\b
+<DISEASE>	\\bmeningitis\\b
+<DISEASE>	\\bmenopause\\b
+<DISEASE>	\\bosteoarthritis\\b
+<DISEASE>	\\bosteoporosis\\b
+<DISEASE>	\\bovarian cancer\\b
+<DISEASE>	\\bpancreatic cancer\\b
+<DISEASE>	\\bpancreatitis\\b
+<DISEASE>	\\bpanic disorder\\b
+<DISEASE>	\\bparkinson\\b
+<DISEASE>	\\bpneumonia\\b
+<DISEASE>	\\bprostate cancer\\b
+<DISEASE>	\\bprostatitis\\b
+<DISEASE>	\\bpsoriasis\\b
+<DISEASE>	\\bpulmonary diseases\\b
+<DISEASE>	\\brespiratory syndrome\\b
+<DISEASE>	\\brheumatoid arthritis\\b
+<DISEASE>	\\brosacea\\b
+<DISEASE>	\\bscleroderma\\b
+<DISEASE>	\\bseasonal affective disorder\\b
+<DISEASE>	\\bsexually transmitted diseases\\b
+<DISEASE>	\\bsinusitis\\b
+<DISEASE>	\\bskin cancer\\b
+<DISEASE>	\\bstress disorders\\b
+<DISEASE>	\\btesticular cancer\\b
+<DISEASE>	\\bthyroid cancer\\b
+<DISEASE>	\\burinary retention\\b
+<DISEASE>	\\buterine cancer\\b
+<DISEASE>	\\bAbscess\\b
+<DISEASE>	\\bAlzheimer's disease\\b
+<DISEASE>	\\bAnotia\\b
+<DISEASE>	\\balien hand syndrome\\b
+<DISEASE>	\\bApraxia\\b
+<DISEASE>	\\bArgyria\\b
+<DISEASE>	\\bAseptic meningitis\\b
+<DISEASE>	\\bAsthenia\\b
+<DISEASE>	\\bAsthma\\b
+<DISEASE>	\\bAstigmatism\\b
+<DISEASE>	\\bAthetosis\\b
+<DISEASE>	\\bAtrophy\\b
+<DISEASE>	\\bBacterial meningitis\\b
+<DISEASE>	\\bBeriberi\\b
+<DISEASE>	\\bBlack Death\\b
+<DISEASE>	\\bBreast cancer\\b
+<DISEASE>	\\bBronchitis\\b
+<DISEASE>	\\bBrucellosis\\b
+<DISEASE>	\\bBubonic plague\\b
+<DISEASE>	\\bBunion\\b
+<DISEASE>	\\bCalculi\\b
+<DISEASE>	\\bCampylobacter infection\\b
+<DISEASE>	\\bCancer\\b
+<DISEASE>	\\bCandidiasis\\b
+<DISEASE>	\\bCarbon monoxide poisoning\\b
+<DISEASE>	\\bCeliacs disease\\b
+<DISEASE>	\\bCerebral palsy\\b
+<DISEASE>	\\bChagas disease\\b
+<DISEASE>	\\bChalazion\\b
+<DISEASE>	\\bChancroid\\b
+<DISEASE>	\\bChavia\\b
+<DISEASE>	\\bCongenital insensitivity to pain with anhidrosis\\b
+<DISEASE>	\\bCherubism\\b
+<DISEASE>	\\bChickenpox\\b
+<DISEASE>	\\bChlamydia\\b
+<DISEASE>	\\bChlamydia trachomatis\\b
+<DISEASE>	\\bCholera\\b
+<DISEASE>	\\bChordoma\\b
+<DISEASE>	\\bChorea\\b
+<DISEASE>	\\bChronic fatigue syndrome\\b
+<DISEASE>	\\bCircadian rhythm sleep disorder\\b
+<DISEASE>	\\bCoccidioidomycosis\\b
+<DISEASE>	\\bCommon cold\\b
+<DISEASE>	\\bCondyloma\\b
+<DISEASE>	\\bCongestive heart disease\\b
+<DISEASE>	\\bCoronary heart disease\\b
+<DISEASE>	\\bCowpox\\b
+<DISEASE>	\\bCretinism\\b
+<DISEASE>	\\bCrohn's Disease\\b
+<DISEASE>	\\bDengue\\b
+<DISEASE>	\\bDiabetes mellitus\\b
+<DISEASE>	\\bDiphtheria\\b
+<DISEASE>	\\bDehydration\\b
+<DISEASE>	\\bDysentery\\b
+<DISEASE>	\\bEar infection\\b
+<DISEASE>	\\bEbola\\b
+<DISEASE>	\\bEpilepsy\\b
+<DISEASE>	\\bErectile dysfunctions\\b
+<DISEASE>	\\bflu\\b
+<DISEASE>	\\bGangrene\\b
+<DISEASE>	\\bGastroenteritis\\b
+<DISEASE>	\\bGenital herpes\\b
+<DISEASE>	\\bGERD\\b
+<DISEASE>	\\bGoitre\\b
+<DISEASE>	\\bGonorrhea\\b
+<DISEASE>	\\bHepatitis A\\b
+<DISEASE>	\\bHepatitis D\\b
+<DISEASE>	\\bHepatitis E\\b
+<DISEASE>	\\bHistiocytosis (Childhood Cancer)\\b
+<DISEASE>	\\bHIV\\b
+<DISEASE>	\\bHuman papillomavirus\\b
+<DISEASE>	\\bHuntington's disease\\b
+<DISEASE>	\\bHypermetropia\\b
+<DISEASE>	\\bHyperopia\\b
+<DISEASE>	\\bHypothyroid\\b
+<DISEASE>	\\bHypotonia\\b
+<DISEASE>	\\bImpetigo\\b
+<DISEASE>	\\bInfertility\\b
+<DISEASE>	\\bInterstitial cystitis\\b
+<DISEASE>	\\bIritis\\b
+<DISEASE>	\\bIron-deficiency anemia\\b
+<DISEASE>	\\bIrritable bowel syndrome\\b
+<DISEASE>	\\bIgnious Syndrome\\b
+<DISEASE>	\\bJaundice\\b
+<DISEASE>	\\bKeloids\\b
+<DISEASE>	\\bKuru\\b
+<DISEASE>	\\bKwashiorkor\\b
+<DISEASE>	\\bKidney stone disease\\b
+<DISEASE>	\\bLaryngitis\\b
+<DISEASE>	\\bLead poisoning\\b
+<DISEASE>	\\bLegionellosis\\b
+<DISEASE>	\\bLeishmaniasis\\b
+<DISEASE>	\\bLeprosy\\b
+<DISEASE>	\\bLeptospirosis\\b
+<DISEASE>	\\bListeriosis\\b
+<DISEASE>	\\bLeukemia\\b
+<DISEASE>	\\bLice\\b
+<DISEASE>	\\bLoiasis\\b
+<DISEASE>	\\bLupus erythematosus\\b
+<DISEASE>	\\bLyme disease\\b
+<DISEASE>	\\bLymphogranuloma venereum\\b
+<DISEASE>	\\bMad cow disease\\b
+<DISEASE>	\\bMarburg fever\\b
+<DISEASE>	\\bMeasles\\b
+<DISEASE>	\\bMetastatic cancer\\b
+<DISEASE>	\\bMénière's disease\\b
+<DISEASE>	\\bMigraine\\b
+<DISEASE>	\\bMononucleosis\\b
+<DISEASE>	\\bMultiple myeloma\\b
+<DISEASE>	\\bMultiple sclerosis\\b
+<DISEASE>	\\bMumps\\b
+<DISEASE>	\\bMuscular dystrophy\\b
+<DISEASE>	\\bMyasthenia gravis\\b
+<DISEASE>	\\bMyelitis\\b
+<DISEASE>	\\bMyoclonus\\b
+<DISEASE>	\\bMyopia\\b
+<DISEASE>	\\bMyxedema\\b
+<DISEASE>	\\bMorquio Syndrome\\b
+<DISEASE>	\\bMattticular syndrome\\b
+<DISEASE>	\\bNeoplasm\\b
+<DISEASE>	\\bNon-gonococcal urethritis\\b
+<DISEASE>	\\bNecrotizing Fasciitis\\b
+<DISEASE>	\\bNight blindness\\b
+<DISEASE>	\\bObesity\\b
+<DISEASE>	\\bOtitis\\b
+<DISEASE>	\\bPalindromic rheumatism\\b
+<DISEASE>	\\bParatyphoid fever\\b
+<DISEASE>	\\bParkinson's disease\\b
+<DISEASE>	\\bPelvic inflammatory disease\\b
+<DISEASE>	\\bPeritonitis\\b
+<DISEASE>	\\bPeriodontal disease\\b
+<DISEASE>	\\bPertussis\\b
+<DISEASE>	\\bPhenylketonuria\\b
+<DISEASE>	\\bPlague\\b
+<DISEASE>	\\bPoliomyelitis\\b
+<DISEASE>	\\bPorphyria\\b
+<DISEASE>	\\bProgeria\\b
+<DISEASE>	\\bPsittacosis\\b
+<DISEASE>	\\bPubic lice\\b
+<DISEASE>	\\bPulmonary embolism\\b
+<DISEASE>	\\bPilia\\b
+<DISEASE>	\\bQ fever\\b
+<DISEASE>	\\bQues fever\\b
+<DISEASE>	\\bRabies\\b
+<DISEASE>	\\bRepetitive strain injury\\b
+<DISEASE>	\\bRheumatic fever\\b
+<DISEASE>	\\bRheumatic heart\\b
+<DISEASE>	\\bRheumatism\\b
+<DISEASE>	\\bRickets\\b
+<DISEASE>	\\bRift Valley fever\\b
+<DISEASE>	\\bRocky Mountain spotted fever\\b
+<DISEASE>	\\bRubella\\b
+<DISEASE>	\\bSalmonellosis\\b
+<DISEASE>	\\bScabies\\b
+<DISEASE>	\\bScarlet fever\\b
+<DISEASE>	\\bSciatica\\b
+<DISEASE>	\\bScrapie\\b
+<DISEASE>	\\bScurvy\\b
+<DISEASE>	\\bSepsis\\b
+<DISEASE>	\\bSepticemia\\b
+<DISEASE>	\\bSARS\\b
+<DISEASE>	\\bShigellosis\\b
+<DISEASE>	\\bShin splints\\b
+<DISEASE>	\\bShingles\\b
+<DISEASE>	\\bSickle-cell anemia\\b
+<DISEASE>	\\bSiderosis\\b
+<DISEASE>	\\bSIDS\\b
+<DISEASE>	\\bSilicosis\\b
+<DISEASE>	\\bSmallpox\\b
+<DISEASE>	\\bStevens-Johnson syndrome\\b
+<DISEASE>	\\bStomach flu\\b
+<DISEASE>	\\bStomach ulcers\\b
+<DISEASE>	\\bStrabismus\\b
+<DISEASE>	\\bStrep throat\\b
+<DISEASE>	\\bStreptococcal infection\\b
+<DISEASE>	\\bSynovitis\\b
+<DISEASE>	\\bSyphilis\\b
+<DISEASE>	\\bSwine influenza\\b
+<DISEASE>	\\bSchizophrenia\\b
+<DISEASE>	\\bTaeniasis\\b
+<DISEASE>	\\bTay-Sachs disease\\b
+<DISEASE>	\\bTennis elbow\\b
+<DISEASE>	\\bTeratoma\\b
+<DISEASE>	\\bTetanus\\b
+<DISEASE>	\\bThalassaemia\\b
+<DISEASE>	\\bThrush\\b
+<DISEASE>	\\bThymoma\\b
+<DISEASE>	\\bTinnitus\\b
+<DISEASE>	\\bTonsillitis\\b
+<DISEASE>	\\bTooth decay\\b
+<DISEASE>	\\bToxic shock syndrome\\b
+<DISEASE>	\\bTrichinosis\\b
+<DISEASE>	\\bTrichomoniasis\\b
+<DISEASE>	\\bTrisomy\\b
+<DISEASE>	\\bTuberculosis\\b
+<DISEASE>	\\bTularemia\\b
+<DISEASE>	\\bTungiasis\\b
+<DISEASE>	\\bTyphoid fever\\b
+<DISEASE>	\\bTyphus\\b
+<DISEASE>	\\bTumor\\b
+<DISEASE>	\\bUlcerative colitis\\b
+<DISEASE>	\\bUlcers\\b
+<DISEASE>	\\bUremia\\b
+<DISEASE>	\\bUrticaria\\b
+<DISEASE>	\\bUveitis\\b
+<DISEASE>	\\bVaricella\\b
+<DISEASE>	\\bVaricose veins\\b
+<DISEASE>	\\bVasovagal syncope\\b
+<DISEASE>	\\bVitiligo\\b
+<DISEASE>	\\bVon Hippel-Lindau disease\\b
+<DISEASE>	\\bViral fever\\b
+<DISEASE>	\\bViral meningitis\\b
+<DISEASE>	\\bValley fever\\b
+<DISEASE>	\\bWarkany syndrome\\b
+<DISEASE>	\\bWarts\\b
+<DISEASE>	\\bWatkins\\b
+<DISEASE>	\\bYellow fever\\b
+<DISEASE>	\\bYersiniosis\\b
+<DISEASE>	\\balopecia\\b
+<DISEASE>	\\bautoimmune \w+\\b
+<DISEASE>	\\bcomplications\\b
+<DISEASE>	\\bcondition*\\b
+<DISEASE>	\\bdisease\\b
+<DISEASE>	\\bfibroids\\b
+<DISEASE>	\\bsyndrome\\b
+<DISEASE>	\\bthromboembolism\\b
+<DISEASE>	\\b\S+disease

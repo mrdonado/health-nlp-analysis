@@ -177,3 +177,19 @@
 [s] go\w* gold for( \S+){0,6} [p]
 [s] help\w* for( \S+){0,7} [p]
 [s] treatment for( \S+){0,5} [p]
+prescrib\w+ [np] to stop
+[npl](secondary|side) effects
+(side|secondary effects) of[npr]
+[s] provid\w+( \S+){0,6} [p]
+most promising is[npr]
+think more about[npr]
+[s] opportunity (for|in)( \S+){0,7} [p]
+[npl](can|could) help
+a trial of[npr]
+[s] mak\w+ a difference in( \S+){0,6} [p]
+[s] len\w+ a hand (in|with)( \S+){0,6} [p]
+[s] as a( \S+){1,4} to (help|combat|attack|hold\w* off| chas(e|i)|mitigat|cure|zap|beat|contain|treats|battl|repair|neutrali|improve(s|ed)|improving|targets|targeting|fight|control|reduce)\w*( \S+){0,9} [p]
+helpful [np] for (those|people)
+[s] a weapon( \S+){1,7} [p]
+[s] significantly (mitigat|contain|treat|improv|reduce)\w*.*[p]
+[s] lower(s|ered|ing) (exacerbation|receeding|relap).*[p]

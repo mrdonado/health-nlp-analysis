@@ -102,4 +102,5 @@
 [s] to avoid( \w+){0,3} [p]
 [s] (be|is)( \w+ ){1,2}(answer|solution|cure)\w*( \w+){0,3} [p]
 [s] treatment( \w+){0,3} [p]
+prescrib\w+ [np] to stop
 [s] effective( \w+){0,2} (in|for|to)( \w+){0,5} [p]
