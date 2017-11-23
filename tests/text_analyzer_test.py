@@ -38,7 +38,7 @@ def test_language_data_loader():
     assert 'eczema' in language_data['start_words']
     assert '^@\\w+$' in language_data['stop_words']
     assert '[s] \\w+ed to (healthier|better)( \\S+){0,7} [p]' in language_data['grammar']
-    assert 'risk for( \S+){0,5} [p]' in language_data['counter_grammar']
+    assert 'chances for ( \S+){0,5} [p]' in language_data['counter_grammar']
     assert r'[s] effective( \w+){0,2} (in|for|to)( \w+){0,5} [p]' in language_data['grammar']
 
 
@@ -79,14 +79,9 @@ def test_counter_analyzer():
         COUNTER_GRAMMAR_PATH,
         START_WORDS_PATH,
         STOP_WORDS_PATH)
-    message = "If you eat a pig you have chances for dying from obesity"
-    analysis = text_analyzer.counter_analyzer(message,
-                                      language_data['start_words'],
-                                      language_data['counter_grammar'])
-    assert analysis is True
     message = "A new medicine for obesity"
     analysis = text_analyzer.counter_analyzer(message,
-                                      language_data['start_words'],
+                                      'obesity',
                                       language_data['counter_grammar'])
     assert analysis is False
 
@@ -100,11 +95,11 @@ def test_magic_bullet_analyzer():
         COUNTER_GRAMMAR_PATH,
         START_WORDS_PATH,
         STOP_WORDS_PATH)
-    message = "I am involved in a trial of this new medicine regarding obesity"
+    message = "For obesity the Dr prescribed a new medicine to stop it"
     analysis = text_analyzer.magic_bullet_analyzer(message,
                                     language_data['start_words'],
                                     language_data['grammar'])
-    assert analysis[0] == 'this new medicine'
+    assert analysis[0] == 'a new medicine'
     message = "This is nonsense obesity"
     analysis = text_analyzer.magic_bullet_analyzer(message,
                                     language_data['start_words'],
