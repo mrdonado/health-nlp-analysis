@@ -85,28 +85,6 @@ def test_counter_analyzer():
                                       language_data['counter_grammar'])
     assert analysis is False
 
-
-def test_magic_bullet_analyzer():
-    """
-    Magic bullet analyzer tests
-    """
-    language_data = text_analyzer.language_data_loader(
-        GRAMMAR_PATH,
-        COUNTER_GRAMMAR_PATH,
-        START_WORDS_PATH,
-        STOP_WORDS_PATH)
-    message = "For obesity the Dr prescribed a new medicine to stop it"
-    analysis = text_analyzer.magic_bullet_analyzer(message,
-                                    language_data['start_words'],
-                                    language_data['grammar'])
-    assert analysis[0] == 'a new medicine'
-    message = "This is nonsense obesity"
-    analysis = text_analyzer.magic_bullet_analyzer(message,
-                                    language_data['start_words'],
-                                    language_data['grammar'])
-    assert analysis[0] == '<nothing_found>'
-
-
 def test_analyzer():
     """
     Analyzer tests
