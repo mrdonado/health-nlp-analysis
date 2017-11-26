@@ -35,7 +35,7 @@ def test_language_data_loader():
         COUNTER_GRAMMAR_PATH,
         START_WORDS_PATH,
         STOP_WORDS_PATH)
-    assert 'eczema' in language_data['start_words']
+    assert 'eczema' in language_data['start_words'].keys()
     assert '^@\\w+$' in language_data['stop_words']
     assert '[s] \\w+ed to (healthier|better)( \\S+){0,7} [p]' in language_data['grammar']
     assert 'chances for ( \S+){0,5} [p]' in language_data['counter_grammar']
@@ -47,27 +47,23 @@ def test_start_word_match():
     Start word match tests
     """
     result = text_analyzer.start_word_match("Some input message",
-                                            ['one', 'word'])
+                                            {'disease': ['acute disease', 'hard disease']})
     assert result is None
-    result = text_analyzer.start_word_match("Some input message",
-                                            ['input', 'word'])
-    assert result == 'input'
-    result = text_analyzer.start_word_match(
-        "Some input message about anorexia nervosa and other things",
-        ['one', 'word', 'anorexia', 'unrelated', 'anorexia nervosa'])
-    assert result == 'anorexia nervosa'
+    result = text_analyzer.start_word_match("Hard disease to treat",
+                                            {'disease': ['acute disease', 'hard disease']})
+    assert result == 'Hard disease'
 
 def test_get_start_word_from_sentence():
     """
     Start word from sentence tests
     """
     result = text_analyzer.get_start_word_from_sentence("This is one-sentence message without a start word",
-                                                        ['obesity', 'fever'])
+                                                        {'disease': ['acute disease', 'hard disease']})
     assert result is None
-    result = text_analyzer.get_start_word_from_sentence("This is the first sentence, and in the second you can find obesity",
-                                                        ['obesity', 'fever'])
-    assert result[0] == 'obesity'
-    assert result[1] == 'and in the second you can find obesity'
+    result = text_analyzer.get_start_word_from_sentence("This is the first sentence, and in the second you can find acute disease",
+                                                        {'disease': ['acute disease', 'hard disease']})
+    assert result[0] == 'acute disease'
+    assert result[1] == 'and in the second you can find acute disease'
 
 
 def test_counter_analyzer():
