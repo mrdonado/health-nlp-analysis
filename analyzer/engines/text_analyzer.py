@@ -73,6 +73,50 @@ def file_parser(path, to_lower):
     input_file.close()
     return results
 
+def start_words_to_dict(start_words):
+    """
+    """
+    single_tokens = dict()
+    for start_word in start_words:
+        for token in start_word.split():
+            if token in single_tokens.keys():
+                single_tokens[token].append(start_word)
+            else:
+                single_tokens[token] = []
+                single_tokens[token].append(start_word)    
+    forbidden_single_tokens = [
+        'of',
+        'type',
+        'with',
+        'and',
+        'the',
+        '^\d+$',
+        'acute',
+        'system',
+        'primary',
+        'involving',
+        'dominant',
+        'recurrent',
+        'or',
+        'to',
+        'in',
+        'without',
+        'situ',
+        'types',
+        'due',
+        '(I|II|III|IV|V|VI|VII|VIII|XIX|X)',
+        '^[A-Z]$',
+        'by'
+    ]
+    single_tokens_to_delete = []
+    for single_token in single_tokens.keys():
+        for forbidden_single_token in forbidden_single_tokens:
+            if re.search(forbidden_single_token, single_token):
+                single_tokens_to_delete.append(single_token)
+                break
+    for single_token_to_delete in single_tokens_to_delete:
+        del single_tokens[single_token_to_delete]
+    return single_tokens
 
 def language_data_loader(grammar_path, counter_grammar_path, start_words_path, stop_words_path):
     """
@@ -90,6 +134,10 @@ def language_data_loader(grammar_path, counter_grammar_path, start_words_path, s
     language_data['counter_grammar'] = file_parser(counter_grammar_path, False)
     # Load start words (a term list to recover messages on diseases)
     language_data['start_words'] = file_parser(start_words_path, True)
+
+    ### Testing this:
+    language_data['start_words'] = start_words_to_dict(language_data['start_words'])
+
     # Load stop words (words tagged as noun phrases that cannot be extracted
     # as entities (e.g. You, @username11):
     language_data['stop_words'] = file_parser(stop_words_path, True)
@@ -98,22 +146,24 @@ def language_data_loader(grammar_path, counter_grammar_path, start_words_path, s
 
 def start_word_match(message, start_words):
     """
-    'start word' finder: it looks for start words within a given message.
-    Start words might be regular expressions.
-    When a match is found, the whole match will be returned. Otherwise,
-    None is returned.
     """
     start_word = None
-    for word in start_words:
-        if re.search(re.escape(word), message, flags=re.IGNORECASE):
-            current_word = message[re.search(re.escape(word), message, flags=re.IGNORECASE).start():
-                                   re.search(re.escape(word), message, flags=re.IGNORECASE).end()]
-            if start_word is None or len(current_word) > len(start_word):
-                start_word = current_word
-    # we search for the longest match ('Mindfulness for anorexia nervosa' gets
-    # 'anorexia nervosa' but not 'anorexia', although both are disease terms)
+    message_to_lower = message.lower()
+    for single_token in start_words.keys():
+        term_has_been_found = False
+        if single_token in message_to_lower:
+            for term in start_words[single_token]:
+                if term in message_to_lower:
+                    term_has_been_found = True
+                    if start_word is None or len(term) > len(start_word):
+                        start_word = term
+        if term_has_been_found is True:
+            break
+    if start_word is not None:
+        start_position = re.search(re.escape(start_word), message_to_lower).start()
+        end_position = re.search(re.escape(start_word), message_to_lower).end()
+        start_word = message[start_position:end_position]
     return start_word
-
 
 def get_start_word_from_sentence(message, start_words):
     """
@@ -388,7 +438,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
 
 # test_message()
 
-###### Test set of messages ################
+# #### Test set of messages ################
 
 # messages = open('mensajes.txt', 'r').readlines()
 # import sys
@@ -401,12 +451,21 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
 # '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
 # '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
 
+# ### Medir el tiempo
+# import time
+# ###
 
 # count = 0
 # for message in messages:
+
+#     start = time.time()
+
 #     count = count +1
 #     print str(count)+'/'+str(len(messages))
 #     message = unicode(message)
 #     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
 #     if result[0] != "<nothing_found>":
 #         print result[0], ' --> ', result[1]
+
+#     end = time.time()
+#     print end - start
