@@ -323,3 +323,8 @@ demand
 (?i)\bwom(a|e)n\b
 (?i)strength$
 (?i)story
+(?i)magic bullet
+(?i)ovation
+(?i)girl
+(?i)congrat
+(?i)superhero

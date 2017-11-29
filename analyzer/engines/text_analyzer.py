@@ -411,7 +411,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words):
         return output
 
 
-# Test message! #####
+###Test message! #####
 # def test_message():
 #     message = raw_input('\n' + 'New message? ')
 #     message = unicode(message)
