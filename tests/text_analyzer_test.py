@@ -98,7 +98,8 @@ def test_analyzer():
                                       language_data['start_words'],
                                       language_data['grammar'],
                                       language_data['counter_grammar'],
-                                      language_data['stop_words'])
+                                      language_data['stop_words'],
+                                      language_data['magic_bullet_grammar'])
     assert analysis[1] == 'hyperthyroidism'
     assert analysis[0] == 'a new medicine'
     message = "some unrelated message that only talks about watching tv"
@@ -106,5 +107,6 @@ def test_analyzer():
                                       language_data['start_words'],
                                       language_data['grammar'],
                                       language_data['counter_grammar'],
-                                      language_data['stop_words'])
+                                      language_data['stop_words'],
+                                      language_data['magic_bullet_grammar'])
     assert analysis[0] == '<nothing_found>'
