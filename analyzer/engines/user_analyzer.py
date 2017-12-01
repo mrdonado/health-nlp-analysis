@@ -278,7 +278,7 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
 #     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
 #     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
 #     message = unicode(message)
-#     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
+#     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'], LANGUAGE_DATA['magic_bullet_grammar'])
 #     print result[0], result[1]
 
 # messagesf = open('mensajes.txt', 'r')

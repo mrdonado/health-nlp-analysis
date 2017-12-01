@@ -12,7 +12,7 @@ testfile = open('corpus/' + corpus_name, 'r')
 for line in testfile:
     line = line.rstrip()
     line = unicode(line)
-    result = text_analyzer.analyzer(line, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'])
+    result = text_analyzer.analyzer(line, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'], LANGUAGE_DATA['magic_bullet_analyzer'])
     if result[0] != '<nothing_found>':
         solution = result[0]
         problem = result[1]
