@@ -83,30 +83,30 @@ def start_words_to_dict(start_words):
                 single_tokens[token].append(start_word)
             else:
                 single_tokens[token] = []
-                single_tokens[token].append(start_word)    
+                single_tokens[token].append(start_word)
     forbidden_single_tokens = [
-        'of',
-        'type',
-        'with',
-        'and',
-        'the',
+        '^of$',
+        '^type$',
+        '^with$',
+        '^and$',
+        '^the$',
         '^\d+$',
-        'acute',
-        'system',
-        'primary',
-        'involving',
-        'dominant',
-        'recurrent',
-        'or',
-        'to',
-        'in',
-        'without',
-        'situ',
-        'types',
-        'due',
-        '(I|II|III|IV|V|VI|VII|VIII|XIX|X)',
+        '^acute$',
+        '^system$',
+        '^primary$',
+        '^involving$',
+        '^dominant$',
+        '^recurrent$',
+        '^or$',
+        '^to$',
+        '^in$',
+        '^without$',
+        '^situ$',
+        '^types$',
+        '^due$',
+        '^(I|II|III|IV|V|VI|VII|VIII|XIX|X)$',
         '^[A-Z]$',
-        'by'
+        '^by$'
     ]
     single_tokens_to_delete = []
     for single_token in single_tokens.keys():
@@ -135,7 +135,7 @@ def language_data_loader(grammar_path, counter_grammar_path, start_words_path, s
     # From langua_data['grammar'], load a subset of rules for magic_bullet_analyzer()
     language_data['magic_bullet_grammar'] = []
     for pattern in language_data['grammar']:
-        if '\[npr\]' or '\[npl\]' or '\[np\]' in pattern:
+        if '[npr]' in pattern or '[np]' in pattern or '[npl]' in pattern:
             language_data['magic_bullet_grammar'].append(pattern)
     
     # Load counter_grammar
@@ -309,6 +309,14 @@ def magic_bullet_analyzer(message, start_word, magic_bullet_grammar):
     rich. E.g. prescribe + noun phrase + to stop. The problem's
     position doesn't need to be explicit.
     """
+
+    # We must enlarge the original message to capture noun phrases within shorter contexts
+    dummy_context = 'Pretty tinny long short yellow dummy'
+    if message.endswith('.'):
+        message = dummy_context + '. ' + message + ' ' + dummy_context
+    else:
+        message = dummy_context + '. ' + message + '. ' + dummy_context
+
     magic_bullet = [None, None]
     case_B_C = None
     longest_match = ''
@@ -320,23 +328,22 @@ def magic_bullet_analyzer(message, start_word, magic_bullet_grammar):
         possible_magic_bullet = ''
 
         # Case A: "prescribe + np + to stop" (with left and right contexts)
-        if '\[np\]' in pattern:
+        if '[np]' in pattern:
             possible_magic_bullet = pattern.replace('[np]', '.+')
             case_B_C = False
 
         # Case B: "npl secondary effects" (no left context)
         # Look for 3 words to the left by defaut
-        elif '\[npl\]' in pattern:
-            possible_magic_bullet = pattern.replace('[npl]', '(\S+ ){3}')
-            pattern_context = pattern.replace('[npl]', '')
+        elif '[npl]' in pattern:
+            possible_magic_bullet = pattern.replace('[npl]', '(\S+ ){4}')
             case_B_C = True
 
         # Case C: "the solution is npr" (no right context)
         # Look for 3 words to the right by default
-        elif '\[npr\]' in pattern:
-            possible_magic_bullet = pattern.replace('[npr]', '( \S+){3}')
-            pattern_context = pattern.replace('[npr]', '')
+        elif '[npr]' in pattern:
+            possible_magic_bullet = pattern.replace('[npr]', '( \S+){4}')
             case_B_C = True
+        
         # Look for a possible pattern match into the message:
         if re.search(possible_magic_bullet, message, flags=re.IGNORECASE):
             match = message[
@@ -350,13 +357,25 @@ def magic_bullet_analyzer(message, start_word, magic_bullet_grammar):
                 magic_bullet[0] = possible_magic_bullet 
                 magic_bullet[1] = case_B_C
 
+                if '[npr]' in pattern:
+                    pattern_context = pattern.replace('[npr]', '')
+                    pattern_context = message[
+                        re.search(pattern_context, message, flags=re.IGNORECASE).start():
+                        re.search(pattern_context, message, flags=re.IGNORECASE).end()
+                    ]
+                elif '[npl]' in pattern:
+                    pattern_context = pattern.replace('[npl]', '')
+                    pattern_context = message[
+                        re.search(pattern_context, message, flags=re.IGNORECASE).start():
+                        re.search(pattern_context, message, flags=re.IGNORECASE).end()
+                    ]
+                
     # 2) If magic bullet is found, get the NP for its match into the message:
     if magic_bullet[0] is not None:
         noun_phrases = []
         for np in NLP(message).noun_chunks:
             np = np.text
             noun_phrases.append(np)
-
         # Get the NP that fits into the pattern match:
         # In case B and C, we take context out of the longest_match string,
         # to avoid confussion if more than one NP is present:
@@ -364,6 +383,7 @@ def magic_bullet_analyzer(message, start_word, magic_bullet_grammar):
             target_longest_match = longest_match.replace(pattern_context, '')
         else:
             target_longest_match = longest_match
+
         for np in noun_phrases:
             if np in target_longest_match:
                 output.append(np)
@@ -374,7 +394,6 @@ def magic_bullet_analyzer(message, start_word, magic_bullet_grammar):
         # Return output if the right NP is found:
         if len(output) == 3:
             return output
-
         # Else, no NP fit although a magic bullet rule
         # is matched: 
         else:
@@ -443,7 +462,6 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
 
         # 2.1) Counter analysis to avoid false positives:
         counter_analyzer_result = counter_analyzer(message, twitter_start_word, counter_grammar)
-        
         if counter_analyzer_result is False:
             
             # 2.2) Try first 'magic bullet' rules:
@@ -513,7 +531,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
         return output
 
 
-##Test message! #####
+# #Test message! #####
 # def test_message():
 #     message = raw_input('\n' + 'New message? ')
 #     message = unicode(message)
@@ -540,9 +558,9 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
 
 # test_message()
 
-# #### Test set of messages ################
+#### Test set of messages ################
 
-# messages = open('mensajes.txt', 'r').readlines()
+# messages = open('messages.txt', 'r').readlines()
 # import sys
 # reload(sys)
 # sys.setdefaultencoding('utf8')
