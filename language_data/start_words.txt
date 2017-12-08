@@ -423,6 +423,7 @@ primary Escherichia coli infectious disease
 commensal Klebsiella infectious disease
 epidemic typhus
 endemic typhus
+chronic pain
 lymphangitis-associated rickettsiosis
 Rickettsia aeschlimannii spotted fever
 aneruptive fever
@@ -545,6 +546,7 @@ acrocapitofemoral dysplasia
 acrodermatitis enteropathica
 acrokeratosis verruciformis
 Askin's tumor
+brain tumor
 oral cavity carcinoma in situ
 pharynx carcinoma in situ
 gall bladder carcinoma in situ
@@ -10890,3 +10892,5 @@ metastasis to the orbit
 hypereosinophilic syndrome
 hypoglycemia
 peripartum cardiomyopathy
+type 2 diabetes
+acute kidney injury
