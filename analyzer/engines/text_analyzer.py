@@ -531,10 +531,16 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
         return output
 
 
-# #Test message! #####
+# ##Test message! #####
 # def test_message():
 #     message = raw_input('\n' + 'New message? ')
 #     message = unicode(message)
+
+#     ### Check NPs
+#     nps = []
+#     for np in NLP(message).noun_chunks:
+#         nps.append(str(np))
+#     print '\n' + ' | '.join(nps)
 
 #     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
 #      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
@@ -558,7 +564,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
 
 # test_message()
 
-#### Test set of messages ################
+### Test set of messages ################
 
 # messages = open('messages.txt', 'r').readlines()
 # import sys
@@ -583,5 +589,9 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
 #     count = count +1
 #     message = unicode(message)
 #     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'], LANGUAGE_DATA['magic_bullet_grammar'])
-#     end = time.time()
-#     print end - start, '\t', result[0] + ' --> ' + result[1]
+#     # end = time.time()
+#     if result[0] == '<nothing_found>':
+#         print message
+#     # print end - start, '\t', result[0] + ' --> ' + result[1]
+
+
