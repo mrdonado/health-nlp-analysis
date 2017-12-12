@@ -295,7 +295,7 @@ minute
 hour
 (^kid| kid)
 day
- mins?
+\bmins?
 (?i)thanks?$
 thing
 ^\d+ mg$
@@ -328,3 +328,11 @@ demand
 (?i)girl
 (?i)congrat
 (?i)superhero
+(?i)^\w+ doses?$
+(?i)^cost-effectiveness$
+(?i)addition$
+(?i)(high|low) activity$
+(?i)responses?$
+(?i)disease
+(?i)weeks?$
+(?i)efficacy$

@@ -137,7 +137,7 @@ patients receiving[npr]
 [s] (is|be) allowed (to|for)( \S+){0,4} [p]
 [s]  manag\w+( \S+){0,5} [p]
 [p] cure\s{0,2}(-|\:) [s]
-[s] (reduce|decrease|slow)\w*( \S+){0,7} [p]
+[s] (delays|delaying|reduce|decrease|slow)\w*( \S+){0,7} [p]
 [p]( \S+){0,5} (reduced|decreased) by [s]
 [s] (cuts|cutted)( \S*){0,5} [p]
 [s] ward off\w*( \S+){0,5} [p]
@@ -252,7 +252,7 @@ favou?rable \w+ of[npr]
 injections? of[npr]
 [s] administration (in|for|to) [p]
 [npl]as (\w+ )?anti
-[npl]as (\w+ ){0,2}(therapy|therapeutical)
+[npl]as (\w+ ){0,4}(therapy|therapeutical|treatment)
 [npl](at|in) high (doses|dosages)
 [npl](is|be|are)( \S+){1,5} (solution|treatment|cure|victory|improvement)
 [s] used (in|to)( \S+){0,7} [p]
@@ -271,3 +271,11 @@ injection (with|of)[npr]
 technique for[npr]
 applying[npr]
 [npl]as a tool
+[npl](combined|in combination) (to|with)( \S+){2,8} (treat|manage|therap)\w*
+cost-effectiveness of[npr]
+[npl]implant for
+(durability|tolerability) of[npr]
+[npl](confers|gives) protection
+[npl]protect\w*( \w+){0,5} against
+[npl](enhanc|promot|improv|boost|maximi)\w+( \S+){0,5} therapeutic effect
+[s] weapon for( \S+){0,5} [p]

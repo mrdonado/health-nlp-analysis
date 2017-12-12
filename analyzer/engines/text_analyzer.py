@@ -246,7 +246,7 @@ def get_noun_phrase(message, longest_match, position, stop_words):
             for candidate_np in candidate_nps[::-1]:
                 stop_word_found = False
                 for stop_word in stop_words:
-                    if re.search(stop_word, str(candidate_np), flags=re.IGNORECASE):
+                    if re.search(stop_word, str(candidate_np)):
                         stop_word_found = True
                         break
                 if stop_word_found is False:
@@ -267,7 +267,7 @@ def get_noun_phrase(message, longest_match, position, stop_words):
             for candidate_np in candidate_nps:
                 stop_word_found = False
                 for stop_word in stop_words:
-                    if re.search(stop_word, str(candidate_np), flags=re.IGNORECASE):
+                    if re.search(stop_word, str(candidate_np)):
                         stop_word_found = True
                         break
                 if stop_word_found is False:
@@ -303,7 +303,7 @@ def counter_analyzer(message, start_word, counter_grammar):
         return False
 
 
-def magic_bullet_analyzer(message, start_word, magic_bullet_grammar):
+def magic_bullet_analyzer(message, start_word, magic_bullet_grammar, stop_words):
     """
     Maps a set of grammar rules with very high precision as the context is 
     rich. E.g. prescribe + noun phrase + to stop. The problem's
@@ -318,7 +318,7 @@ def magic_bullet_analyzer(message, start_word, magic_bullet_grammar):
         message = dummy_context + '. ' + message + '. ' + dummy_context
 
     magic_bullet = [None, None]
-    case_B_C = None
+    magic_bullet_type = None
     longest_match = ''
     target_noun_phrase = ''
     pattern_context = None
@@ -330,19 +330,19 @@ def magic_bullet_analyzer(message, start_word, magic_bullet_grammar):
         # Case A: "prescribe + np + to stop" (with left and right contexts)
         if '[np]' in pattern:
             possible_magic_bullet = pattern.replace('[np]', '.+')
-            case_B_C = False
+            magic_bullet_type = 'case A'
 
         # Case B: "npl secondary effects" (no left context)
         # Look for 3 words to the left by defaut
         elif '[npl]' in pattern:
             possible_magic_bullet = pattern.replace('[npl]', '(\S+ ){4}')
-            case_B_C = True
+            magic_bullet_type = 'case B'
 
         # Case C: "the solution is npr" (no right context)
         # Look for 3 words to the right by default
         elif '[npr]' in pattern:
             possible_magic_bullet = pattern.replace('[npr]', '( \S+){4}')
-            case_B_C = True
+            magic_bullet_type = 'case C'
         
         # Look for a possible pattern match into the message:
         if re.search(possible_magic_bullet, message, flags=re.IGNORECASE):
@@ -355,21 +355,21 @@ def magic_bullet_analyzer(message, start_word, magic_bullet_grammar):
                 # against another
                 longest_match = match
                 magic_bullet[0] = possible_magic_bullet 
-                magic_bullet[1] = case_B_C
+                magic_bullet[1] = magic_bullet_type
 
-                if '[npr]' in pattern:
+                if magic_bullet[1] == 'case C':
                     pattern_context = pattern.replace('[npr]', '')
                     pattern_context = message[
                         re.search(pattern_context, message, flags=re.IGNORECASE).start():
                         re.search(pattern_context, message, flags=re.IGNORECASE).end()
                     ]
-                elif '[npl]' in pattern:
+                elif magic_bullet[1] == 'case B':
                     pattern_context = pattern.replace('[npl]', '')
                     pattern_context = message[
                         re.search(pattern_context, message, flags=re.IGNORECASE).start():
                         re.search(pattern_context, message, flags=re.IGNORECASE).end()
                     ]
-                
+
     # 2) If magic bullet is found, get the NP for its match into the message:
     if magic_bullet[0] is not None:
         noun_phrases = []
@@ -379,17 +379,44 @@ def magic_bullet_analyzer(message, start_word, magic_bullet_grammar):
         # Get the NP that fits into the pattern match:
         # In case B and C, we take context out of the longest_match string,
         # to avoid confussion if more than one NP is present:
-        if magic_bullet[1] == True:
+        if magic_bullet[1] == 'case B' or magic_bullet[1] == 'case C':
             target_longest_match = longest_match.replace(pattern_context, '')
         else:
             target_longest_match = longest_match
 
-        for np in noun_phrases:
-            if np in target_longest_match:
-                output.append(np)
-                output.append(start_word)
-                output.append(magic_bullet[0])
-                break
+        # Logical sequence to find the NP that suits the target_longest_match:
+        # if case B (e.g. [npl] is the treatment): Look the right-most NP,
+        # if case C (e.g. the treatment is [npr]): Look the left-most NP
+        # For this, iterate to the right or to the left in the for-loop. 
+        if magic_bullet[1] == 'case B':
+            for np in noun_phrases[::-1]:
+                stop_word_found = False
+                if np in target_longest_match:
+                    # Check that the NP is not a stop word (this should be made
+                    # faster with refactorization):
+                    for stop_word in stop_words:
+                        if re.search(stop_word, str(np)):
+                            stop_word_found = True
+                    if stop_word_found is False:
+                        output.append(np)
+                        output.append(start_word)
+                        output.append(magic_bullet[0])
+                        break
+        elif magic_bullet[1] == 'case C':
+            for np in noun_phrases:
+                stop_word_found = False
+                if np in target_longest_match:
+                    # Check that the NP is not a stop word (this should be made
+                    # faster with refactorization):
+                    for stop_word in stop_words:
+                        if re.search(stop_word, str(np)):
+                            stop_word_found = True
+                    if stop_word_found is False:
+                        output.append(np)
+                        output.append(start_word)
+                        output.append(magic_bullet[0])
+                        break
+
 
         # Return output if the right NP is found:
         if len(output) == 3:
@@ -465,7 +492,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
         if counter_analyzer_result is False:
             
             # 2.2) Try first 'magic bullet' rules:
-            magic_bullet_analyzer_result = magic_bullet_analyzer(no_splitted_message, start_word, magic_bullet_grammar)
+            magic_bullet_analyzer_result = magic_bullet_analyzer(no_splitted_message, start_word, magic_bullet_grammar, stop_words)
             if magic_bullet_analyzer_result[0] != '<nothing_found>':
                 output.append(magic_bullet_analyzer_result[0])
                 output.append(magic_bullet_analyzer_result[1])
@@ -531,7 +558,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
         return output
 
 
-# ##Test message! #####
+##Test message! #####
 # def test_message():
 #     message = raw_input('\n' + 'New message? ')
 #     message = unicode(message)
