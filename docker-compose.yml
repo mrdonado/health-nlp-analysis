@@ -33,6 +33,7 @@ services:
       - health-nlp-network
     depends_on:
       - beanstalksvc
+      - elasticsvc
 
 
 networks:
