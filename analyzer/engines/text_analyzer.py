@@ -6,43 +6,9 @@
 ## Analyzer ##
 ##############
 
-Given a grammar, and a set of start words, this
-file provides the tools to analyze a human text written in
-English.
-
-The analyzer receives a text input (message), and extracts valuable
-information from it within the DISEASE-TREATMENT cognitive frame, i.e. a
-disease and a potential solution for it.
-
-It consists of the following functions:
-
-(1) file_parser:
-    Parses language data files before loading them as language resources
-(2) language_data_loader:
-    Loads linguistic knowledge to feed the Analyzer (a simple NLP engine)
-(3) start_word_match:
-    Finds disease mentions in the incoming text message
-(4) get_start_word_from_sentence:
-    Divides the incoming message into sentences, and look for the
-    start word in each sentence. When found, it returns the sentence and
-    the start word found in it
-(5) get_noun_phrase:
-    Extracts the exact noun phrase corresponding to the solution of the
-    disease problem. Before, it parses the whole sentences to look for all
-    the noun structures, and then chooses the appropriate one
-(6) counter_analyzer:
-    Maps a set of grammar rules into the message, in order to prevent false
-    positives. These rules have priority over the rules from analyzer()
-    E.g. risk for + problem, is a "counter rule" that prevents a case of false
-    positive in the rule: solution + for + problem
-(7) magic_bullet_analyzer:
-    Maps a set of grammar rules with very high precision as the context is 
-    rich. E.g. prescribe + noun phrase + to stop. For these reason, the problem's
-    position doesn't need to be explicit.
-(6) analyzer:
-    Maps the language dataset's rules into the text mensage, and get the best 
-    noun phrase as the solution for the disease problem.
-
+Text analyzer receives an input (message), and extracts valuable
+information from it: a "solution" (management, treatment, funds, etc.)
+and its corresponding disease.
 
 """
 import re
@@ -57,10 +23,13 @@ import re
 from spacy.en import English
 NLP = English()
 
+# Load magic_bullet_analyzer() function, a separate module
+from analyzer.engines import magic_bullet_analyzer
+#Not working with tests: import magic_bullet_analyzer
 
 def file_parser(path, to_lower):
     """
-    Helper function to parse text files.
+    Helper function to parse language resource files.
     """
     input_file = open(path, 'r', encoding='utf-8')
     #input_file = open(path, 'r')
@@ -73,8 +42,12 @@ def file_parser(path, to_lower):
     input_file.close()
     return results
 
+
 def start_words_to_dict(start_words):
     """
+    Create a dict of "start words" from a large file of disease
+    keywords. E.g. 'brain cancer', 'skin cancer' are stored in
+    {'cancer': ['brain cancer', 'skin cancer']}
     """
     single_tokens = dict()
     for start_word in start_words:
@@ -118,12 +91,14 @@ def start_words_to_dict(start_words):
         del single_tokens[single_token_to_delete]
     return single_tokens
 
+
 def language_data_loader(grammar_path, counter_grammar_path, start_words_path, stop_words_path):
     """
     It receives three file paths as input:
     - Grammar
     - Start words
     - Stop words
+    - Counter grammar
     Then it parses them and returns an array with their contents
     altogether.
     """
@@ -135,7 +110,7 @@ def language_data_loader(grammar_path, counter_grammar_path, start_words_path, s
     # From langua_data['grammar'], load a subset of rules for magic_bullet_analyzer()
     language_data['magic_bullet_grammar'] = []
     for pattern in language_data['grammar']:
-        if '[npr]' in pattern or '[np]' in pattern or '[npl]' in pattern:
+        if '[np' in pattern:
             language_data['magic_bullet_grammar'].append(pattern)
     
     # Load counter_grammar
@@ -154,6 +129,7 @@ def language_data_loader(grammar_path, counter_grammar_path, start_words_path, s
 
 def start_word_match(message, start_words):
     """
+    Find possible string matches of disease words into messages
     """
     start_word = None
     message_to_lower = message.lower()
@@ -172,6 +148,7 @@ def start_word_match(message, start_words):
         end_position = re.search(re.escape(start_word), message_to_lower).end()
         start_word = message[start_position:end_position]
     return start_word
+
 
 def get_start_word_from_sentence(message, start_words):
     """
@@ -216,7 +193,7 @@ def get_noun_phrase(message, longest_match, position, stop_words):
     """
     Extracts the exact noun phrase corresponding to the solution of the
     disease problem. The arguments this function gets are defined in 
-    analyzer(), the next function
+    analyzer()
     """
 
     longest_match_start = re.search(re.escape(longest_match), message).start()
@@ -303,138 +280,6 @@ def counter_analyzer(message, start_word, counter_grammar):
         return False
 
 
-def magic_bullet_analyzer(message, start_word, magic_bullet_grammar, stop_words):
-    """
-    Maps a set of grammar rules with very high precision as the context is 
-    rich. E.g. prescribe + noun phrase + to stop. The problem's
-    position doesn't need to be explicit.
-    """
-
-    # We must enlarge the original message to capture noun phrases within shorter contexts
-    dummy_context = 'Pretty tinny long short yellow dummy'
-    if message.endswith('.'):
-        message = dummy_context + '. ' + message + ' ' + dummy_context
-    else:
-        message = dummy_context + '. ' + message + '. ' + dummy_context
-
-    magic_bullet = [None, None]
-    magic_bullet_type = None
-    longest_match = ''
-    target_noun_phrase = ''
-    pattern_context = None
-    output = []
-    
-    for pattern in magic_bullet_grammar:
-        possible_magic_bullet = ''
-
-        # Case A: "prescribe + np + to stop" (with left and right contexts)
-        if '[np]' in pattern:
-            possible_magic_bullet = pattern.replace('[np]', '.+')
-            magic_bullet_type = 'case A'
-
-        # Case B: "npl secondary effects" (no left context)
-        # Look for 3 words to the left by defaut
-        elif '[npl]' in pattern:
-            possible_magic_bullet = pattern.replace('[npl]', '(\S+ ){4}')
-            magic_bullet_type = 'case B'
-
-        # Case C: "the solution is npr" (no right context)
-        # Look for 3 words to the right by default
-        elif '[npr]' in pattern:
-            possible_magic_bullet = pattern.replace('[npr]', '( \S+){4}')
-            magic_bullet_type = 'case C'
-        
-        # Look for a possible pattern match into the message:
-        if re.search(possible_magic_bullet, message, flags=re.IGNORECASE):
-            match = message[
-                re.search(possible_magic_bullet, message, flags=re.IGNORECASE).start():
-                re.search(possible_magic_bullet, message, flags=re.IGNORECASE).end()
-            ]
-            if len(match) > len(longest_match):
-                # Store the longest match to avoid the ambiguity of one rule
-                # against another
-                longest_match = match
-                magic_bullet[0] = possible_magic_bullet 
-                magic_bullet[1] = magic_bullet_type
-
-                if magic_bullet[1] == 'case C':
-                    pattern_context = pattern.replace('[npr]', '')
-                    pattern_context = message[
-                        re.search(pattern_context, message, flags=re.IGNORECASE).start():
-                        re.search(pattern_context, message, flags=re.IGNORECASE).end()
-                    ]
-                elif magic_bullet[1] == 'case B':
-                    pattern_context = pattern.replace('[npl]', '')
-                    pattern_context = message[
-                        re.search(pattern_context, message, flags=re.IGNORECASE).start():
-                        re.search(pattern_context, message, flags=re.IGNORECASE).end()
-                    ]
-
-    # 2) If magic bullet is found, get the NP for its match into the message:
-    if magic_bullet[0] is not None:
-        noun_phrases = []
-        for np in NLP(message).noun_chunks:
-            np = np.text
-            noun_phrases.append(np)
-        # Get the NP that fits into the pattern match:
-        # In case B and C, we take context out of the longest_match string,
-        # to avoid confussion if more than one NP is present:
-        if magic_bullet[1] == 'case B' or magic_bullet[1] == 'case C':
-            target_longest_match = longest_match.replace(pattern_context, '')
-        else:
-            target_longest_match = longest_match
-
-        # Logical sequence to find the NP that suits the target_longest_match:
-        # if case B (e.g. [npl] is the treatment): Look the right-most NP,
-        # if case C (e.g. the treatment is [npr]): Look the left-most NP
-        # For this, iterate to the right or to the left in the for-loop. 
-        if magic_bullet[1] == 'case B':
-            for np in noun_phrases[::-1]:
-                stop_word_found = False
-                if np in target_longest_match:
-                    # Check that the NP is not a stop word (this should be made
-                    # faster with refactorization):
-                    for stop_word in stop_words:
-                        if re.search(stop_word, str(np)):
-                            stop_word_found = True
-                    if stop_word_found is False:
-                        output.append(np)
-                        output.append(start_word)
-                        output.append(magic_bullet[0])
-                        break
-        elif magic_bullet[1] == 'case C':
-            for np in noun_phrases:
-                stop_word_found = False
-                if np in target_longest_match:
-                    # Check that the NP is not a stop word (this should be made
-                    # faster with refactorization):
-                    for stop_word in stop_words:
-                        if re.search(stop_word, str(np)):
-                            stop_word_found = True
-                    if stop_word_found is False:
-                        output.append(np)
-                        output.append(start_word)
-                        output.append(magic_bullet[0])
-                        break
-
-
-        # Return output if the right NP is found:
-        if len(output) == 3:
-            return output
-        # Else, no NP fit although a magic bullet rule
-        # is matched: 
-        else:
-            output.append('<nothing_found>')
-            output.append(start_word)
-            output.append(magic_bullet[0])
-            return output
-    else:
-        output.append('<nothing_found>')
-        output.append(start_word)
-        output.append('<no pattern found>')
-        return output
-
-
 def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_bullet_grammar):
     """
     Analyzer, a treatment-entity finder.
@@ -492,7 +337,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
         if counter_analyzer_result is False:
             
             # 2.2) Try first 'magic bullet' rules:
-            magic_bullet_analyzer_result = magic_bullet_analyzer(no_splitted_message, start_word, magic_bullet_grammar, stop_words)
+            magic_bullet_analyzer_result = magic_bullet_analyzer.magic_bullet_analyzer(no_splitted_message, start_word, magic_bullet_grammar, stop_words)
             if magic_bullet_analyzer_result[0] != '<nothing_found>':
                 output.append(magic_bullet_analyzer_result[0])
                 output.append(magic_bullet_analyzer_result[1])
@@ -558,7 +403,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
         return output
 
 
-##Test message! #####
+#Test message! #####
 # def test_message():
 #     message = raw_input('\n' + 'New message? ')
 #     message = unicode(message)
@@ -591,7 +436,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
 
 # test_message()
 
-### Test set of messages ################
+# Test set of messages ################
 
 # messages = open('messages.txt', 'r').readlines()
 # import sys
@@ -608,17 +453,20 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
 # import time
 # ###
 
-# count = 0
+
 # for message in messages:
 
 #     start = time.time()
-
-#     count = count +1
 #     message = unicode(message)
 #     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'], LANGUAGE_DATA['magic_bullet_grammar'])
-#     # end = time.time()
-#     if result[0] == '<nothing_found>':
-#         print message
-#     # print end - start, '\t', result[0] + ' --> ' + result[1]
+#     end = time.time()
+#     if result[0] != '<nothing_found>':
+#         print end-start, '\t', result[0], '\t', result[1], '\t', result[2]
+#     #     if '[np = ' in result[2]:
+#     #         print result[0], ' ---> ', result[1], '\t', message
+#     #     else:
+#     #         print '! OK: ', end - start
+#     # else:
+#     #     print end - start
 
 
