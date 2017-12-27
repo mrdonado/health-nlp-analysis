@@ -96,8 +96,8 @@ def lexicon_generator(grammar_file_path, dictionary):
             node_list = re.findall(r'<\S+?>', pattern)
             for node in node_list:
                 if node in dictionary.keys():
-                    instance = re.sub(
-                        node, '(' + '|'.join(dictionary[node]) + ')', instance)
+                    instanced_node = '(' + '|'.join(dictionary[node]) + ')'
+                    instance = instance.replace(node, instanced_node)
             generated_lexicon[(pattern, semantic_tag)] = instance
         # (b) Pattern without node:
         else:
@@ -228,30 +228,31 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
     return user_analyzer_result
 
 
-# Test message! #####
+# #Test message! #####
 # def test_message():
-#     user_name = raw_input('\n' + 'User name? ')
+#     # user_name = raw_input('\n' + 'User name? ')
+#     user_name = 'dummy user name'
 #     user_description = raw_input('\n' + 'User description? ')
 #     DICTIONARY = dictionary_parser(
-#     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/user_dictionary.txt')
+#     '/Users/juan/health-nlp-analysis/language_data/user_dictionary.txt')
 #     LEXICON = lexicon_generator(
-#     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
+#     '/Users/juan/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
 #     USER_NAME_PATTERNS = user_name_parser(
-#     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/user_name_patterns.txt')
+#     '/Users/juan/health-nlp-analysis/language_data/user_name_patterns.txt')
 #     result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
-#     print '\n'+'<'+result[1]+'>'+'\t'+'['+result[0]+']' + '\t' + result[2]
+#     print '\n'+'<'+result[1]+'>'+'\t'+'[ '+result[0]+' ]' + '\t' + result[2]
 
 #     control = raw_input('(t)ry again ?')
 #     while control == "t":
 #         DICTIONARY = dictionary_parser(
-#         '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/user_dictionary.txt')
+#         '/Users/juan/health-nlp-analysis/language_data/user_dictionary.txt')
 #         LEXICON = lexicon_generator(
-#         '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
+#         '/Users/juan/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
 #         USER_NAME_PATTERNS = user_name_parser(
-#         '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/user_name_patterns.txt')
+#         '/Users/juan/health-nlp-analysis/language_data/user_name_patterns.txt')
 #         result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
 #         print '<m>'+user_name+'\t'+user_description+'</m>'
-#         print '\n'+'<'+result[1]+'>'+'\t'+'['+result[0]+']' + '\t' + result[2]
+#         print '\n'+'<'+result[1]+'>'+'\t'+'[ '+result[0]+' ]' + '\t' + result[2]
 
 #         control = raw_input('(t)ry again ?')
 #     else:
@@ -259,29 +260,31 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
 
 # test_message()
 
-###### Test set of messages ################
+# # ##### Test set of messages ################
 
 # import sys
 # reload(sys)
 # sys.setdefaultencoding('utf8')
 
-# DICTIONARY = dictionary_parser('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/user_dictionary.txt')
-# LEXICON = lexicon_generator('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
-# USER_NAME_PATTERNS = user_name_parser('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/user_name_patterns.txt')
+# DICTIONARY = dictionary_parser('/Users/juan/health-nlp-analysis/language_data/user_dictionary.txt')
+# LEXICON = lexicon_generator('/Users/juan/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
+# USER_NAME_PATTERNS = user_name_parser('/Users/juan/health-nlp-analysis/language_data/user_name_patterns.txt')
 
 
-# def call_text_analyzer(message):
-#     from text_analyzer import analyzer
-#     from text_analyzer import language_data_loader
-#     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
-#     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
-#     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
-#     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
-#     message = unicode(message)
-#     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'], LANGUAGE_DATA['magic_bullet_grammar'])
-#     print result[0], result[1]
+# # def call_text_analyzer(message):
+# #     from text_analyzer import analyzer
+# #     from text_analyzer import language_data_loader
+# #     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
+# #     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
+# #     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
+# #     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
+# #     message = unicode(message)
+# #     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'], LANGUAGE_DATA['magic_bullet_grammar'])
+# #     print result[0], result[1]
 
-# messagesf = open('mensajes.txt', 'r')
+# resultFile = open('RESULTS.txt', 'w')
+
+# messagesf = open('messages.txt', 'r')
 # messages = []
 # for line in messagesf:
 #     line = line.rstrip()
@@ -291,12 +294,9 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
 #     input_text = line.split('\t')
 #     user_name = input_text[0]
 #     user_description = input_text[1]
-#     message = input_text[2]
+#     # message = input_text[2]
 #     result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
-#     print 'User Name: ', user_name
-#     print 'Description: ', '[', result[1], '] ', user_description
-#     print 'Message: ', message
-#     print '-----'
-#     call_text_analyzer(message)
-#     print result
+#     if result[1] != '<no tag>':
+#         a = result[1] + '\t' + user_description + '\t' + result[0] + '\n'
+#         resultFile.write(a)
 

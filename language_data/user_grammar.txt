@@ -1,137 +1,207 @@
-(?i)nurse clinician	Professional
-(?i)(;|,|\.) practitioner	Doctor
-(?i)^practitioner	Doctor
-(?i)peer reviewed	Source
-(?i)for patients	Healthcare initiative
-(?i)(<MEDICAL_FIELD>|<MEDICAL_ATTRIBUTE>|<DISEASE>) activist\b	Interested in healthcare
-PhD\b	Academia
-(?i)^(\S+ ){0,6}professor (of|at)\b	Academia
-(?i)^(\S+ ){0,6}working at( \S+){0,6} (uni|university|institute)	Academia
-(?i)^(\S+ ){0,3}<DISEASE> survivor\b	Patient
-(?i)(<MEDICAL_FIELD>|<MEDICAL_ATTRIBUTE>|<DISEASE>) information system	Med business
-(?i)improving( \S+){0,6} <DISEASE>	Health initiative
-(?i)(<MEDICAL_FIELD>|<MEDICAL_ATTRIBUTE>)( \S+){0,20} industr(y|ies)	Med business
-(?i)information (on|about)( \S+){0,3} #?(<MEDICAL_FIELD>|<DISEASE>)	Generic
-(?i)(<MEDICAL_FIELD>|<MEDICAL_ATTRIBUTE>|<DISEASE>)( \S+){0,4} researcher	Academia
-(?i)(professor|teacher) of( \S+){0,4} <MEDICAL_FIELD>\b	Academia
-(?i)^researcher	Academia
-(?i)college of( \S+){0,7} (<MEDICAL_JOB>|<MEDICAL_FIELD>)	Academia
-(?i)phd\.?( \S+){0,4} <MEDICAL_FIELD>\b	Academia
-(?i)physicist at	Doctor
-(?i)^dr(a)*( |\.)	Doctor
-(?i)working for <MEDICAL_ATTRIBUTE>\b	Professional
-(?i)<DOCTOR> at <\S+>	Doctor
-(?i)(;|,) <DOCTOR>(;|,)	Doctor
-(?i)<DOCTOR> (and|&) \w+	Doctor
-(?i)\w+ (and|&) <DOCTOR>\b	Doctor
-(?i)(medical|clinical) <DOCTOR>\b	Doctor
-(?i)\. <DOCTOR>\b	Doctor
-(?i)\/<DOCTOR>\b	Doctor
-(?i)#\w*<DOCTOR>\b	Doctor
-(?i)^(\S+ ){0,5}<DOCTOR>\b	Doctor
-(?i)<ADMINISTRATIVE_JOB>.*<MEDICAL_FIELD>\b	Professional
-(?i)<MEDICAL_FIELD> consultant	Specialist
-(?i)<DOCTOR> (&|\+)	Doctor
-(?i)<DOCTOR>\/	Doctor
-(?i)(<DISEASE>|<MEDICAL_FIELD>)( \S+){0,2} association	Health association
-(?i)platform for( \S+){0,10} <DISEASE>\b	Health association
-(?i)society( \S+){0,3} <MEDICAL_FIELD>\b	Health association
-(?i)promot.*<DISEASE>\b	Health initiative
-(?i)provid\w+( \S+){0,10} <MEDICAL_ATTRIBUTE>\b	Health initiative
-(?i)provid\w+( \w+){1,5} for( \S+){0,5} <MEDICAL_FIELD>\b	Health initiative
-(?i)solution( \S+){1,5} <DISEASE>\b	Health initiative
-(?i)therap\w+( \S+){0,3} (for|to)( \S+){0,5} (<DISEASE>|<MEDICAL_ATTRIBUTE>|<MEDICAL_FIELD>)	Health initiative
-(?i)treatment of( \S+){1,4} disease\w*	Health initiative
-(?i)(interest\w*|passion\w*) (in|for|about)( \S+){0,7} (#?<MEDICAL_FIELD>|<DISEASE>)	Interested in healthcare
-(?i)<MEDICAL_ATTRIBUTE>( \S+){0,3} platform	Health initiative
-(?i)healthcare needs	Health initiative
-(?i)treatment of( \S+){0,3} <DISEASE>\b	Health initiative
-(?i)(<DISEASE>|<MEDICAL_FIELD) awareness	Health initiative
-(?i)(innovation|solutions|knowledge)( \w+){1,6} <MEDICAL_ATTRIBUTE>\b	Health initiative
-(?i)^provid.*<MEDICAL_ATTRIBUTE>\b	Health initiative
-(?i)<MEDICAL_ATTRIBUTE> advice	Health initiative
-(?i)<PATIENT> (care|health)	Health initiative
-(?i)<PATIENT>( \S+){0,5} <DISEASE>\b	Health initiative
-(?i)benefit( \S+){0,3} <PATIENT>\b	Health initiative
-(?i)for( \S+){0,2} <PATIENT>\b	Health initiative
-(?i)help\w* (<MEDICAL_JOB>s*|<MEDICAL_ATTRIBUTE>)	Health initiative
-(?i)helping( \S+){1,10} <DISEASE>\b	Health initiative
-(?i)(boost|improv)( \S+){0,10} <MEDICAL_ATTRIBUTE>\b	Health initiative
-(?i)people( \S+){1,3} <DISEASE>\b	Health initiative
-(?i)(<DISEASE>|<MEDICAL_ATTRIBUTE>|<MEDICAL_FIELD>)( \S+){0,3} (hospital|clinic)\b	Hospital source
-(?i)<MEDICAL_JOB>( \S+){0,2} (at|in)( \S+){0,6} (hospital|clinic|<INSTITUTION>)\b	Hospital source
-(?i)at( \w+){1,3} (clinic|hospital)\b	Hospital source
-(?i)unit( \S+){0,2} of( \S+){0,5} <MEDICAL_FIELD>\b	Hospital source
-(?i)<ADMINISTRATIVE_JOB>( \S+){0,7} (clinic|hospital)\b	Hospital source
-(?i)^(\w+ ){0,1}official( \S+){1,10} (<MEDICAL_FIELD>|<DISEASE>)	Institution
-(?i)<DISEASE>( \w+){0,5} foundation	Institution
-(?i)<INSTITUTION>( \S+){0,5} (of|for)( \S+){0,15} (<MEDICAL_ATTRIBUTE>|<MEDICAL_FIELD>|<DISEASE>)\b	Institution
-(?i)^<INSTITUTION>( \S+){1,7} <DISEASE>\b	Institution
-(?i)^<INSTITUTION>( \S+){1,8} <MEDICAL_FIELD>\b	Institution
-(?i) is a( \S+){1,6} <INSTITUTION>\b	Institution
-(?i)board certified.*(<MEDICAL_FIELD>|<MEDICAL_JOB>)	Institution
-(?i)board of( \S+){0,5} (<MEDICAL_FIELD>|<MEDICAL_JOB>)	Institution
-(?i)<MEDICAL_ATTRIBUTE>( \S+){1,4} fellow	Intern
-(?i)<MEDICAL_ATTRIBUTE>( \S+){1,4} trainee	Intern
-(?i)<MEDICAL_FIELD>( \S+ ){0,2} resident	Intern
-(?i)fellow in( \S+){0,5} <MEDICAL_FIELD>\b	Intern
-(?i)journal of	Journal
-(?i)(distributor|manufacturers)( \S+){0,3} for( \S+){0,3} <MEDICAL_ATTRIBUTE>\b	Med business
-(?i)(patient|health)( \S+){0,7} solution	Med business
-(?i)<DISEASE>( \w+){0,3} solutions	Med business
-(?i)<MEDICAL_ATTRIBUTE>( \S+){0,3} device	Med business
-(?i)<MEDICAL_ATTRIBUTE>( \S+){0,3} provider	Med business
-(?i)<MEDICAL_FIELD> solutions	Med business
-(?i)<MEDICAL_FIELD>( \S+){0,2} investor	Med business
-(?i)<MEDICAL_FIELD>( \S+){0,3} industry	Med business
-(?i)for <MEDICAL_FIELD> Professionals	Med business
-(?i)provid.*(for|to).*(clinic|hospital)\b	Med business
-(?i)<MEDICAL_ATTRIBUTE> <MEDICAL_FIELD>\b	Generic
-(?i)#(med\w+|\w+med )	Generic
-(?i)#\w*<MEDICAL_FIELD>\b	Generic
-(?i)^(\S+ ){0,3}medical \w+	Generic
-(?i)^(\S+ ){0,5}<MEDICAL_FIELD>\b	Generic
-(?i)^\w+ <MEDICAL_FIELD>\b	Generic
-(?i)^<MEDICAL_ATTRIBUTE> \w+	Generic
-(?i)^<MEDICAL_FIELD>\b	Generic
-(?i)^medical \w+	Generic
-(?i)about <MEDICAL_FIELD>\b	Generic
-(?i)in( \S+){0,2} <MEDICAL_ATTRIBUTE>\b	Generic
-(?i)(<MEDICAL_FIELD>|<MEDICAL_ATTRIBUTE>|<DISEASE>)( \w+){0,5} news\b	News source
-(?i)working for <MEDICAL_ATTRIBUTE>\b	Professional
-(?i)<MEDICAL_JOB> at <\S+>	Professional
-(?i)(;|,) <MEDICAL_JOB>(;|,)	Professional
-(?i)<MEDICAL_JOB> (and|&) \w+	Professional
-(?i)\w+ (and|&) <MEDICAL_JOB>\b	Professional
-(?i)(medical|clinical) <MEDICAL_JOB>\b	Professional
-(?i)\. <MEDICAL_JOB>\b	Professional
-(?i)\/<MEDICAL_JOB>\b	Professional
-(?i)#\w*<MEDICAL_JOB>\b	Professional
-(?i)^(\S+ ){0,5}<MEDICAL_JOB>\b	Professional
-(?i)<ADMINISTRATIVE_JOB> of( \S+){0,3} (<MEDICAL_FIELD>|<MEDICAL_ATTRIBUTE>)\b	Professional
-(?i)<ADMINISTRATIVE_JOB>.*<MEDICAL_FIELD>\b	Professional
-(?i)<MEDICAL_FIELD> consultant	Professional
-(?i)<MEDICAL_JOB> (&|\+)	Professional
-(?i)<MEDICAL_JOB>\/	Professional
-(?i)publish.*(<DISEASE>|<MEDICAL_FIELD>)	Pubishling source
-(?i)providing.*information.*<DISEASE>\b	Source
-(?i)(<MEDICAL_FIELD>|<MEDICAL_ATTRIBUTE>|<DISEASE>) (news|information)	Source
-(?i)leader in( \S+){0,3} <MEDICAL_FIELD>\b	Specialist
-(?i)<MEDICAL_FIELD>( \w+){0,4} expert	Specialist
-(?i)<MEDICAL_FIELD>( \w+){0,4} specialist	Specialist
-(?i)<MEDICAL_JOB>( \S+){0,3} speciali(z|s)\w+	Specialist
-(?i)speaker on.*<MEDICAL_FIELD>\b	Specialist
-(?i)<DISEASE> blogger	Web source
-(?i)<MEDICAL_ATTRIBUTE> (web|portal|site)	Web source
-(?i)(web|site|portal) (about|on)( \S+){0,5} (<DISEASE>|<MEDICAL_FIELD>)	Web source
-(?i)<ACADEMIC_JOB> at <\S+>	Academia
-(?i)(;|,) <ACADEMIC_JOB>(;|,)	Academia
-(?i)<ACADEMIC_JOB> (and|&) \w+	Academia
-(?i)\w+ (and|&) <ACADEMIC_JOB>\b	Academia
-(?i)(medical|clinical) <ACADEMIC_JOB>\b	Academia
-(?i)\. <ACADEMIC_JOB>\b	Academia
-(?i)\/<ACADEMIC_JOB>\b	Academia
-(?i)#\w*<ACADEMIC_JOB>\b	Academia
-(?i)^(\S+ ){0,5}<ACADEMIC_JOB>\b	Academia
-(?i)<ACADEMIC_JOB> (&|\+)	Academia
-(?i)<ACADEMIC_JOB>\/	Academia
+(?i)official twitter( \S+){1,4} <HEALTH>	Generic
+^Dr (\&|and )	Doctor
+^Dr\.? [A-Z][a-z]+ [A-Z]	Doctor
+^Dr\.? [A-Z][a-z]+'s 	Doctor
+, Dr\.?, 	Doctor
+Proff\. ?Dr\b	Academia
+I('m| am) Dr\b	Doctor
+Medical Dr\b	Doctor
+(?i)official twitter( \S+){1,4} Dr\b	Doctor
+\bDr\.?( \w+){2,4} is a\b	Doctor
+^<DOCTOR>	Doctor
+^#<DOCTOR>	Doctor
+^(#\w+ ){1,3}#<DOCTOR>	Doctor
+\| <DOCTOR> \|	Doctor
+,( \w+){0,2} <DOCTOR>(,|\.| and| \&)	Doctor
+;( \w+){0,2} <DOCTOR>(;|\.| and| \&)	Doctor
+\.( \w+){0,2} <DOCTOR>	Doctor
+/( \w+){0,2} <DOCTOR>/	Doctor
+<DOCTOR> PhD	Academia
+<DOCTOR> researching	Academia
+full.time <DOCTOR>	Doctor
+(J|j)unior <DOCTOR>	Doctor
+(A|a)spiring <DOCTOR>	Doctor
+(F|f)uture <DOCTOR>	Interested in healthcare
+(^[A-Z][a-z]+ )(\w+ ){0,2}<DOCTOR>	Doctor
+(C|c)ertified( \w+){0,2} <DOCTOR>	Doctor
+(C|c)linical( \w+){0,2} <DOCTOR>	Doctor
+(I'm|I am) a( \w+){0,5} <DOCTOR>	Doctor
+(I|i)nterventional <DOCTOR>	Doctor
+(M|m)edical <DOCTOR>	Doctor
+NHS <DOCTOR>	Doctor
+(P|p)round( \w+){0,4} <DOCTOR>	Doctor
+(?i)public health( \w+){0,3} <DOCTOR>	Doctor
+(?i)retired <DOCTOR>	Doctor
+^<PROFESSIONAL>	Professional
+^#<PROFESSIONAL>	Professional
+^(#\w+ ){1,3}#<PROFESSIONAL>	Professional
+\| <PROFESSIONAL> \|	Professional
+,( \w+){0,2} <PROFESSIONAL>(,|\.| and| \&)	Professional
+;( \w+){0,2} <PROFESSIONAL>(;|\.| and| \&)	Professional
+\.( \w+){0,2} <PROFESSIONAL>	Professional
+/( \w+){0,2} <PROFESSIONAL>/	Professional
+<PROFESSIONAL> PhD	Academia
+<PROFESSIONAL> researching	Academia
+full.time <PROFESSIONAL>	Professional
+(J|j)unior <PROFESSIONAL>	Professional
+(A|a)spiring <PROFESSIONAL>	Professional
+(F|f)uture <PROFESSIONAL>	Professional
+^[A-Z][a-z]+( \w+){0,2} <PROFESSIONAL>	Professional
+(C|c)ertified( \w+){0,2} <PROFESSIONAL>	Professional
+(C|c)linical( \w+){0,2} <PROFESSIONAL>	Professional
+(I'm|I am) a( \w+){0,5} <PROFESSIONAL>	Professional
+(I|i)nterventional <PROFESSIONAL>	Professional
+(M|m)edical <PROFESSIONAL>	Professional
+NHS <PROFESSIONAL>	Professional
+(P|p)round( \w+){0,4} <PROFESSIONAL>	Professional
+(?i)public health( \w+){0,3} <PROFESSIONAL>	Professional
+(?i)retired <PROFESSIONAL>	Professional
+<DOCTOR> at 	Doctor
+<DOCTOR> by profession	Doctor
+(?i)public health <DOCTOR>	Doctor
+<DOCTOR>( \w+){0,3} interest\w* in	Doctor
+<DOCTOR> speciali\w+ in	Doctor
+<DOCTOR> working (on|for|in|at)	Doctor
+^(\w+ ){0,3}<DOCTOR>/	Doctor
+<PROFESSIONAL> at 	Professional
+<PROFESSIONAL> by profession	Professional
+(?i)public health <PROFESSIONAL>	Professional
+<PROFESSIONAL>( \w+){0,3} interest\w* in	Professional
+<PROFESSIONAL> speciali\w+ in	Professional
+<PROFESSIONAL> working (on|for|in|at)	Professional
+^(\w+ ){0,3}<PROFESSIONAL>/	Professional
+<FIELD> (advisor|activist|advocate|blogger)	Interested in healthcare
+<FIELD> consultant	Professional
+<FIELD> executive 	Professional
+<FIELD>( \w+){0,2} expert 	Professional
+#<FIELD> #\S+ 	Generic
+#\S+ #<FIELD>	Generic
+\. <FIELD>\. 	Generic
+^<FIELD>\. 	Generic
+\, <FIELD>\, 	Generic
+(?i)(assistant|associate|asst|assoc)\w*( \S+){1,3} of <FIELD>	Professional
+^(\w+ ){0,3}Society for( \w+){0,3} <FIELD>	Institution
+^(\w+ ){0,3}Journal( \w+){0,3} <FIELD>	Publishing source
+Chair of( \S+){0,5} <FIELD>	Professional
+\bChief( \S+){0,3} <FIELD>	Professional
+\bHead of( \S+){0,5} <FIELD>	Professional
+\bDirector( \S+){0,3} <FIELD>	Professional
+\bBSc( \w+){0,2} <FIELD>	Professional
+Consultant( \S+){0,3} <FIELD>	Professional
+(?i)researcher in( \S+){0,3} <FIELD>	Academia
+(?i)(lecturer|professor)( \S+){0,3} <FIELD>	Academia
+\bPhD in( \S+){0,5} <FIELD>	Academia
+(?i)(faculty|school) of( \S+){0,4} <FIELD>	Institution
+\bI am( \S+){0,3} (of|in|at)( \S+){0,5} <FIELD>	Professional
+\b I (like|love) <FIELD>	Interested in healthcare
+(?i) <FIELD>( \w+){0,2} journal\b	Publishing source
+\b(Professor|Prof\.?)( \w+){0,3} <FIELD>	Academia
+(Promoting|Providing)( \S+){0,5} <FIELD>	Healthcare initiative
+Registered( \S+){0,3} <DOCTOR>	Doctor
+(?i)passion\w*( \S+){1,4} <FIELD>	Interested in healthcare
+(?i)speciali(s|z)ing in( \S+){0,5} <FIELD>	Professional
+(?i)student of( \S+){0,5} <FIELD>	Interested in healthcare
+^The [A-Z]+( \w+){0,3} <FIELD>	Generic
+^We are( \S+){0,5} <FIELD>	Association
+(Conference|Summit|Congress)( \S+){1,5} <FIELD>	Institution
+(Society|Alliance|Department|Institute) of( \S+){0,5} <FIELD>	Institution
+(Center|Centre) for( \S+){0,5} <FIELD>	Institution
+[A-Z][a-z]+ of <FIELD> @	Professional
+<FIELD>( \S+){0,3} Association	Institution
+\b(of|in)( \S+){0,3} <FIELD> at (the|[A-Z])	Professional
+(?i)<FIELD>( \S+){0,2} blog\b	Generic
+Chairman of( \S+){0,4} <FIELD>	Professional
+<FIELD>( \w+){0,2} Clinic	Institution
+<FIELD> clinician	Doctor
+(?i)<FIELD>( \w+){0,2} company	Med Business
+<FIELD>( \w+){0,2} Consortium	Med Business
+<FIELD>( \w+){0,2} Department	Institution
+<FIELD> Director	Professional
+<FIELD> (doctor|doc\b)	Doctor
+<FIELD>( \w+){0,2} enthusiast	Interested in healthcare
+<FIELD>( \w+){0,2} Entrepreneur	Med business
+<FIELD>( \w+){0,2} Executive	Professional
+<FIELD>( \w+){0,2} Felloe	Professional
+<FIELD>( \w+){0,3} Foundation	Institution
+<FIELD>( \w+){0,2} geek\b	Interested in healthcare
+<FIELD>( \w+){0,2} (graduate student|grad\b)	Interested in healthcare
+<FIELD>( \w+){0,2} Group\b	Med business
+<FIELD> is (a|the)\b	Generic
+<FIELD>( \S+){1,10} peer-reviewed	Publishing source
+(?i)<FIELD>( \w+){0,2} (lab|laboratory)	Institution
+(?i)<FIELD>( \w+){0,2} library	Med business
+<FIELD>( \w+){0,2} Ltd\b	Med business
+<FIELD> major\b	Professional
+<FIELD>( \w+){0,2} Network	Association
+(?i)<FIELD>( \w+){0,2} news\b	News source
+<FIELD>( \w+){0,3} Society	Institution
+<FIELD>( \w+){0,2} Organization	Institution
+<FIELD>( \w+){0,2} PhD	Academia
+(?i)<FIELD>( \S+){0,5} (post-doc|postdoc)	Academia
+<FIELD>( \w+){0,2} professional\b	Professional
+<FIELD>( \w+){0,2} provider\b	Med business
+<FIELD>( \w+){0,2} (researcher|Research\b)	Academia
+<FIELD>( \w+){0,2} resident\b	Doctor
+School of( \S+){0,4} <FIELD>	Institution
+<FIELD>( \w+){0,2} School	Institution
+<FIELD>( \w+){0,2} Society	Institution
+(?i)<FIELD> (specialist\b|speciali(s|z)ing)	Professional
+<FIELD>( \w+){0,2} student\b	Interested in healthcare
+<FIELD> technology	Med business
+<FIELD>( \w+){0,2} trainee\b	Interested in healthcare
+^<PLACE>( \w+){1,5} <FIELD>	Institution
+^(A|The)( \S+){0,3} <PLACE>( \S+){1,20} <HEALTH>	Association
+^(\S+ ){0,3}(American|British|Australian|Canadian|European) <PLACE>( \S+){1,15} <HEALTH>	Association
+^(\S+ ){0,3}<ATTRIBUTE>( \S+){0,2} <PLACE>	Association
+<ATTRIBUTE>( \S+){0,2} <PLACE>	Association
+^(\S+ ){0,3}<FIELD>( \S+){0,2}<PLACE>	Association
+(Chairman|Director|CEO|Secretary|President)( \w+){0,2} <PLACE>	Professional
+<DOCTOR> (at|in|of)( \S+){0,4} <PLACE>	Doctor
+<PROFESSIONAL> (at|in|of)( \S+){0,4} <PLACE>	Professional
+(?i)journal of( \S+){1,5} <PLACE>	Publishing source
+^We( are|'re)( \S+){0,20} <HEALTH>	Association
+ <PLACE>, a( \S+){1,20} <HEALTH>	Association
+<PLACE>\. We( \S+){1,20} <HEALTH>	Association
+<PLACE> \([A-Z]+\)( \S+){1,15} <HEALTH>	Institution
+<PLACE>( \w+){0,2} (aimed|aims)( \S+){1,20} <HEALTH>	Association
+<PLACE>( \w+){0,2} care for( \S+){1,20} <HEALTH>	Association
+<PLACE>( \w+){0,3} dedicated to( \S+){1,20} <HEALTH>	Association
+<PLACE>( \w+){0,3} devoted to( \S+){1,20} <HEALTH>	Association
+<PLACE>( \w+){0,3} (focussing|focussed) on( \S+){1,20} <HEALTH>	Association
+<PLACE> for( \S+){0,20} <HEALTH>	Association
+<PLACE>( \S+){0,2} is (a|an|the)( \S+){0,20} <HEALTH>	Association
+<PLACE>( \S+){0,2} is one of the( \S+){0,20} <HEALTH>	Association
+<PLACE> of( \S+){0,3} <HEALTH>	Association
+<PLACE>( \S+){0,2} (provides|providing)( \S+){0,20} <HEALTH>	Association
+<PLACE> working to( \S+){1,20} <HEALTH>	Association
+(?i)(prevention|treatment)( \w+){1,5} <DISEASE>	Generic
+(?i)researching( \S+){0,4} <DISEASE>	Academia
+^(\S+ ){0,4}(work|working)( \w+){1,5} <DISEASE>	Professional
+,[^,]+,( \S+){0,3} ?<DISEASE>,[^,]+,	Generic
+<DISEASE>( \S+){0,2} advocate	Interested in healthcare
+<DISEASE> Association	Institution
+<DISEASE> management	Generic
+<DISEASE> <DOCTOR>	Doctor
+<DISEASE> <PROFESSIONAL>	Professional
+<DISEASE> prevention	Generic
+^(\S+ ){0,4}<DISEASE>( \S+){0,2} researcher	Academia
+(?i)<DISEASE> specialist	Doctor
+(?i)<DISEASE>( \S+){0,2} survivor 	Patient
+Anti\-\w+( \w+){0,1} <SOLUTION>	Med business
+(?i)(speciali(s|z)es?|speciali(s|z)ing) in( \S+){0,3} <HEALTH>	Professional
+<HEALTH>( \w+){0,5} <SOLUTION>	Generic
+<SOLUTION>( \w+){0,5} <HEALTH>	Generic
+\bin( \w+){0,3} <SOLUTION>	Generic
+(provides?|providing)( \w+){0,3} <SOLUTION>	Generic
+<DISEASE>( \S+){0,3} <SOLUTION>	Generic
+(?i)(diagnostic|diagnosis)( \S+){0,3} <SOLUTION>	Generic
+(developes?|developing)( \w+){0,3} <SOLUTION>	Generic
+(?i)<SOLUTION>( \S+){0,3} (diagnosis|diagnostic)	Generic
+<SOLUTION>( \w+){0,2} <PLACE>	Association
+<SOLUTION> for 	Med business
+<SOLUTION> options 	Med business
+<SOLUTION> provider 	Med business
+<SOLUTION> services 	Med business
+(?i)\bapp( \S+){0,5} <HEALTH>	Med business
+(?i)(doctor |dr\. |dr |dr)who	<no tag>
+(?i)<HEALTH> jobs	<no tag>
