@@ -11,8 +11,8 @@ DICTIONARY = user_analyzer.dictionary_parser(
     './language_data/user_dictionary.txt')
 LEXICON = user_analyzer.lexicon_generator(
     './language_data/user_grammar.txt', DICTIONARY)
-USER_NAME_PATTERNS = user_analyzer.user_name_parser(
-    './language_data/user_name_patterns.txt')
+STRING_TWITTER_QUERIES = user_analyzer.string_twitter_queriesParser(
+    './language_data/string_twitter_queries.txt')
 
 
 # Text analysis
@@ -32,7 +32,7 @@ def nlp_analysis(job_json):
     # Get 'profile' and 'health_related'
     user_analysis = user_analyzer.user_analyzer(job_json['user_name'],
                                                 job_json['user_description'],
-                                                USER_NAME_PATTERNS,
+                                                STRING_TWITTER_QUERIES,
                                                 LEXICON)
 
     analysis['profile'] = user_analysis[1]

@@ -1,4 +1,4 @@
 (?i)nurse clinician	Professional
 (?i)(;|,|\.) practitioner	Doctor
 (?i)^practitioner	Doctor
-(?i)peer reviewed	Source
+(?i)^physicist	Doctor
