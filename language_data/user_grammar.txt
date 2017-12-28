@@ -1,3 +1,4 @@
+Lifescope crawling headlines	Academia
 (?i)official twitter( \S+){1,4} <HEALTH>	Generic
 ^Dr (\&|and )	Doctor
 ^Dr\.? [A-Z][a-z]+ [A-Z]	Doctor
