@@ -6,7 +6,7 @@ from analyzer.engines import user_analyzer
 
 USER_DICTIONARY = './tests/engines/demo_user_dictionary.txt'
 USER_GRAMMAR = './tests/engines/demo_user_grammar.txt'
-USER_NAME_PATTERNS_PATH = './tests/engines/demo_user_name_patterns.txt'
+STRING_TWITTER_QUERIES = './tests/engines/demo_string_twitter_queries.txt'
 
 
 def test_is_tag():
@@ -44,7 +44,51 @@ def test_lexicon_generator():
     assert lexicon == {('(?i)(;|,|\\.) practitioner', 'Doctor'): '(?i)(;|,|\\.) practitioner',
                        ('(?i)^practitioner', 'Doctor'): '(?i)^practitioner',
                        ('(?i)nurse clinician', 'Professional'): '(?i)nurse clinician',
-                       ('(?i)peer reviewed', 'Source'): '(?i)peer reviewed'}
+                       ('(?i)^physicist', 'Doctor'): '(?i)^physicist'}
+
+
+def test_string_twitter_queriesParser():
+    """
+    Generate a demo Twitter query list from a demo Twitter query file
+    """
+    
+    string_twitter_queries = user_analyzer.string_twitter_queriesParser(STRING_TWITTER_QUERIES)
+
+    assert string_twitter_queries == ['physicist', 'Physicist', 'PHYSICIST']
+
+
+def test_user_description_HasQuery():
+    """
+    Test the user_description_HasQuery function
+    """
+    
+    string_twitter_queries = user_analyzer.string_twitter_queriesParser(STRING_TWITTER_QUERIES)
+
+    user_description = 'I am Justin Bieber'
+    result = user_analyzer.user_description_HasQuery(user_description, string_twitter_queries)
+    assert result is False
+
+    user_description = 'Physicist, father, runner'
+    result = user_analyzer.user_description_HasQuery(user_description, string_twitter_queries)
+    assert result is True
+
+
+def test_user_name_analysis():
+    """
+    Test the user_name_analysis function
+    """
+    
+    user_name = 'John Paul, MD'
+    result = user_analyzer.user_name_analysis(user_name)
+    assert result == [', MD', 'Doctor']
+
+    user_name = 'johnpaulMD'
+    result = user_analyzer.user_name_analysis(user_name)
+    assert result == ['MD', 'Doctor']
+
+    user_name = 'johnpauLMD'
+    result = user_analyzer.user_name_analysis(user_name)
+    assert result == None
 
 
 def test_user_analyzer():
@@ -53,29 +97,18 @@ def test_user_analyzer():
     """
     dictionary = user_analyzer.dictionary_parser(USER_DICTIONARY)
     lexicon = user_analyzer.lexicon_generator(USER_GRAMMAR, dictionary)
-    user_name_patterns = user_analyzer.user_name_parser(
-        USER_NAME_PATTERNS_PATH)
+    string_twitter_queries = user_analyzer.string_twitter_queriesParser(
+        STRING_TWITTER_QUERIES)
 
     assert user_analyzer.user_analyzer('Mr. Proper',
                                        'Some random person',
-                                       user_name_patterns,
+                                       string_twitter_queries,
                                        lexicon) == [
                                            '<no pattern>',
         '<no tag>',
         '<no name/description>']
 
     assert user_analyzer.user_analyzer('Doctor Proper',
-                                       'Some physicist and father',
-                                       user_name_patterns,
-                                       lexicon) == ['(?i)doctor', 'Doctor', '<from Name>']
-
-
-    """
-    # older assertions...
-    assert user_analyzer.user_analyzer('Some physicist and father',
-                                       lexicon) == ['¡<MEDICAL_JOB>¡ (and|&) \\w+',
-                                                    'physicist']
-    assert user_analyzer.user_analyzer('family medicine website',
-                                       lexicon) == ['¡<MEDICAL_ATTRIBUTE> (web|portal|site)¡',
-                                                    'family medicine web']
-    """
+                                       'Physicist and father',
+                                       string_twitter_queries,
+                                       lexicon) == ['(?i)^physicist', 'Doctor', '<from Description>']

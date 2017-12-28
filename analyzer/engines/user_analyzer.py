@@ -14,8 +14,6 @@ according to a set of semantic tags.
 
 import re
 
-# Auxiliar functions for User's description analysis:
-# is_tag, dictionary_parser, lexicon_generator
 
 
 def is_tag(value):
@@ -104,59 +102,93 @@ def lexicon_generator(grammar_file_path, dictionary):
             generated_lexicon[(pattern, semantic_tag)] = instance
     return generated_lexicon
 
-# Auxiliar functions for User's name analysis:
-# user_name_parser, user_name_analysis,
 
-
-def user_name_parser(user_name_patterns_path):
-    '''
-    Create a list of pattern expressions for user name's text. Each pattern
-    has a corresponding semantic tag for user categorization. E.g.:
-    , MD$  DOCTOR
-    '''
-    user_name_patterns = []
-    user_name_file = open(user_name_patterns_path, 'r')
-    for line in user_name_file:
+def string_twitter_queriesParser(string_twitter_queries_path):
+    """
+    Read a file with all Twitter queries' possible variations (all lower, all caps,
+    upper initial). Store them into a list.
+    """
+    string_twitter_queries = []
+    string_twitter_queries_file = open(string_twitter_queries_path, 'r')
+    for line in string_twitter_queries_file:
         line = line.rstrip()
-        (pattern, semantic_tag) = line.split('\t')
-        user_name_patterns.append((pattern, semantic_tag))
-    user_name_file.close()
-    return user_name_patterns
+        string_twitter_queries.append(line)
+    string_twitter_queries_file.close()
+
+    return string_twitter_queries
 
 
-def user_name_analysis(user_name, user_name_patterns):
-    '''
-    Analysis of user name's text. Given the text, this function maps user name pattern
-    expressions into it. If found, it returns the list 'result', where:
+
+def user_description_HasQuery(user_description, string_twitter_queries):
+    """
+    Helper function of user_analyzer(). If a Twitter query is not present in a user
+    description text, user_analyzer() doesn't go further to save time processing.
+    """
+    
+    result = False
+
+    for string_twitter_query in string_twitter_queries:
+        if string_twitter_query in str(user_description):
+            result = True
+            break
+    
+    return result
+
+
+
+def user_name_analysis(user_name):
+    """
+    Analysis of user name's text. Given the text, this function maps a set of
+    simple string patterns into it. If found, it returns the list 'result',
+    where:
     result[0] is the pattern found
     result[1] is the semantic tag linked to pattern
-    '''
+    """
+
     result = []
-    longest_match = ''
-    matching_pattern_tuple = None
-    for pattern_tuple in user_name_patterns:
-        if re.search(pattern_tuple[0], user_name):
-            possible_match = user_name[re.search(pattern_tuple[0], user_name).start(
-            ):re.search(pattern_tuple[0], user_name).end()]
-            if len(possible_match) > len(longest_match):
-                longest_match = possible_match
-                matching_pattern_tuple = pattern_tuple
-    if len(longest_match) > 0:
-        result.append(matching_pattern_tuple[0])
-        result.append(matching_pattern_tuple[1])
+    user_name_end_pos = len(user_name) - 1
+
+    if ', MD' in user_name[user_name_end_pos -4:]:
+        result.append(', MD')
+        result.append('Doctor')
+        return result
+    elif ',MD' in user_name[user_name_end_pos -3:]:
+        result.append(',MD')
+        result.append('Doctor')
+        return result
+    elif ', GP' in user_name[user_name_end_pos -4:]:
+        result.append(', GP')
+        result.append('Doctor')
+        return result
+    elif ',GP' in user_name[user_name_end_pos -3:]:
+        result.append(',GP')
+        result.append('Doctor')
+        return result
+    elif 'MD' in user_name[user_name_end_pos -2:] and user_name[user_name_end_pos -4:user_name_end_pos -1:].islower():
+        result.append('MD')
+        result.append('Doctor')
+        return result
+    elif 'GP' in user_name[user_name_end_pos -2:] and user_name[user_name_end_pos -4:user_name_end_pos -1:].islower():
+        result.append('GP')
+        result.append('Doctor')
+        return result
+    elif 'Dr' in user_name[0:2] and user_name[2].isupper():
+        result.append('Dr')
+        result.append('Doctor')
         return result
     else:
         return None
 
 
+
 # Analyzer:
 
-def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
+def user_analyzer(user_name, user_description, string_twitter_queries, lexicon):
     """
     This function performs a two-steps analysis to get a user profile categorization.
     The first step is to analyze the user name's text. If patterns are found, it returns
     the result and does not go further. If not, it proceeds with a second analysis on
-    the user description's text, and try to give results on the same format.
+    the user description's text, and tries to give results on the same format.
 
     This function's outcome is the list 'user_analyzer_result', where:
     user_analyzer_result[0] is the pattern found
@@ -165,138 +197,99 @@ def user_analyzer(user_name, user_description, user_name_patterns, lexicon):
 
     user_analyzer_result = []
 
-    # Analysis on the user name's text:
-    user_name_analysis_result = user_name_analysis(
-        user_name, user_name_patterns)
-    if user_name_analysis_result is not None:
-        user_analyzer_result.append(user_name_analysis_result[0])
-        user_analyzer_result.append(user_name_analysis_result[1])
-        user_analyzer_result.append('<from Name>')
+    # Before the analysis, look for queries in the user description's text.
+    # If queries are not present, no analysis is performed to save time processing.
 
-    # Analysis on the user description's text:
-    if len(user_analyzer_result) == 0:
-        longest_match = ''
-        matching_pattern_tuple = None
-        matching_instance = None
-        all_pattern_tuples = dict()
-        for pattern_tuple, instance in lexicon.items():
-            if re.search(instance, user_description):
-                if pattern_tuple[1] not in all_pattern_tuples.keys():
-                    all_pattern_tuples[pattern_tuple[1]] = pattern_tuple[0]
-                possible_match = user_description[re.search(instance, user_description).start(
-                ):re.search(instance, user_description).end()]
-                if len(possible_match) > len(longest_match):
-                    longest_match = possible_match
-                    matching_pattern_tuple = pattern_tuple
-                    matching_instance = instance
-        if len(longest_match) > 0:
-            # We give preference to the following semantic tags, following this
-            # order:
-            if 'Doctor' in all_pattern_tuples.keys():
-                user_analyzer_result.append(all_pattern_tuples['Doctor'])
-                user_analyzer_result.append('Doctor')
-                user_analyzer_result.append('<from Description>')
-            elif 'Academia' in all_pattern_tuples.keys():
-                user_analyzer_result.append(all_pattern_tuples['Academia'])
-                user_analyzer_result.append('Academia')
-                user_analyzer_result.append('<from Description>')
-            elif 'Patient' in all_pattern_tuples.keys():
-                user_analyzer_result.append(all_pattern_tuples['Patient'])
-                user_analyzer_result.append('Patient')
-                user_analyzer_result.append('<from Description>')
-            elif 'Institution' in all_pattern_tuples.keys():
-                user_analyzer_result.append(all_pattern_tuples['Institution'])
-                user_analyzer_result.append('Institution')
-                user_analyzer_result.append('<from Description>')
-            elif 'Journal' in all_pattern_tuples.keys():
-                user_analyzer_result.append(all_pattern_tuples['Journal'])
-                user_analyzer_result.append('Journal')
-                user_analyzer_result.append('<from Description>')
-            elif 'News source' in all_pattern_tuples.keys():
-                user_analyzer_result.append(all_pattern_tuples['News source'])
-                user_analyzer_result.append('News source')
-                user_analyzer_result.append('<from Description>')
-            else:
-                user_analyzer_result.append(matching_pattern_tuple[0])
-                user_analyzer_result.append(matching_pattern_tuple[1])
-                user_analyzer_result.append('<from Description>')
+    HasQuery = user_description_HasQuery(user_description, string_twitter_queries)
+    if HasQuery is False:
+        user_analyzer_result.append('<no pattern>')
+        user_analyzer_result.append('<no tag>')
+        user_analyzer_result.append('<no name/description>')
+    else:
+
+        # User analysis process
+        # 1) Analysis on the user name's text:
+
+        user_name_analysis_result = user_name_analysis(user_name)
+        if user_name_analysis_result is not None:
+            user_analyzer_result.append(user_name_analysis_result[0])
+            user_analyzer_result.append(user_name_analysis_result[1])
+            user_analyzer_result.append('<from Name>')
         else:
-            user_analyzer_result.append('<no pattern>')
-            user_analyzer_result.append('<no tag>')
-            user_analyzer_result.append('<no name/description>')
+
+            # 2) Analysis on the user description's text:
+            longest_match = ''
+            matching_pattern_tuple = None
+            matching_instance = None
+            all_pattern_tuples = dict()
+            for pattern_tuple, instance in lexicon.items():
+                if re.search(instance, user_description):
+                    if pattern_tuple[1] not in all_pattern_tuples.keys():
+                        all_pattern_tuples[pattern_tuple[1]] = pattern_tuple[0]
+                    possible_match = user_description[re.search(instance, user_description).start(
+                    ):re.search(instance, user_description).end()]
+                    if len(possible_match) > len(longest_match):
+                        longest_match = possible_match
+                        matching_pattern_tuple = pattern_tuple
+                        matching_instance = instance
+            if len(longest_match) > 0:
+                # We give preference to the following semantic tags,
+                # following this order:
+                if 'Doctor' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['Doctor'])
+                    user_analyzer_result.append('Doctor')
+                    user_analyzer_result.append('<from Description>')
+                elif 'Academia' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['Academia'])
+                    user_analyzer_result.append('Academia')
+                    user_analyzer_result.append('<from Description>')
+                elif 'Publishing source' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['Publishing source'])
+                    user_analyzer_result.append('Publishing source')
+                    user_analyzer_result.append('<from Description>')
+                elif 'Institution' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['Institution'])
+                    user_analyzer_result.append('Institution')
+                    user_analyzer_result.append('<from Description>')
+                elif 'Association' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['Association'])
+                    user_analyzer_result.append('Association')
+                    user_analyzer_result.append('<from Description>')
+                elif 'Professional' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['Professional'])
+                    user_analyzer_result.append('Professional')
+                    user_analyzer_result.append('<from Description>')
+                elif 'News source' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['News source'])
+                    user_analyzer_result.append('News source')
+                    user_analyzer_result.append('<from Description>')
+                elif 'Healthcare initiative' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['Healthcare initiative'])
+                    user_analyzer_result.append('Healthcare initiative')
+                    user_analyzer_result.append('<from Description>')
+                elif 'Patient' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['Patient'])
+                    user_analyzer_result.append('Patient')
+                    user_analyzer_result.append('<from Description>')
+                elif 'Med Business' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['Med Business'])
+                    user_analyzer_result.append('Med Business')
+                    user_analyzer_result.append('<from Description>')
+                elif 'Interested in healthcare' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['Interested in healthcare'])
+                    user_analyzer_result.append('Interested in healthcare')
+                    user_analyzer_result.append('<from Description>')
+                elif 'Generic' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['Generic'])
+                    user_analyzer_result.append('Generic')
+                    user_analyzer_result.append('<from Description>')
+                elif '<no tag>' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['<no tag>'])
+                    user_analyzer_result.append('<no tag>')
+                    user_analyzer_result.append('<from Description>')                
+            else:
+                user_analyzer_result.append('<no pattern>')
+                user_analyzer_result.append('<no tag>')
+                user_analyzer_result.append('<no name/description>')
 
     return user_analyzer_result
-
-
-# #Test message! #####
-# def test_message():
-#     # user_name = raw_input('\n' + 'User name? ')
-#     user_name = 'dummy user name'
-#     user_description = raw_input('\n' + 'User description? ')
-#     DICTIONARY = dictionary_parser(
-#     '/Users/juan/health-nlp-analysis/language_data/user_dictionary.txt')
-#     LEXICON = lexicon_generator(
-#     '/Users/juan/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
-#     USER_NAME_PATTERNS = user_name_parser(
-#     '/Users/juan/health-nlp-analysis/language_data/user_name_patterns.txt')
-#     result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
-#     print '\n'+'<'+result[1]+'>'+'\t'+'[ '+result[0]+' ]' + '\t' + result[2]
-
-#     control = raw_input('(t)ry again ?')
-#     while control == "t":
-#         DICTIONARY = dictionary_parser(
-#         '/Users/juan/health-nlp-analysis/language_data/user_dictionary.txt')
-#         LEXICON = lexicon_generator(
-#         '/Users/juan/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
-#         USER_NAME_PATTERNS = user_name_parser(
-#         '/Users/juan/health-nlp-analysis/language_data/user_name_patterns.txt')
-#         result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
-#         print '<m>'+user_name+'\t'+user_description+'</m>'
-#         print '\n'+'<'+result[1]+'>'+'\t'+'[ '+result[0]+' ]' + '\t' + result[2]
-
-#         control = raw_input('(t)ry again ?')
-#     else:
-#         test_message()
-
-# test_message()
-
-# # ##### Test set of messages ################
-
-# import sys
-# reload(sys)
-# sys.setdefaultencoding('utf8')
-
-# DICTIONARY = dictionary_parser('/Users/juan/health-nlp-analysis/language_data/user_dictionary.txt')
-# LEXICON = lexicon_generator('/Users/juan/health-nlp-analysis/language_data/user_grammar.txt', DICTIONARY)
-# USER_NAME_PATTERNS = user_name_parser('/Users/juan/health-nlp-analysis/language_data/user_name_patterns.txt')
-
-
-# # def call_text_analyzer(message):
-# #     from text_analyzer import analyzer
-# #     from text_analyzer import language_data_loader
-# #     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
-# #     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
-# #     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
-# #     '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
-# #     message = unicode(message)
-# #     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'], LANGUAGE_DATA['magic_bullet_grammar'])
-# #     print result[0], result[1]
-
-# resultFile = open('RESULTS.txt', 'w')
-
-# messagesf = open('messages.txt', 'r')
-# messages = []
-# for line in messagesf:
-#     line = line.rstrip()
-#     messages.append(line)
-
-# for line in messages:
-#     input_text = line.split('\t')
-#     user_name = input_text[0]
-#     user_description = input_text[1]
-#     # message = input_text[2]
-#     result = user_analyzer(user_name, user_description, USER_NAME_PATTERNS, LEXICON)
-#     if result[1] != '<no tag>':
-#         a = result[1] + '\t' + user_description + '\t' + result[0] + '\n'
-#         resultFile.write(a)
-
