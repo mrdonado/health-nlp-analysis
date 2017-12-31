@@ -24,8 +24,10 @@ from spacy.en import English
 NLP = English()
 
 # Load magic_bullet_analyzer() function, a separate module
-from analyzer.engines import magic_bullet_analyzer
-#Not working with tests: import magic_bullet_analyzer
+# Before: from analyzer.engines import magic_bullet_analyzer
+import sys
+sys.path.append('./analyzer/engines')
+import magic_bullet_analyzer
 
 def file_parser(path, to_lower):
     """
@@ -401,72 +403,3 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
         output.append(start_word)
         output.append('<no pattern found>')
         return output
-
-
-#Test message! #####
-# def test_message():
-#     message = raw_input('\n' + 'New message? ')
-#     message = unicode(message)
-
-#     ### Check NPs
-#     nps = []
-#     for np in NLP(message).noun_chunks:
-#         nps.append(str(np))
-#     print '\n' + ' | '.join(nps)
-
-#     LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
-#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
-#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
-#      '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
-#     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'], LANGUAGE_DATA['magic_bullet_grammar'])
-    
-#     print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
-
-#     control = raw_input('(t)ry again ?')
-#     while control == "t":
-#         LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
-#         '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
-#         result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'], LANGUAGE_DATA['magic_bullet_grammar'])
-#         print '<m>'+message+'</m>'
-#         print '\n'+'<'+result[0]+'>'+'\t'+'<'+result[1]+'>'+'\t'+'<'+result[2]+'>'+'\n'
-
-#         control = raw_input('(t)ry again ?')
-#     else:
-#         test_message()
-
-# test_message()
-
-# Test set of messages ################
-
-# messages = open('messages.txt', 'r').readlines()
-# import sys
-# reload(sys)
-# sys.setdefaultencoding('utf8')
-
-
-# LANGUAGE_DATA = language_data_loader('/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/grammar.txt',
-# '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/counter_grammar.txt',
-# '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/start_words.txt', 
-# '/Users/DoraDorita/Lifescope1Nov/health-nlp-analysis/language_data/stop_words.txt')
-
-# ### Medir el tiempo
-# import time
-# ###
-
-
-# for message in messages:
-
-#     start = time.time()
-#     message = unicode(message)
-#     result = analyzer(message, LANGUAGE_DATA['start_words'], LANGUAGE_DATA['grammar'], LANGUAGE_DATA['counter_grammar'], LANGUAGE_DATA['stop_words'], LANGUAGE_DATA['magic_bullet_grammar'])
-#     end = time.time()
-#     if result[0] != '<nothing_found>':
-#         print end-start, '\t', result[0], '\t', result[1], '\t', result[2]
-#     #     if '[np = ' in result[2]:
-#     #         print result[0], ' ---> ', result[1], '\t', message
-#     #     else:
-#     #         print '! OK: ', end - start
-#     # else:
-#     #     print end - start
-
-
