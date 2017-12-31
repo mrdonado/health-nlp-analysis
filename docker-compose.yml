@@ -3,6 +3,7 @@ services:
   beanstalksvc:
     image: schickling/beanstalkd:latest
     container_name: health_beanstalksvc
+    restart: always
     networks:
       - health-nlp-network   
     ports:
@@ -18,6 +19,7 @@ services:
       memlock:
         soft: -1
         hard: -1
+    restart: always
     networks:
       - health-nlp-network   
     volumes:
@@ -31,6 +33,7 @@ services:
       - .:/usr/src/app
     networks:
       - health-nlp-network
+    restart: always
     depends_on:
       - beanstalksvc
       - elasticsvc
