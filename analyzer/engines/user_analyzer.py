@@ -286,7 +286,11 @@ def user_analyzer(user_name, user_description, string_twitter_queries, lexicon):
                 elif '<no tag>' in all_pattern_tuples.keys():
                     user_analyzer_result.append(all_pattern_tuples['<no tag>'])
                     user_analyzer_result.append('<no tag>')
-                    user_analyzer_result.append('<from Description>')                
+                    user_analyzer_result.append('<from Description>')
+                else:
+                    user_analyzer_result.append('<Rule with unknow tag>')
+                    user_analyzer_result.append('Unknown')
+                    user_analyzer_result.append('<from Description>')
             else:
                 user_analyzer_result.append('<no pattern>')
                 user_analyzer_result.append('<no tag>')

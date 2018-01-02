@@ -90,7 +90,8 @@ Chair of( \S+){0,5} <FIELD>	Professional
 \bBSc( \w+){0,2} <FIELD>	Professional
 Consultant( \S+){0,3} <FIELD>	Professional
 (?i)researcher in( \S+){0,3} <FIELD>	Academia
-(?i)(lecturer|professor)( \S+){0,3} <FIELD>	Academia
+(?i)(lecturer|professor|\bprof\.?)( \S+){0,3} <FIELD>	Academia
+(?i)<FIELD> (lecturer|professor|\bprof\.? )	Academia
 \bPhD in( \S+){0,5} <FIELD>	Academia
 (?i)(faculty|school) of( \S+){0,4} <FIELD>	Institution
 \bI am( \S+){0,3} (of|in|at)( \S+){0,5} <FIELD>	Professional
@@ -99,13 +100,14 @@ Consultant( \S+){0,3} <FIELD>	Professional
 \b(Professor|Prof\.?)( \w+){0,3} <FIELD>	Academia
 (Promoting|Providing)( \S+){0,5} <FIELD>	Healthcare initiative
 Registered( \S+){0,3} <DOCTOR>	Doctor
-(?i)passion\w*( \S+){1,4} <FIELD>	Interested in healthcare
+(?i)passion\w*( \S+){1,4} <HEALTH>	Interested in healthcare
 (?i)speciali(s|z)ing in( \S+){0,5} <FIELD>	Professional
 (?i)student of( \S+){0,5} <FIELD>	Interested in healthcare
 ^The [A-Z]+( \w+){0,3} <FIELD>	Generic
 ^We are( \S+){0,5} <FIELD>	Association
 (Conference|Summit|Congress)( \S+){1,5} <FIELD>	Institution
-(Society|Alliance|Department|Institute) of( \S+){0,5} <FIELD>	Institution
+(Society|Alliance|Department|Institute|Dept) of( \S+){0,5} <HEALTH>	Institution
+<HEALTH>( \S+){0,2} (Society|Alliance|Department|Institute)	Institution
 (Center|Centre) for( \S+){0,5} <FIELD>	Institution
 [A-Z][a-z]+ of <FIELD> @	Professional
 <FIELD>( \S+){0,3} Association	Institution
@@ -134,19 +136,19 @@ Chairman of( \S+){0,4} <FIELD>	Professional
 <FIELD>( \w+){0,2} Ltd\b	Med business
 <FIELD> major\b	Professional
 <FIELD>( \w+){0,2} Network	Association
-(?i)<FIELD>( \w+){0,2} news\b	News source
+(?i)<HEALTH>( \w+){0,2} news\b	News source
 <FIELD>( \w+){0,3} Society	Institution
 <FIELD>( \w+){0,2} Organization	Institution
 <FIELD>( \w+){0,2} PhD	Academia
 (?i)<FIELD>( \S+){0,5} (post-doc|postdoc)	Academia
 <FIELD>( \w+){0,2} professional\b	Professional
 <FIELD>( \w+){0,2} provider\b	Med business
-<FIELD>( \w+){0,2} (researcher|Research\b)	Academia
+<HEALTH>( \w+){0,2} (researcher|Research\b)	Academia
 <FIELD>( \w+){0,2} resident\b	Doctor
 School of( \S+){0,4} <FIELD>	Institution
 <FIELD>( \w+){0,2} School	Institution
 <FIELD>( \w+){0,2} Society	Institution
-(?i)<FIELD> (specialist\b|speciali(s|z)ing)	Professional
+(?i)<HEALTH>( \S+){0,2} (specialist\b|speciali(s|z)ing)	Professional
 <FIELD>( \w+){0,2} student\b	Interested in healthcare
 <FIELD> technology	Med business
 <FIELD>( \w+){0,2} trainee\b	Interested in healthcare
@@ -154,7 +156,7 @@ School of( \S+){0,4} <FIELD>	Institution
 ^(A|The)( \S+){0,3} <PLACE>( \S+){1,20} <HEALTH>	Association
 ^(\S+ ){0,3}(American|British|Australian|Canadian|European) <PLACE>( \S+){1,15} <HEALTH>	Association
 ^(\S+ ){0,3}<ATTRIBUTE>( \S+){0,2} <PLACE>	Association
-<ATTRIBUTE>( \S+){0,2} <PLACE>	Association
+<HEALTH>( \S+){0,2} <PLACE>	Association
 ^(\S+ ){0,3}<FIELD>( \S+){0,2}<PLACE>	Association
 (Chairman|Director|CEO|Secretary|President)( \w+){0,2} <PLACE>	Professional
 <DOCTOR> (at|in|of)( \S+){0,4} <PLACE>	Doctor
@@ -187,7 +189,6 @@ School of( \S+){0,4} <FIELD>	Institution
 <DISEASE> prevention	Generic
 ^(\S+ ){0,4}<DISEASE>( \S+){0,2} researcher	Academia
 (?i)<DISEASE> specialist	Doctor
-(?i)<DISEASE>( \S+){0,2} survivor 	Patient
 Anti\-\w+( \w+){0,1} <SOLUTION>	Med business
 (?i)(speciali(s|z)es?|speciali(s|z)ing) in( \S+){0,3} <HEALTH>	Professional
 <HEALTH>( \w+){0,5} <SOLUTION>	Generic
@@ -206,3 +207,50 @@ Anti\-\w+( \w+){0,1} <SOLUTION>	Med business
 (?i)\bapp( \S+){0,5} <HEALTH>	Med business
 (?i)(doctor |dr\. |dr |dr)who	<no tag>
 (?i)<HEALTH> jobs	<no tag>
+<ATTRIBUTE> <DOCTOR>	Doctor
+(?i)researcher at( \S+){0,5} <HEALTH>	Academia
+(?i)(dedicated|devoted) to( \S+){0,5} <HEALTH>	Healthcare initiative
+(?i)<ATTRIBUTE> information	Generic
+(?i)advocate for( \S+){0,5} <HEALTH>	Interested in healthcare
+(?i)<HEALTH> expert	Professional
+\bon <FIELD>	Generic
+(?i)community (of|for)( \w+){0,3} <HEALTH>	Association
+^An?( \w+){0,3} <DOCTOR>	Doctor
+innovations? (in|on)( \S+){0,3} <HEALTH>	Generic
+(?i)\b(a|an)( \S+){0,2} journal\b	Publishing source
+(?i)develop\w+( \S+){0,5} technologies( \S+){1,10} <HEALTH>	Med Business
+(?i)interested in( \S+){0,2} <HEALTH>	Interested in healthcare
+(?i)is (a|the) leading( \S+){0,10}<HEALTH>	Association
+Doctor (\&|and) 	Doctor
+(?i)<FIELD> passionate	Interested in healthcare
+tweeting (on|about) <HEALTH>	Generic
+committed to( \S+){0,7} <HEALTH>	Healthcare initiative
+/<DOCTOR>(,| and | \& |\. )	Doctor
+(?i)(\w+ ){0,3}clinical fellow\b	Doctor
+solutions (to|for)( \S+){0,5} <HEALTH>	Med Business
+\b[A-Z][a-z]+( \w+){0,2} Hospital	Institution
+\| <DOCTOR>	Doctor
+^Doc\b	Doctor
+(?i)medical advice	Generic
+(?i)early(\-| )stage( \S+){0,2} <DOCTOR>	Doctor
+(?i)<ATTRIBUTE>( \w+){0,4} company	Med Business
+(?i)<HEALTH>( \S+){0,2} devices	Med Business
+(?i)access to( \S+){0,5} <HEALTH>	Healthcare initiative
+<PROFESSIONAL> (in|of)( \S+){0,5} <HEALTH>	Professional
+addressing( \S+){0,6} <HEALTH>	Generic
+^(\S+ ){0,4}<FIELD> consultant	Generic
+(?i)^(\S+ ){0,4}<FIELD>( \S+){0,2} fellow	Professional
+(?i)\bnews( \S+){0,5} <HEALTH>	News source
+(?i)<HEALTH> investor	Med Business
+(?i)fellowship in( \S+){0,2} <FIELD>	Doctor
+writ(e|ing) (on|about)( \w+){0,4} <FIELD>	Interested in healthcare
+^(The Journal|Journal) of( \S+){0,10} <HEALTH>	Publishing source
+(?i)covering( \w+){0,3} <FIELD>	Generic
+(?i)<HEALTH>( \S+){0,3} consultancy	Generic
+(?i)<ATTRIBUTE>( \w+){0,2} student	Interested in healthcare
+^<FIELD>(, | \& | and |; )	Generic
+NHS( \w+){0,2} <DOCTOR>	Doctor
+(?i)official (twitter|account)( \S+){0,7} <HEALTH>	Institution
+(?i)patient advocacy	Generic
+^<ATTRIBUTE>( \S+){0,2} <FIELD>	Generic
+^The( \w+){0,5} <FIELD>( \w+){0,5} is a\b	Healthcare initiative
