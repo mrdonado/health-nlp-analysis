@@ -235,7 +235,11 @@ def user_analyzer(user_name, user_description, string_twitter_queries, lexicon):
             if len(longest_match) > 0:
                 # We give preference to the following semantic tags,
                 # following this order:
-                if 'Doctor' in all_pattern_tuples.keys():
+                if '<no tag>' in all_pattern_tuples.keys():
+                    user_analyzer_result.append(all_pattern_tuples['<no tag>'])
+                    user_analyzer_result.append('<no tag>')
+                    user_analyzer_result.append('<from Description>')
+                elif 'Doctor' in all_pattern_tuples.keys():
                     user_analyzer_result.append(all_pattern_tuples['Doctor'])
                     user_analyzer_result.append('Doctor')
                     user_analyzer_result.append('<from Description>')
@@ -283,12 +287,8 @@ def user_analyzer(user_name, user_description, string_twitter_queries, lexicon):
                     user_analyzer_result.append(all_pattern_tuples['Generic'])
                     user_analyzer_result.append('Generic')
                     user_analyzer_result.append('<from Description>')
-                elif '<no tag>' in all_pattern_tuples.keys():
-                    user_analyzer_result.append(all_pattern_tuples['<no tag>'])
-                    user_analyzer_result.append('<no tag>')
-                    user_analyzer_result.append('<from Description>')
                 else:
-                    user_analyzer_result.append('<Rule with unknow tag>')
+                    user_analyzer_result.append(list(all_pattern_tuples.values())[0])
                     user_analyzer_result.append('Unknown')
                     user_analyzer_result.append('<from Description>')
             else:

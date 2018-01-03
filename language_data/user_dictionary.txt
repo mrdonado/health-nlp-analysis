@@ -11,7 +11,6 @@
 <DOCTOR>	(?i)\bcardiologist\b
 <PROFESSIONAL>	(?i)\bcaregiver\b
 <PROFESSIONAL>	(?i)\bchiropodist\b
-<PROFESSIONAL>	(?i)\bchiropractor\b
 <DOCTOR>	(?i)\bclinician\b
 <DOCTOR>	(?i)\bcoroner\b
 <DOCTOR>	(?i)\bcytopathologist\b
@@ -27,7 +26,9 @@
 <DOCTOR>	(?i)\bendocrinologist\b
 <DOCTOR>	(?i)\bepidemiologist\b
 <PROFESSIONAL>	(?i)\bexaminer\b
-<DOCTOR>	(?i)\bforensic\b
+<ATTRIBUTE>	(?i)\bforensic\b
+<FIELD>	(?i)\bforensic\b
+<HEALTH>	(?i)\bforensic\b
 <DOCTOR>	(?i)\bG\.P\.\b
 <DOCTOR>	(?i)\bgastroenterologist\b
 <DOCTOR>	(?i)\bgeneticist\b
@@ -59,6 +60,7 @@
 <PROFESSIONAL>	(?i)\bnurse-practitioner\b
 <PROFESSIONAL>	(?i)\bnutritionist\b
 <DOCTOR>	(?i)\bob-gyn\b
+<DOCTOR>	(?i)\bob/gyn\b
 <DOCTOR>	(?i)\bobstetrician\b
 <PROFESSIONAL>	(?i)\btherapist\b
 <DOCTOR>	(?i)\boncologist\b
@@ -180,7 +182,6 @@
 <ATTRIBUTE>	(?i)\bcaregiving\b
 <ATTRIBUTE>	(?i)\bcongenital\b
 <ATTRIBUTE>	(?i)\bcellular\b
-<ATTRIBUTE>	(?i)\bchiropractic\b
 <ATTRIBUTE>	(?i)\bchronic\b
 <ATTRIBUTE>	(?i)\bclinic\b
 <ATTRIBUTE>	(?i)\bclinical\b
@@ -252,7 +253,6 @@
 <HEALTH>	(?i)\bcaregiving\b
 <HEALTH>	(?i)\bcongenital\b
 <HEALTH>	(?i)\bcellular\b
-<HEALTH>	(?i)\bchiropractic\b
 <HEALTH>	(?i)\bchronic\b
 <HEALTH>	(?i)\bclinic\b
 <HEALTH>	(?i)\bclinical\b
