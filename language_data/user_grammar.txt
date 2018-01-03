@@ -122,27 +122,27 @@ Chairman of( \S+){0,4} <FIELD>	Professional
 <FIELD> Director	Professional
 <FIELD> (doctor|doc\b)	Doctor
 <FIELD>( \w+){0,2} enthusiast	Interested in healthcare
-<FIELD>( \w+){0,2} Entrepreneur	Med business
+<FIELD>( \w+){0,2} Entrepreneur	Med Business
 <FIELD>( \w+){0,2} Executive	Professional
 <FIELD>( \w+){0,2} Felloe	Professional
 <FIELD>( \w+){0,3} Foundation	Institution
 <FIELD>( \w+){0,2} geek\b	Interested in healthcare
 <FIELD>( \w+){0,2} (graduate student|grad\b)	Interested in healthcare
-<FIELD>( \w+){0,2} Group\b	Med business
+<FIELD>( \w+){0,2} Group\b	Med Business
 <FIELD> is (a|the)\b	Generic
 <FIELD>( \S+){1,10} peer-reviewed	Publishing source
 (?i)<FIELD>( \w+){0,2} (lab|laboratory)	Institution
-(?i)<FIELD>( \w+){0,2} library	Med business
-<FIELD>( \w+){0,2} Ltd\b	Med business
+(?i)<FIELD>( \w+){0,2} library	Med Business
+<FIELD>( \w+){0,2} Ltd\b	Med Business
 <FIELD> major\b	Professional
-<FIELD>( \w+){0,2} Network	Association
+<FIELD>( \w+){0,2} Network 	Association
 (?i)<HEALTH>( \w+){0,2} news\b	News source
 <FIELD>( \w+){0,3} Society	Institution
 <FIELD>( \w+){0,2} Organization	Institution
 <FIELD>( \w+){0,2} PhD	Academia
 (?i)<FIELD>( \S+){0,5} (post-doc|postdoc)	Academia
 <FIELD>( \w+){0,2} professional\b	Professional
-<FIELD>( \w+){0,2} provider\b	Med business
+<FIELD>( \w+){0,2} provider\b	Med Business
 <HEALTH>( \w+){0,2} (researcher|Research\b)	Academia
 <FIELD>( \w+){0,2} resident\b	Doctor
 School of( \S+){0,4} <FIELD>	Institution
@@ -150,13 +150,13 @@ School of( \S+){0,4} <FIELD>	Institution
 <FIELD>( \w+){0,2} Society	Institution
 (?i)<HEALTH>( \S+){0,2} (specialist\b|speciali(s|z)ing)	Professional
 <FIELD>( \w+){0,2} student\b	Interested in healthcare
-<FIELD> technology	Med business
+<FIELD> technology	Med Business
 <FIELD>( \w+){0,2} trainee\b	Interested in healthcare
 ^<PLACE>( \w+){1,5} <FIELD>	Institution
-^(A|The)( \S+){0,3} <PLACE>( \S+){1,20} <HEALTH>	Association
+^(A|The) <PLACE>( \S+){1,20} <HEALTH>	Association
 ^(\S+ ){0,3}(American|British|Australian|Canadian|European) <PLACE>( \S+){1,15} <HEALTH>	Association
 ^(\S+ ){0,3}<ATTRIBUTE>( \S+){0,2} <PLACE>	Association
-<HEALTH>( \S+){0,2} <PLACE>	Association
+^(\S+ ){0,5}<HEALTH>( \S+){0,2} <PLACE>	Association
 ^(\S+ ){0,3}<FIELD>( \S+){0,2}<PLACE>	Association
 (Chairman|Director|CEO|Secretary|President)( \w+){0,2} <PLACE>	Professional
 <DOCTOR> (at|in|of)( \S+){0,4} <PLACE>	Doctor
@@ -174,7 +174,7 @@ School of( \S+){0,4} <FIELD>	Institution
 <PLACE> for( \S+){0,20} <HEALTH>	Association
 <PLACE>( \S+){0,2} is (a|an|the)( \S+){0,20} <HEALTH>	Association
 <PLACE>( \S+){0,2} is one of the( \S+){0,20} <HEALTH>	Association
-<PLACE> of( \S+){0,3} <HEALTH>	Association
+^(\S+ ){0,5}<PLACE> of( \S+){0,2} <HEALTH>	Association
 <PLACE>( \S+){0,2} (provides|providing)( \S+){0,20} <HEALTH>	Association
 <PLACE> working to( \S+){1,20} <HEALTH>	Association
 (?i)(prevention|treatment)( \w+){1,5} <DISEASE>	Generic
@@ -189,7 +189,7 @@ School of( \S+){0,4} <FIELD>	Institution
 <DISEASE> prevention	Generic
 ^(\S+ ){0,4}<DISEASE>( \S+){0,2} researcher	Academia
 (?i)<DISEASE> specialist	Doctor
-Anti\-\w+( \w+){0,1} <SOLUTION>	Med business
+Anti\-\w+( \w+){0,1} <SOLUTION>	Med Business
 (?i)(speciali(s|z)es?|speciali(s|z)ing) in( \S+){0,3} <HEALTH>	Professional
 <HEALTH>( \w+){0,5} <SOLUTION>	Generic
 <SOLUTION>( \w+){0,5} <HEALTH>	Generic
@@ -200,14 +200,13 @@ Anti\-\w+( \w+){0,1} <SOLUTION>	Med business
 (developes?|developing)( \w+){0,3} <SOLUTION>	Generic
 (?i)<SOLUTION>( \S+){0,3} (diagnosis|diagnostic)	Generic
 <SOLUTION>( \w+){0,2} <PLACE>	Association
-<SOLUTION> for 	Med business
-<SOLUTION> options 	Med business
-<SOLUTION> provider 	Med business
-<SOLUTION> services 	Med business
-(?i)\bapp( \S+){0,5} <HEALTH>	Med business
+<SOLUTION> for 	Med Business
+<SOLUTION> options 	Med Business
+<SOLUTION> provider 	Med Business
+<SOLUTION> services 	Med Business
+(?i)\bapp( \S+){0,5} <HEALTH>	Med Business
 (?i)(doctor |dr\. |dr |dr)who	<no tag>
-(?i)<HEALTH> jobs	<no tag>
-<ATTRIBUTE> <DOCTOR>	Doctor
+^(\S+ ){0,5} <ATTRIBUTE> <DOCTOR>	Doctor
 (?i)researcher at( \S+){0,5} <HEALTH>	Academia
 (?i)(dedicated|devoted) to( \S+){0,5} <HEALTH>	Healthcare initiative
 (?i)<ATTRIBUTE> information	Generic
@@ -254,3 +253,12 @@ NHS( \w+){0,2} <DOCTOR>	Doctor
 (?i)patient advocacy	Generic
 ^<ATTRIBUTE>( \S+){0,2} <FIELD>	Generic
 ^The( \w+){0,5} <FIELD>( \w+){0,5} is a\b	Healthcare initiative
+(?i)\bjobs?\b	<no tag>
+(?i)\brecruit\w*\b	<no tag>
+(?i)\bherbal	<no tag>
+(?i)\bholistic	<no tag>
+(?i)\bcareers?\b	<no tag>
+(?i)online doctor	<no tag>
+(?i)homoeopa	<no tag>
+(?i)\bnot?( \S+){1,4} <DOCTOR>	<no tag>
+^Find\b	<no tag>
