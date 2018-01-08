@@ -401,5 +401,8 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
     if len(output) == 0 or output[0] in output[1]:
         output.append('<nothing_found>')
         output.append(start_word)
-        output.append('<no pattern found>')
+        if magic_bullet_analyzer_result[2] != '<no pattern found>':
+            output.append(magic_bullet_analyzer_result[2])
+        else:
+            output.append('<no pattern found>')
         return output
