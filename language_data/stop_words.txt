@@ -14,31 +14,31 @@ y\'$
 ^’s
 ^amp$
 ^#$
-^i$
-^it$
-^you$
-^they$
-^he$
-^she$
-^his$
-^her$
-^this$
-^him$
-^we$
-^me$
-^us$
-^what$
-^who$
+(?i)^i$
+(?i)^it$
+(?i)^you$
+(?i)^they$
+(?i)^he$
+(?i)^she$
+(?i)^his$
+(?i)^her$
+(?i)^this$
+(?i)^him$
+(?i)^we$
+(?i)^me$
+(?i)^us$
+(?i)^what$
+(?i)^who$
 ^\.?@
 ^\\
-^(RT|MT)  
+^(RT|MT) 
 ^\d+\w$
 anyone
-^anything$
-^treatment$
+(?i)^anything$
+(?i)^treatment$
 someone
 that(\'|\’)s
-^something$
+(?i)^something$
 awareness
 ^cure$
 ^dead$
@@ -60,13 +60,12 @@ impact
 possibilit(y|ies)
 summary
 basis
-body\w*
+(?i)nobody
 key
 history
 people
 prospects?
 time
-you
 light
 approval
 #?fda
@@ -92,99 +91,9 @@ risk\w*
 important
 breakthrough\w*
 patient
-researcher\w*
 impact
-^hypercholesterolemia$
-^pancreatitis$
-^parkinson$
-^parkinsonsa$
-^lymphoma$
-^diabetes$
-^lupus$
-^abdominal pain$
-^adenoiditis$
 ^aids$
-^alzheimer$
-^anorexia nervosa$
-^appendicitis$
-^arthritis$
-^asthma$
-^alopecia areata$
-^atherosclerosis$
-^bipolar disorder$
-^bladder cancer$
-^botulism$
-^breast cancer$
-^cancer$
-^cataracts$
-^cellulite$
-^cervical cancer$
-^cholesterol$
-^pulmonary diseases$
-^\w+ diseases$
-^chronic pain$
-^cirrhosis$
-^migraine$
-^heart diseases$
-^heart disease$
-^dermatitis$
-^diabetes$
-^dyspepsia$
-^dysthymias$
-^emphysema$
-^encephalitis$
-^eustachian tube problems$
-^fibromyalgia$
-^food allergy$
-^glaucoma$
-^hair loss$
-^hemorrhoids$
-^hepatitis b$
-^hepatitis c$
-^high blood pressure$
-^cholesterol$
-^hyperthyroidism$
-^hypothyroidism$
-^influenza$
-^cystitis$
-^kidney stones$
-^lactose intolerance$
-^lichen planus$
-^liver cancer$
-^cardiovascular diseases$
-^low back pain$
-^lung cancer$
-^lupus$
-^malaria$
-^melanoma$
-^meningitis$
-^menopause$
-^obesity$
-^osteoarthritis$
-^osteoporosis$
-^ovarian cancer$
-^pancreatic cancer$
-^panic disorder$
-^pneumonia$
-^stress disorders$
-^prostate cancer$
-^prostatitis$
-^psoriasis$
-^hypertension$
-^rheumatoid arthritis$
-^rosacea$
-^scleroderma$
-^seasonal affective disorder$
-^respiratory syndrome$
-^sexually transmitted diseases$
-^sinusitis$
-^skin cancer$
-^apnea$
-^testicular cancer$
-^thyroid cancer$
-^colitis$
-^urinary retention$
-^uterine cancer$
+(?i)\btips?\b
 crew
 chances
 (?i)blog
@@ -192,102 +101,12 @@ chances
 disorder
 ^#\w+ #\w
 (?i)post
-(?i)^#?cancer$
-(?i)^#?hypercholesterolemia$
-(?i)^#?pancreatitis$
-(?i)^#?parkinson$
-(?i)^#?parkinson's$
-(?i)^#?lymphoma$
-(?i)^#?diabetes$
-(?i)^#?lupus$
-(?i)^#?abdominal pain$
-(?i)^#?adenoiditis$
 (?i)^#?aids$
-(?i)^#?alzheimer$
-(?i)^#?alzheimer's$
-(?i)^#?anorexia nervosa$
-(?i)^#?appendicitis$
-(?i)^#?arthritis$
-(?i)^#?asthma$
-(?i)^#?alopecia areata$
-(?i)^#?atherosclerosis$
-(?i)^#?bipolar disorder$
-(?i)^#?bladder cancer$
-(?i)^#?botulism$
-(?i)^#?breast cancer$
-(?i)^#?cancer$
-(?i)^#?cataracts$
-(?i)^#?cellulite$
-(?i)^#?cervical cancer$
-(?i)^#?cholesterol$
-(?i)^#?pulmonary diseases$
-(?i)^#?chronic pain$
-(?i)^#?cirrhosis$
-(?i)^#?heart diseases$
-(?i)^#?heart disease$
-(?i)^#?dermatitis$
-(?i)^#?diabetes$
-(?i)^#?dyspepsia$
-(?i)^#?dysthymias$
-(?i)^#?emphysema$
-(?i)^#?encephalitis$
-(?i)^#?eustachian tube problems$
-(?i)^#?fibromyalgia$
-(?i)^#?food allergy$
-(?i)^#?glaucoma$
-(?i)^#?hair loss$
-(?i)^#?hemorrhoids$
-(?i)^#?hepatitis b$
-(?i)^#?hepatitis c$
-(?i)^#?high blood pressure$
-(?i)^#?cholesterol$
-(?i)^#?hyperthyroidism$
-(?i)^#?hypothyroidism$
-(?i)^#?influenza$
-(?i)^#?cystitis$
-(?i)^#?kidney stones$
-(?i)^#?lactose intolerance$
-(?i)^#?lichen planus$
-(?i)^#?liver cancer$
-(?i)^#?cardiovascular diseases$
-(?i)^#?low back pain$
-(?i)^#?lung cancer$
-(?i)^#?lupus$
-(?i)^#?malaria$
-(?i)^#?melanoma$
-(?i)^#?meningitis$
-(?i)^#?menopause$
-(?i)^#?obesity$
-(?i)^#?osteoarthritis$
-(?i)^#?osteoporosis$
-(?i)^#?ovarian cancer$
-(?i)^#?pancreatic cancer$
-(?i)^#?pancreatitis$
-(?i)^#?panic disorder$
-(?i)^#?pneumonia$
-(?i)^#?stress disorders$
-(?i)^#?prostate cancer$
-(?i)^#?prostatitis$
-(?i)^#?psoriasis$
-(?i)^#?hypertension$
-(?i)^#?rheumatoid arthritis$
-(?i)^#?rosacea$
-(?i)^#?scleroderma$
-(?i)^#?seasonal affective disorder$
-(?i)^#?respiratory syndrome$
-(?i)^#?sexually transmitted diseases$
-(?i)^#?sinusitis$
-(?i)^#?skin cancer$
-(?i)^#?apnea$
-(?i)^#?testicular cancer$
-(?i)^#?thyroid cancer$
-(?i)^#?colitis$
-(?i)^#?urinary retention$
-(?i)^#?uterine cancer$
+(?i)\btips?\b
  MD$
 heaven
 job
-target
+(?i)^target$
 reason
 people
 ^ppl$
@@ -336,3 +155,8 @@ demand
 (?i)disease
 (?i)weeks?$
 (?i)efficacy$
+(?i)^(my |your|his |her )
+(?i)reminder
+^coverage
+(?i)\btaste\b
+RT @oncologytube

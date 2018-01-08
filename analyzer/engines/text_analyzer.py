@@ -124,7 +124,7 @@ def language_data_loader(grammar_path, counter_grammar_path, start_words_path, s
 
     # Load stop words (words tagged as noun phrases that cannot be extracted
     # as entities (e.g. You, @username11):
-    language_data['stop_words'] = file_parser(stop_words_path, True)
+    language_data['stop_words'] = file_parser(stop_words_path, False)
     
     return language_data
 

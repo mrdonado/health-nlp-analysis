@@ -7,6 +7,7 @@
 [np = intervention]
 [np = interventions]
 [np = surgery]
+[np = transplantation]
 [s] on the first line of( \S+){2,10} [p]
 [s] an eye out for( \S+){0,3} [p]
 [s] (could|can) improve( \S+){0,4} [p]
@@ -185,7 +186,6 @@ patients receiving[npr]
 [s] go\w* gold for( \S+){0,6} [p]
 [s] help\w* for( \S+){0,7} [p]
 [s] treatment for( \S+){0,5} [p]
-[npl](secondary|side) effects
 (side|secondary effects) of[npr]
 [s] provid\w+( \S+){0,6} [p]
 most promising is[npr]
@@ -255,7 +255,7 @@ injections? of[npr]
 [npl]as (\w+ )?anti
 [npl]as (\w+ ){0,4}(therapy|therapeutical|treatment)
 [npl](at|in) high (doses|dosages)
-[npl](is|be|are)( \S+){1,5} (solution|treatment|cure|victory|improvement)
+[npl](is|be|are) (a|the)( \S+){1,4} (solution|treatment|cure|victory|improvement)
 [s] used (in|to)( \S+){0,7} [p]
 [npl]better than
 [npl]contraindicated (for|to|in)
@@ -279,3 +279,12 @@ cost-effectiveness of[npr]
 [npl]protect\w*( \w+){0,5} against
 [npl](enhanc|promot|improv|boost|maximi)\w+( \S+){0,5} therapeutic effect
 [s] weapon for( \S+){0,5} [p]
+[s] (be|are|is)( \S+){0,3} advancing( \S+){0,10} [p]
+[s] (increas|giv|provid)\w+ coverage( \S+){0,10} [p]
+[npl](be|are|is|remain)\w*( \S+){0,5} (best|preferred) (therapy|treatment)
+[s] opportunit(y|ies) for( \S+){0,10} [p]
+relief from[npr]
+benefits( \w+){0,3} of[npr]
+[s] is a (great|good)( \S+){1,10} [p]
+[npl]join forces
+[s] new insights (for|in)( \w+){0,5} [p]

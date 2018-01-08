@@ -262,3 +262,4 @@ NHS( \w+){0,2} <DOCTOR>	Doctor
 (?i)homoeopa	<no tag>
 (?i)\bnot?( \S+){1,4} <DOCTOR>	<no tag>
 ^Find\b	<no tag>
+IPC Heart care	<no tag>
