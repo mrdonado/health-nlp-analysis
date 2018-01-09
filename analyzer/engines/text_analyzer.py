@@ -311,6 +311,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
 
     """
     # Necessary variables:
+    magic_bullet_analyzer_result = None
     longest_match = ''
     matching_pattern = ''
     output = []
@@ -401,5 +402,11 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
     if len(output) == 0 or output[0] in output[1]:
         output.append('<nothing_found>')
         output.append(start_word)
-        output.append('<no pattern found>')
+        # Append this to output if a pattern was found in magic_bullet_analyzer(),
+        # but any noun phrase wasn't found:
+        if magic_bullet_analyzer_result is not None:
+            if magic_bullet_analyzer_result[2] != '<no pattern found>':
+                output.append(magic_bullet_analyzer_result[2])
+        else:
+            output.append('<no pattern found>')
         return output
