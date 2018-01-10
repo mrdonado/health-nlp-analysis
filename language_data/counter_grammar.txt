@@ -1,8 +1,8 @@
-risk\w* for( \S+){0,5} [p]
+risk\w*( \S+){0,3} for( \S+){0,5} [p]
 why \w+ [p]
 chances for ( \S+){0,5} [p]
 screen\w* for( \S+){0,5} [p]
-(are not|aren't|isn't|is not|doesn't|does not|don't|do not)( \S+){1,7} [p]
+(n't protect|are not|aren't|isn't|is not|doesn't|does not|don't|do not|\bare never|\bis never)( \S+){1,7} [p]
 get ready (to|for)( \S+){0,5} [p]
 for support\w*( \S+){0,7} [p]
 (not|no|never|\w+n't|cannot)( \S+){0,5} (improve|prevent|reduce|show|cure|treatment|improvement|therapy|restore|treat|benefit|enhance|help|combat|hold| chas(e|i)|contain|block|improve|fight|hit|control|reduce|ability|prescribe|brings|work|treat|cure|reduce|decrease|slow|help|combat|attack|hold\w* off| chas(e|i)|mitigat|cure|zap|beat|contain|treats|repair|neutrali|improve(s|ed)|improving|targets|targeting|fight|control|reduce)( \S+){0,5} [p]
@@ -53,3 +53,7 @@ sensitivity for( \S+){0,8} [p]
 (?i)trigger for( \S+){0,5} [p]
 (?i)difficult for( \S+){0,5} [p]
 (?i)responsibility for( \S+){0,10} [p]
+(?i)enhancer for( \S+){0,5} [p]
+bring\w* risk\w* of
+promot\w* [p]
+double whammy

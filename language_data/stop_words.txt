@@ -159,4 +159,8 @@ demand
 (?i)reminder
 ^coverage
 (?i)\btaste\b
-RT @oncologytube
+(?i)^symptom
+(?i)^sign
+cohort\b
+^al\b
+(?i)impairment
