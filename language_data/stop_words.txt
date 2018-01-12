@@ -164,3 +164,4 @@ demand
 cohort\b
 ^al\b
 (?i)impairment
+(?i)^therapy$

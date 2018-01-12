@@ -57,3 +57,4 @@ sensitivity for( \S+){0,8} [p]
 bring\w* risk\w* of
 promot\w* [p]
 double whammy
+(battling|battles)( \w+){0,2} [p]
