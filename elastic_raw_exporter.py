@@ -6,11 +6,6 @@ from config_loader import ELASTICSEARCH_CONFIG as es_config
 import json
 import requests
 
-current_index = 0
-
-page_size = 1000
-total = page_size + 1
-
 
 def export_hits(hits, file):
     # Export each element to the export.txt file
@@ -20,25 +15,26 @@ def export_hits(hits, file):
 
 f = open('export.txt', 'w')
 
-r = requests.get(es_config['url'] + '/analysis/_search?scroll=1m',
+r = requests.get(es_config['url'] + '/analysis/_search?scroll=1m&size=5000',
                  auth=(es_config['user'],
                        es_config['password']))
 
 data = r.json()
 scroll_id = data['_scroll_id']
-total = data['hits']['total']
+hits_count = len(data['hits']['hits'])
 export_hits(data['hits']['hits'], f)
 
-while scroll_id:
-    payload = {'scroll': '1m', 'scroll_id': scroll_id}
+while hits_count > 0:
+    payload={'scroll': '1m', 'scroll_id': scroll_id}
     # Get analysis data
-    r = requests.post(es_config['url'] + '/_search/scroll',
+    r=requests.post(es_config['url'] + '/_search/scroll',
                       auth=(es_config['user'],
                             es_config['password']),
                       json=payload)
-    data = r.json()
-    scroll_id = data['_scroll_id']
+    data=r.json()
+    scroll_id=data['_scroll_id']
     export_hits(data['hits']['hits'], f)
+    hits_count=len(data['hits']['hits'])
     print('.', end='', flush=True)
 
 f.close()
