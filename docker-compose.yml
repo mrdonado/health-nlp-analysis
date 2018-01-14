@@ -9,7 +9,7 @@ services:
     ports:
       - "127.0.0.1:11300:11300"
   elasticsvc:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.4.3
     container_name: health_elasticsvc
     environment:
       - cluster.name=docker-cluster
