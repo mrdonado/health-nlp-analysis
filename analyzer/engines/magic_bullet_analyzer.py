@@ -47,7 +47,7 @@ def get_string_match_plus_noun_phrases(magic_bullet_instance, start_word, noun_p
 
     result = [None, noun_phrases]
     
-    forbidden_tokens = ['the', 'new']
+    forbidden_tokens = ['the', 'new', 'its', 'our']
 
     if magic_bullet_instance in message.lower():
         if len(noun_phrases) == 0:
@@ -59,10 +59,16 @@ def get_string_match_plus_noun_phrases(magic_bullet_instance, start_word, noun_p
                 if np.split()[-1].lower() == magic_bullet_instance:
                     if len(np.split()) > 1:
                         penultimate_token = np.split()[len(np.split())-2].lower()
-                        if penultimate_token not in forbidden_tokens: 
-                            if start_word not in np:
-                                result[0] = np
-                                break
+                        from_first_to_penultimate_tokens = ' '.join(np.split()[0:-1])
+                        # First exception: 'Frontal Fybrosing Alopecia treatment' is not a valid solution
+                        if start_word.lower() == from_first_to_penultimate_tokens.lower():
+                            continue
+                        # Second exception: 'New treatment' is not a valid solution
+                        elif len(np.split()) == 2 and penultimate_token in forbidden_tokens:
+                                continue
+                        else:
+                            result[0] = np
+                            break
     
     return result
 

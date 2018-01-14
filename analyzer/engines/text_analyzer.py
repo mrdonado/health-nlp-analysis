@@ -114,7 +114,9 @@ def language_data_loader(grammar_path, counter_grammar_path, start_words_path, s
     for pattern in language_data['grammar']:
         if '[np' in pattern:
             language_data['magic_bullet_grammar'].append(pattern)
-    
+    for pattern in language_data['magic_bullet_grammar']:
+        language_data['grammar'].remove(pattern)
+
     # Load counter_grammar
     language_data['counter_grammar'] = file_parser(counter_grammar_path, False)
     
@@ -124,7 +126,7 @@ def language_data_loader(grammar_path, counter_grammar_path, start_words_path, s
 
     # Load stop words (words tagged as noun phrases that cannot be extracted
     # as entities (e.g. You, @username11):
-    language_data['stop_words'] = file_parser(stop_words_path, True)
+    language_data['stop_words'] = file_parser(stop_words_path, False)
     
     return language_data
 
@@ -311,6 +313,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
 
     """
     # Necessary variables:
+    magic_bullet_analyzer_result = None
     longest_match = ''
     matching_pattern = ''
     output = []
@@ -369,7 +372,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
                 # Rule matchs if 'longest_match' contains a string,
                 # so the analysis can continue:
                 if len(longest_match) > 0:
-                        
+
                     # First possible structure: SOLUTION before PROBLEM
                     if matching_pattern.find('[s]') < matching_pattern.find('[p]'):
                         target_match = message[:message.find(longest_match)]
@@ -395,11 +398,27 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
                                 output.append(start_word)
                                 output.append(matching_pattern)
                                 return output
+                    
+                    # This returns matching rules without [s] or [p], neither
+                    # they're magic bullets. So, they are possibly mispelled:
+                    else:
+                        output.append('<nothing_found>')
+                        output.append(start_word)
+                        output.append('This rule may be erroneous: ' + matching_pattern)
+                        return output
 
     # Get no results if no solution or start word is found, or if solution =
     # start_word
-    if len(output) == 0 or output[0] in output[1]:
+    if len(output) == 0:
         output.append('<nothing_found>')
         output.append(start_word)
-        output.append('<no pattern found>')
+        # Append this to output if a pattern was found in magic_bullet_analyzer(),
+        # but any noun phrase wasn't found:
+        if magic_bullet_analyzer_result is not None:
+            if magic_bullet_analyzer_result[2] != '<no pattern found>':
+                output.append(magic_bullet_analyzer_result[2])
+            else:
+                output.append('<no pattern found>')
+        else:
+            output.append('<no pattern found>')
         return output

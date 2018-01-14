@@ -1,4 +1,5 @@
 [np = treatment]
+[np = treatments]
 [np = injection]
 [np = injections]
 [np = therapy]
@@ -7,6 +8,14 @@
 [np = intervention]
 [np = interventions]
 [np = surgery]
+[np = transplantation]
+[np = oilment]
+[np = oilments]
+[np = immunotherapy]
+[np = immunotherapies]
+[np = self-management]
+[np = technique]
+[np = techniques]
 [s] on the first line of( \S+){2,10} [p]
 [s] an eye out for( \S+){0,3} [p]
 [s] (could|can) improve( \S+){0,4} [p]
@@ -58,7 +67,6 @@ patients receiving[npr]
 [p]( \S+){0,2} patients( \S+){0,3} treated (with|w|using) [s]
 [p]( \S+){0,6} (treated|improved|controlled|contained|helped|contained) (w|with|using) [s]
 [s] focus\w* on( \S+){0,3} [p]
-[p]( \S+){0,10} \S*approved [s]
 [s]( \S+){0,3} options for( \S+){0,6} [p]
 [s] (win|get|gain)\w*( \S+){0,7} (approval|nod)( \S+){1,7} [p]
 [s] potential( \w+){0,3} (as|in|for).*[p]
@@ -77,7 +85,7 @@ patients receiving[npr]
 [p]( \S+){1,8} hope with [s]
 [s] strengthen\w*( \S+){0,6} [p]
 [s] goodbye( \w+){0,3} [p]
-[s] benefits*( \S+){0,6} [p]
+[s] benefits [p]
 [p] (killed)( \S+){0,8} with [s]
 [s] (good|great) (for|to|in).*[p]
 [s] options*( \S+){0,5} for( \S+){0,8} [p]
@@ -185,7 +193,6 @@ patients receiving[npr]
 [s] go\w* gold for( \S+){0,6} [p]
 [s] help\w* for( \S+){0,7} [p]
 [s] treatment for( \S+){0,5} [p]
-[npl](secondary|side) effects
 (side|secondary effects) of[npr]
 [s] provid\w+( \S+){0,6} [p]
 most promising is[npr]
@@ -226,7 +233,6 @@ anti\S+ (action|mechanism|activity|effect\w*) of[npr]
 (beneficial effects?|benefits?) of[npr]
 intravenous[npr]
 combination therapy with[npr]
-(new|direct) oral[npr]
 topical[npr]
 safety of[npr]
 inhibitory effect of[npr]
@@ -255,7 +261,7 @@ injections? of[npr]
 [npl]as (\w+ )?anti
 [npl]as (\w+ ){0,4}(therapy|therapeutical|treatment)
 [npl](at|in) high (doses|dosages)
-[npl](is|be|are)( \S+){1,5} (solution|treatment|cure|victory|improvement)
+[npl](is|be|are) (a|the)( \S+){1,4} (solution|treatment|cure|victory|improvement)
 [s] used (in|to)( \S+){0,7} [p]
 [npl]better than
 [npl]contraindicated (for|to|in)
@@ -268,7 +274,6 @@ infusion (with|of)[npr]
 injection (with|of)[npr]
  antagonist[npr]
 (a|the) need for[npr]
-technique for[npr]
 applying[npr]
 [npl]as a tool
 [npl](combined|in combination) (to|with)( \S+){2,8} (treat|manage|therap)\w*
@@ -279,3 +284,20 @@ cost-effectiveness of[npr]
 [npl]protect\w*( \w+){0,5} against
 [npl](enhanc|promot|improv|boost|maximi)\w+( \S+){0,5} therapeutic effect
 [s] weapon for( \S+){0,5} [p]
+[s] (be|are|is)( \S+){0,3} advancing( \S+){0,10} [p]
+[s] (increas|giv|provid)\w+ coverage( \S+){0,10} [p]
+[npl](be|are|is|remain)\w*( \S+){0,5} (best|preferred) (therapy|treatment)
+[s] opportunit(y|ies) for( \S+){0,10} [p]
+relief from[npr]
+benefits( \w+){0,3} of[npr]
+[s] is a (great|good)( \S+){1,10} [p]
+[npl]join forces
+[s] new insights (for|in)( \w+){0,5} [p]
+[npl](develop|work|implement|launch|produc)\w*( \w+){0,2} solution (to|for)
+[np = transplant]
+[npl](may improve|can improve|could improve|have improve)
+[npl]improve\w* survival
+[s] a big one (for|to|in)( \w+){0,5} [p]
+(therapeutic|therapeutical) \w+ of[npr]
+therap\w+ target\w+[npr]
+[s] hope (for|to)( \w+){0,4} [p]

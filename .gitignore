@@ -6,5 +6,6 @@ venv
 cover
 config.ini
 esdata
+TryAnalyzer
 .DS_Store
 **/.DS_Store
