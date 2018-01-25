@@ -36,7 +36,6 @@ def nlp_analysis(job_json):
                                                 LEXICON)
 
     analysis['profile'] = user_analysis[1]
-    analysis['profile_rule'] = user_analysis[0]
     analysis['profile_origin'] = user_analysis[2]
 
     # Identified medical sources will be tagged as health related
