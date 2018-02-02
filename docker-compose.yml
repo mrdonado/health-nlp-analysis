@@ -1,4 +1,4 @@
-version: '3'
+version: '2.1'
 services:
   beanstalksvc:
     image: schickling/beanstalkd:latest
@@ -22,11 +22,9 @@ services:
       memlock:
         soft: -1
         hard: -1
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512m
+    mem_limit: 1024m
+    memswap_limit: 1024m
+    privileged: false
     restart: always
     networks:
       - health-nlp-network   
