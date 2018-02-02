@@ -2,7 +2,7 @@ version: '3'
 services:
   beanstalksvc:
     image: schickling/beanstalkd:latest
-    container_name: health_beanstalksvc
+    container_name: beanstalksvc
     restart: always
     networks:
       - health-nlp-network   
@@ -10,16 +10,23 @@ services:
       - "127.0.0.1:11300:11300"
   elasticsvc:
     image: docker.elastic.co/elasticsearch/elasticsearch:5.4.3
-    container_name: health_elasticsvc
+    container_name: elasticsvc
     environment:
       - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - ELASTIC_PASSWORD=somepass
+      - xpack.security.enabled=false
+      - xpack.watcher.enabled=false
     ulimits:
       memlock:
         soft: -1
         hard: -1
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512m
     restart: always
     networks:
       - health-nlp-network   
