@@ -136,17 +136,16 @@ def start_word_match(message, start_words):
     Find possible string matches of disease words into messages
     """
     start_word = None
+    longest_term = ''
     message_to_lower = message.lower()
     for single_token in start_words.keys():
-        term_has_been_found = False
         if single_token in message_to_lower:
             for term in start_words[single_token]:
                 if term in message_to_lower:
-                    term_has_been_found = True
-                    if start_word is None or len(term) > len(start_word):
-                        start_word = term
-        if term_has_been_found is True:
-            break
+                    if len(term) > len(longest_term):
+                        longest_term = term
+    if len(longest_term) > 0:
+        start_word = longest_term
     if start_word is not None:
         start_position = re.search(re.escape(start_word), message_to_lower).start()
         end_position = re.search(re.escape(start_word), message_to_lower).end()
