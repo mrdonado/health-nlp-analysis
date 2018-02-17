@@ -57,7 +57,12 @@ def get_string_match_plus_noun_phrases(magic_bullet_instance, start_word, noun_p
         'my',
         'your',
         'which',
-        'and'
+        'and',
+        'my',
+        'that',
+        'each',
+        'a',
+        'an'
     ]
     
     if magic_bullet_instance in message.lower():
