@@ -1,0 +1,26 @@
+FROM ubuntu:trusty
+# install dev libs
+RUN apt-get update -y && \
+    apt-get -y install python3 python3-pip python3-coverage python3-yaml && \
+    apt-get -y install libfreetype6-dev libxft-dev libffi-dev locales && \
+    apt-get install python-dev -y && \
+    apt-get install python3-dev -y && \
+    apt-get install libevent-dev -y && \
+    # install new gcc
+    apt-get update && \
+    apt-get install build-essential software-properties-common -y && \
+    add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
+    apt-get update && \
+    apt-get install gcc-snapshot -y && \
+    apt-get update && \
+    apt-get install gcc-6 g++-6 -y && \
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-6 && \
+    apt-get install gcc-4.8 g++-4.8 -y && \
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8;
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
+ADD requirements.txt /usr/src/app/
+RUN pip3 install -r requirements.txt 
+# RUN python3 -m spacy download en
+RUN pip3 install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.0.0/en_core_web_sm-2.0.0.tar.gz --no-deps
+CMD python3 main.py
