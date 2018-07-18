@@ -47,8 +47,24 @@ def get_string_match_plus_noun_phrases(magic_bullet_instance, start_word, noun_p
 
     result = [None, noun_phrases]
     
-    forbidden_tokens = ['the', 'new', 'its', 'our']
-
+    forbidden_tokens = [
+        'the',
+        'new',
+        'its',
+        'our',
+        'her',
+        'his',
+        'my',
+        'your',
+        'which',
+        'and',
+        'my',
+        'that',
+        'each',
+        'a',
+        'an'
+    ]
+    
     if magic_bullet_instance in message.lower():
         if len(noun_phrases) == 0:
             for np in NLP(message).noun_chunks:
