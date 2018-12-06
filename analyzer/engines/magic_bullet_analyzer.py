@@ -134,9 +134,18 @@ def magic_bullet_analyzer(message, start_word, magic_bullet_grammar, stop_words)
                 matching_pattern = pattern
 
     if type_of_longest_match == 'case A':
-        output.append(longest_match)
-        output.append(start_word)
-        output.append(matching_pattern)
+        stop_word_found = False
+        for stop_word in stop_words:
+            if re.search(stop_word, str(longest_match)):
+                stop_word_found = True
+        if stop_word_found is False:
+            output.append(longest_match)
+            output.append(start_word)
+            output.append(matching_pattern)
+        else:
+            output.append('<nothing_found>')
+            output.append(start_word)
+            output.append(matching_pattern)
     
     elif type_of_longest_match == 'case B':
         if len(noun_phrases) == 0:
