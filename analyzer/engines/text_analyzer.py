@@ -283,6 +283,20 @@ def counter_analyzer(message, start_word, counter_grammar):
         return False
 
 
+def check_if_problem_in_solution(solution, problem):
+    """
+    Returns 'true' if the problem word is
+    found at the beginning of the solution word
+    """
+    
+    # Cleanse '#' if present
+    if solution.startswith('#'):
+        solution = solution.replace('#', '')
+
+    if solution.lower().startswith(problem.lower()):
+        return True
+
+
 def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_bullet_grammar):
     """
     Analyzer, a treatment-entity finder.
@@ -346,6 +360,8 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
                 output.append(magic_bullet_analyzer_result[0])
                 output.append(magic_bullet_analyzer_result[1])
                 output.append(magic_bullet_analyzer_result[2])
+                if check_if_problem_in_solution(output[0], output[1]):
+                    output[0] = '<nothing_found>'
                 return output
             else:
 
@@ -383,6 +399,8 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
                                 output.append(target_noun_phrase)
                                 output.append(start_word)
                                 output.append(matching_pattern)
+                                if check_if_problem_in_solution(output[0], output[1]):
+                                    output[0] = '<nothing_found>'
                                 return output
                         
                     # Second possible structure: SOLUTION after PROBLEM:
@@ -396,6 +414,8 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
                                 output.append(target_noun_phrase)
                                 output.append(start_word)
                                 output.append(matching_pattern)
+                                if check_if_problem_in_solution(output[0], output[1]):
+                                    output[0] = '<nothing_found>'
                                 return output
                     
                     # This returns matching rules without [s] or [p], neither
@@ -406,8 +426,7 @@ def analyzer(message, start_words, grammar, counter_grammar, stop_words, magic_b
                         output.append('This rule may be erroneous: ' + matching_pattern)
                         return output
 
-    # Get no results if no solution or start word is found, or if solution =
-    # start_word
+    # Get no results if no solution or start word is found
     if len(output) == 0:
         output.append('<nothing_found>')
         output.append(start_word)

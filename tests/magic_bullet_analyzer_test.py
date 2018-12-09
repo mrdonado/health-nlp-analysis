@@ -87,5 +87,3 @@ def test_magic_bullet_analyzer():
         'obesity',
         'analgesic \w+ of[npr]'
     ]
-
-

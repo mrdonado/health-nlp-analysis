@@ -26,6 +26,16 @@ def test_file_parser():
     assert 'invented_word' not in start_words
 
 
+def test_start_words_to_dict():
+    """
+    start_words_to_dict() test
+    """
+
+    start_words = ['blue toothache', 'black toothache', 'blue backpain', 'black backpain']
+    result = text_analyzer.start_words_to_dict(start_words)
+    assert result == {'blue': ['blue toothache', 'blue backpain'], 'toothache': ['blue toothache', 'black toothache'], 'black': ['black toothache', 'black backpain'], 'backpain': ['blue backpain', 'black backpain']}
+
+
 def test_language_data_loader():
     """
     Language data loader tests
@@ -81,6 +91,42 @@ def test_counter_analyzer():
                                       language_data['counter_grammar'])
     assert analysis is False
 
+
+def test_get_noun_phrase():
+    """
+    get_noun_phrase() test
+    """
+
+    message = 'Farma labs develop a new device for diabetes'
+    longest_match = 'for diabetes'
+    position = 'sp'
+    result = text_analyzer.get_noun_phrase(message, longest_match, position, ['random stop word'])
+    assert result == 'a new device'
+
+    message = 'Diabetes is now treated with a new device that Farma labs have created'
+    longest_match = 'Diabetes is now treated with'
+    position = 'ps'
+    result = text_analyzer.get_noun_phrase(message, longest_match, position, ['random stop word'])
+    assert result == 'a new device'
+
+    message = 'were for diabetes'
+    longest_match = 'for diabetes'
+    position = 'sp'
+    result = text_analyzer.get_noun_phrase(message, longest_match, position, ['random stop word'])
+    assert result == None
+
+
+def test_check_if_problem_in_solution():
+    result = text_analyzer.check_if_problem_in_solution('stop eating', 'obesity')
+    assert result is None
+
+    result = text_analyzer.check_if_problem_in_solution('obesity medicine', 'obesity')
+    assert result is True
+
+    result = text_analyzer.check_if_problem_in_solution('#obesity', 'obesity')
+    assert result is True
+
+
 def test_analyzer():
     """
     Analyzer tests
@@ -110,3 +156,12 @@ def test_analyzer():
                                       language_data['stop_words'],
                                       language_data['magic_bullet_grammar'])
     assert analysis[0] == '<nothing_found>'
+    message = "#hyperthyroidism for hyperthyroidism"
+    analysis = text_analyzer.analyzer(message,
+                                      language_data['start_words'],
+                                      language_data['grammar'],
+                                      language_data['counter_grammar'],
+                                      language_data['stop_words'],
+                                      language_data['magic_bullet_grammar'])
+    assert analysis[0] == '<nothing_found>'
+    assert analysis[1] == 'hyperthyroidism'
