@@ -82,6 +82,18 @@ def test_counter_analyzer():
     assert analysis is False
 
 
+def test_get_noun_phrase():
+    """
+    get_noun_phrase() test
+    """
+
+    message = 'Farma labs develop a new device for diabetes'
+    longest_match = 'for diabetes'
+    position = 'sp'
+    result = text_analyzer.get_noun_phrase(message, longest_match, position, ['random stop word'])
+    assert result == 'a new device'
+
+
 def test_check_if_problem_in_solution():
     result = text_analyzer.check_if_problem_in_solution('stop eating', 'obesity')
     assert result is None
