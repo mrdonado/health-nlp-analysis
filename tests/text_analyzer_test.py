@@ -103,6 +103,18 @@ def test_get_noun_phrase():
     result = text_analyzer.get_noun_phrase(message, longest_match, position, ['random stop word'])
     assert result == 'a new device'
 
+    message = 'Diabetes is now treated with a new device that Farma labs have created'
+    longest_match = 'Diabetes is now treated with'
+    position = 'ps'
+    result = text_analyzer.get_noun_phrase(message, longest_match, position, ['random stop word'])
+    assert result == 'a new device'
+
+    message = 'were for diabetes'
+    longest_match = 'for diabetes'
+    position = 'sp'
+    result = text_analyzer.get_noun_phrase(message, longest_match, position, ['random stop word'])
+    assert result == None
+
 
 def test_check_if_problem_in_solution():
     result = text_analyzer.check_if_problem_in_solution('stop eating', 'obesity')
@@ -144,3 +156,12 @@ def test_analyzer():
                                       language_data['stop_words'],
                                       language_data['magic_bullet_grammar'])
     assert analysis[0] == '<nothing_found>'
+    message = "#hyperthyroidism for hyperthyroidism"
+    analysis = text_analyzer.analyzer(message,
+                                      language_data['start_words'],
+                                      language_data['grammar'],
+                                      language_data['counter_grammar'],
+                                      language_data['stop_words'],
+                                      language_data['magic_bullet_grammar'])
+    assert analysis[0] == '<nothing_found>'
+    assert analysis[1] == 'hyperthyroidism'
