@@ -81,6 +81,18 @@ def test_counter_analyzer():
                                       language_data['counter_grammar'])
     assert analysis is False
 
+
+def test_check_if_problem_in_solution():
+    result = text_analyzer.check_if_problem_in_solution('stop eating', 'obesity')
+    assert result is None
+
+    result = text_analyzer.check_if_problem_in_solution('obesity medicine', 'obesity')
+    assert result is True
+
+    result = text_analyzer.check_if_problem_in_solution('#obesity', 'obesity')
+    assert result is True
+
+
 def test_analyzer():
     """
     Analyzer tests
