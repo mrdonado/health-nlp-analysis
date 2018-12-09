@@ -26,6 +26,16 @@ def test_file_parser():
     assert 'invented_word' not in start_words
 
 
+def test_start_words_to_dict():
+    """
+    start_words_to_dict() test
+    """
+
+    start_words = ['blue toothache', 'black toothache', 'blue backpain', 'black backpain']
+    result = text_analyzer.start_words_to_dict(start_words)
+    assert result == {'blue': ['blue toothache', 'blue backpain'], 'toothache': ['blue toothache', 'black toothache'], 'black': ['black toothache', 'black backpain'], 'backpain': ['blue backpain', 'black backpain']}
+
+
 def test_language_data_loader():
     """
     Language data loader tests
